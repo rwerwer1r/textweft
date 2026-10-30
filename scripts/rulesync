@@ -31,4 +31,8 @@ if [[ ! -x "$bin" ]]; then
   mv "$tmp" "$bin"
   trap - EXIT
 fi
+if [[ "$(sha256_file "$bin")" != "$expected_sha256" ]]; then
+  echo "캐시된 Rulesync SHA-256 불일치" >&2
+  exit 1
+fi
 exec "$bin" "$@"

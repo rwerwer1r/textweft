@@ -44,8 +44,8 @@ bash scripts/rulesync-assets update
 
 - **`install`**: 현재 잠금 파일을 기준으로 설치합니다.
 - **`generate`**: 잠금 상태를 설치한 뒤 로컬 타깃 투영과 Git 추적 라우팅 색인을 생성합니다.
-- **`check`**: Rulesync 엄격 진단, 라우팅 색인 일치성, 생성물 Git 소유권 및 정본 `AGENTS.md` 무변형을 검사합니다.
-- **`update`**: 외부 원본과 잠금을 **의도적으로 갱신할 때만** 사용합니다.
+- **`check`**: Rulesync 엄격 진단, 라우팅 색인 일치성, 생성물 Git 소유권 및 직접 관리하는 `AGENTS.md`·`CHATBOT.md`·`CLAUDE.md`·`GEMINI.md` 무변형을 검사합니다.
+- **`update`**: 외부 소스가 없는 현재 단계에서는 **비활성화**했습니다. 외부 Skill 도입 승인 및 잠금 정책을 마련한 뒤 구현합니다.
 
 `scripts/rulesync`는 **Rulesync v40.2.0**의 지원 플랫폼별 바이너리를 다운로드하고 **SHA-256을 검증**한 뒤 `.cache/rulesync/`에 캐싱하는 실행 래퍼입니다. 실제 설치·투영에는 셸·Git·Node.js·curl·네트워크·적절한 실행 권한이 필요합니다.
 
