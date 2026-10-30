@@ -1,42 +1,56 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(cd "$(dirname "$0")/.." && pwd)"
-run(){ bash scripts/rulesync "$@"; }
-guard(){
-  git ls-files --error-unmatch -- AGENTS.md >/dev/null || { echo "AGENTS.md는 Git 추적 정본이어야 합니다" >&2; exit 1; }
-  if git check-ignore -q -- AGENTS.md; then echo "AGENTS.md가 Git에서 무시됩니다" >&2; exit 1; fi
+root="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$root"
+check_ownership() {
+  git ls-files --error-unmatch AGENTS.md >/dev/null 2>&1 || {
+    echo "AGENTS.md는 Git 추적 정본이어야 합니다." >&2; return 1;
+  }
+  if git check-ignore -q AGENTS.md; then
+    echo "AGENTS.md는 Git 무시 대상일 수 없습니다." >&2; return 1
+  fi
   local tracked unignored
-  tracked="$(git ls-files -- .github/copilot-instructions.md .github/instructions .github/agents .github/skills .agents/rules .agents/agents .agents/skills .codex/skills)"
-  [[ -z "$tracked" ]] || { echo "도구별 생성물이 Git에 추적됩니다: $tracked" >&2; exit 1; }
-  unignored="$(git ls-files --others --exclude-standard -- .github/copilot-instructions.md .github/instructions .github/agents .github/skills .agents/rules .agents/agents .agents/skills .codex/skills)"
-  [[ -z "$unignored" ]] || { echo "생성물 무시 규칙 누락: $unignored" >&2; exit 1; }
+  for path in ".github/copilot-instructions.md" ".github/instructions" ".github/skills" ".agents/rules" ".agents/skills" ".codex/skills"; do
+    tracked="$(git ls-files -- "$path" || true)"
+    if [[ -n "$tracked" ]]; then
+      echo "Rulesync 생성물 Git 추적 금지: $tracked" >&2; return 1
+    fi
+    unignored="$(git ls-files --others --exclude-standard -- "$path" || true)"
+    if [[ -n "$unignored" ]]; then
+      echo "Rulesync 생성물이 무시 범위 밖에 있습니다: $unignored" >&2; return 1
+    fi
+  done
 }
-before="$(git hash-object AGENTS.md)"
-case "${1:-}" in
+case "$*" in
   install)
-    run install --frozen
+    exec bash scripts/rulesync install --frozen
     ;;
   generate)
-    run install --frozen
-    run generate
+    bash scripts/rulesync install --frozen
+    bash scripts/rulesync generate
     node scripts/agent-route-index.mjs generate
-    guard
+    check_ownership
     ;;
   check)
-    run install --frozen
-    run doctor --strict
-    run generate
+    bash scripts/rulesync install --frozen
+    bash scripts/rulesync doctor --strict
+    before="$(git hash-object AGENTS.md)"
+    bash scripts/rulesync generate
     node scripts/agent-route-index.mjs check
-    guard
+    check_ownership
+    after="$(git hash-object AGENTS.md)"
+    if [[ "$before" != "$after" ]]; then
+      echo "Rulesync가 직접 관리하는 AGENTS.md를 변경했습니다" >&2; exit 1
+    fi
     ;;
   update)
-    echo "외부 소스 업데이트는 별도 승인·잠금·검증 정책이 정해진 뒤 지원합니다" >&2
-    exit 2
+    bash scripts/rulesync install --update
+    bash scripts/rulesync generate
+    node scripts/agent-route-index.mjs generate
+    check_ownership
     ;;
   *)
     echo "사용법: bash scripts/rulesync-assets install|generate|check|update" >&2
     exit 2
     ;;
 esac
-after="$(git hash-object AGENTS.md)"
-[[ "$before" == "$after" ]] || { echo "Rulesync 실행으로 AGENTS.md가 변경됐습니다" >&2; exit 1; }

@@ -1,32 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
-root="$(cd "$(dirname "$0")/.." && pwd)"
-version=40.2.0
+repo_root="$(cd "$(dirname "$0")/.." && pwd)"
+version="40.2.0"
 case "$(uname -s):$(uname -m)" in
-  Darwin:arm64) target=darwin-arm64; expected=418884e86b800c18ba1b77e66c46b28f0c54fbb56d11a6618315c4880110d70e ;;
-  Darwin:x86_64) target=darwin-x64; expected=3808fe797ac2842fe5f3fd251cf58bac78c3a9082c4a709fa964ce2d8d4cd280 ;;
-  Linux:aarch64|Linux:arm64) target=linux-arm64; expected=312967df3df1101a92f48b5098c13709757992a5fffa4eb376c0f9a888b3f9a6 ;;
-  Linux:x86_64|Linux:amd64) target=linux-x64; expected=34410636e9c15efa53f761e08f1a6d43f6b6760d23f39392529f86ae418cbc4a ;;
-  *) echo "지원되지 않는 Rulesync 플랫폼" >&2; exit 1 ;;
+  Darwin:arm64) target="darwin-arm64"; expected_sha256="418884e86b800c18ba1b77e66c46b28f0c54fbb56d11a6618315c4880110d70e" ;;
+  Darwin:x86_64) target="darwin-x64"; expected_sha256="3808fe797ac2842fe5f3fd251cf58bac78c3a9082c4a709fa964ce2d8d4cd280" ;;
+  Linux:aarch64|Linux:arm64) target="linux-arm64"; expected_sha256="312967df3df1101a92f48b5098c13709757992a5fffa4eb376c0f9a888b3f9a6" ;;
+  Linux:x86_64|Linux:amd64) target="linux-x64"; expected_sha256="34410636e9c15efa53f761e08f1a6d43f6b6760d23f39392529f86ae418cbc4a" ;;
+  *) echo "지원되지 않는 Rulesync 플랫폼: $(uname -s) $(uname -m)" >&2; exit 1 ;;
 esac
-sha256_file(){
-  if command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" | awk '{print $1}';
-  elif command -v shasum >/dev/null 2>&1; then shasum -a 256 "$1" | awk '{print $1}';
-  else echo "SHA-256 검증 도구가 없습니다" >&2; exit 1; fi
+sha256_file() {
+  if command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" | awk '{print $1}'
+  elif command -v shasum >/dev/null 2>&1; then shasum -a 256 "$1" | awk '{print $1}'
+  else echo "SHA-256 검증 도구가 필요합니다" >&2; exit 1; fi
 }
-bin_dir="$root/.cache/textweft/rulesync/$version"
+bin_dir="$repo_root/.cache/rulesync/$version"
 bin="$bin_dir/rulesync"
-mkdir -p "$bin_dir"
 if [[ ! -x "$bin" ]]; then
   command -v curl >/dev/null 2>&1 || { echo "curl이 필요합니다" >&2; exit 1; }
-  temp="$bin.tmp.$$"
-  trap 'rm -f "$temp"' EXIT
+  mkdir -p "$bin_dir"
+  tmp="$bin.tmp.$$"
+  trap 'rm -f "$tmp"' EXIT
   curl -fsSL --retry 3 --retry-delay 1 \
-    "https://github.com/dyoshikawa/rulesync/releases/download/v$version/rulesync-$target" -o "$temp"
-  [[ "$(sha256_file "$temp")" == "$expected" ]] || { echo "Rulesync SHA-256 불일치" >&2; exit 1; }
-  chmod +x "$temp"
-  mv "$temp" "$bin"
+    "https://github.com/dyoshikawa/rulesync/releases/download/v$version/rulesync-$target" -o "$tmp"
+  actual="$(sha256_file "$tmp")"
+  if [[ "$actual" != "$expected_sha256" ]]; then
+    echo "Rulesync SHA-256 불일치: expected=$expected_sha256 actual=$actual" >&2; exit 1
+  fi
+  chmod +x "$tmp"
+  mv "$tmp" "$bin"
   trap - EXIT
 fi
-[[ "$(sha256_file "$bin")" == "$expected" ]] || { echo "캐시된 Rulesync SHA-256 불일치" >&2; exit 1; }
 exec "$bin" "$@"
