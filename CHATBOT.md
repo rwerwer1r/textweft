@@ -1,22 +1,22 @@
 # Chat Runtime Entry
 
-This is a thin bridge into Textweft's repository-owned harness, **not** a second source of authority.
+이 문서는 Textweft 저장소의 기존 하네스로 연결하는 **얇은 챗 런타임 진입점**입니다. 별도의 권한·절차 정본이 아닙니다.
 
 ## Read order
 
-1. Verify active repository, ref, requested stage, and GitHub identity; then read [AGENTS.md](AGENTS.md) and any nested instructions for the target path.
-2. Read [Agent Asset Route](.agents/route/ROUTE.md), select only task-relevant registered assets, and read their actual contents.
-3. For changes, consult [Workflow Selection](docs/development/workflows/choosing.md), [Vibe Coding Workflow](docs/development/workflows/vibe-coding.md), [Routine Working Loop](docs/development/workflows/routine-loop.md), and [Inbox Policy](inbox/README.md) when resumable work is involved.
+1. 현재 저장소·ref·요청 단계·GitHub 계정을 확인하고 [AGENTS.md](AGENTS.md) 및 대상 경로에 적용되는 하위 지침을 읽습니다.
+2. [자산 라우터](.agents/route/ROUTE.md)에서 작업과 관련된 등록 자산만 선택하고 실제 원본을 읽습니다.
+3. 변경 작업에서는 [워크플로 선택](docs/development/workflows/choosing.md), [바이브코딩 워크플로](docs/development/workflows/vibe-coding.md), [일상 작업 루프](docs/development/workflows/routine-loop.md)를 확인합니다. 복원할 상태가 있는 작업은 [인박스 정책](inbox/README.md)도 따릅니다.
 
 ## Vibe Coding Bridge
 
-- 자연어 요청에서 프레임워크 사용 경험과 확인 가능한 수용 조건을 도출합니다. 역할 용어는 [Glossary](docs/GLOSSARY.md)를 따릅니다. 작은 작업에는 형식적인 명세·승인 질문을 늘리지 않고 구현을 주도합니다.
-- 실제 소스·예제·테스트를 근거로 작은 변경을 수행하고 **의도 → 결과 → 검증/미실행 → 사람의 결정 사항**을 보고합니다.
-- 바이브코더가 프레임워크를 이해·재사용할 수 있는지 평가합니다. AI가 만든 코드를 검증 없이 통과로 간주하지 않습니다.
+- 자연어 요청에서 프레임워크 사용 경험과 검증 가능한 수용 조건을 도출합니다. 역할 용어는 [용어집](docs/GLOSSARY.md)을 따릅니다. 작은 작업에는 불필요한 명세나 승인 질문을 늘리지 않고 구현을 주도합니다.
+- 실제 소스·예제·테스트를 근거로 작게 변경하고 **의도 → 결과 → 검증/미실행 → 사람이 결정할 사항**을 보고합니다.
+- 바이브코더가 프레임워크를 이해하고 재사용할 수 있는지 평가합니다. AI 생성 코드를 검증 없이 통과한 것으로 간주하지 않습니다.
 
 ## Capability bridge
 
-- Do not assume a shell, remote clone, CI, editor, scripts, or subagent tool exists. Inspect available capabilities before using them.
-- A supported alternative runtime may reproduce a **reviewed, bounded** validation step, but report it as an alternative—not as execution of the project's original command or target environment. Never bypass sandbox, identity, or authorization boundaries.
-- If a future task requires a registered subagent but delegation is unavailable, read its actual role contract and, when appropriate, perform role-separated analysis in this chat. Label it as **single-agent fallback**, not independent review.
-- If source files, permissions, or runtime features are inaccessible, state which parts are unverified. Do not invent missing procedures or silently substitute another repository.
+- 셸·원격 클론·CI·편집기·스크립트 실행 도구·Subagent 위임 기능이 존재한다고 가정하지 않습니다. 사용 가능한 역량을 먼저 확인합니다.
+- 지원되는 대체 실행 환경에서 검토된 범위의 검증 단계를 재현할 수 있지만 **대체 실행**임을 밝힙니다. 원래 명령이나 타깃 환경에서 실행했다고 주장하거나 샌드박스·계정·권한을 우회하지 않습니다.
+- 등록된 Subagent가 필요하나 위임할 수 없다면 실제 역할 계약을 읽고, 적절할 경우 이 챗에서 역할별로 구분하여 분석합니다. **단일 에이전트의 대체 수행**이라고 밝히며 독립 리뷰라고 주장하지 않습니다.
+- 원본 파일·권한·런타임 기능에 접근할 수 없다면 미확인 부분을 명시합니다. 없는 절차를 추측하거나 다른 저장소를 임의로 대체하지 않습니다.

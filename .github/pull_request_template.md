@@ -1,6 +1,6 @@
 ## Summary
 
-What changed, why, and which project contract does it affect?
+무엇을 왜 변경했고 어떤 프로젝트 계약에 영향을 주는지 작성합니다.
 
 ## User intent and result
 
@@ -10,16 +10,16 @@ What changed, why, and which project contract does it affect?
 
 ## Scope and evidence
 
-- [ ] Target repository/identity/ref verified
-- [ ] Changes stay within the requested stage and scope
-- [ ] Relevant checks attempted where available; results and unrun checks distinguished below
-- [ ] Diff reviewed for security, scope drift, broken links and documentation mismatch
-- [ ] Remaining risks, unrun checks, and required approvals disclosed
+- [ ] 정확한 저장소·계정·ref 확인
+- [ ] 변경이 요청된 작업 단계와 범위 안에 있음
+- [ ] 가능한 관련 검증을 시도했으며 결과와 미실행 항목을 아래에 구분함
+- [ ] 보안·범위 이탈·깨진 링크·문서 불일치에 대해 diff 자체 리뷰 완료
+- [ ] 남은 위험·미실행 검사·필요한 승인 명시
 
-**Executed checks (not assumptions):**
+**실제로 실행한 검사와 결과:**
 
-**Not run / unavailable / pending:**
+**미실행 / 실행 불가 / 대기 중인 검사:**
 
 ## Human decisions / follow-up
 
-List any approval gate, compatibility question, or follow-up. A PR does not authorize merge, release, or deployment.
+승인 게이트, 호환성 판단, 후속 작업을 기록합니다. PR 생성은 병합·릴리스·배포 승인이 아닙니다.

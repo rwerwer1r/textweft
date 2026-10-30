@@ -2,31 +2,31 @@
 
 ## Ownership
 
-[AGENTS.md](../../../AGENTS.md) is the directly maintained repository-wide authority contract. [CHATBOT.md](../../../CHATBOT.md) is a chat entrypoint, and [ROUTE.md](../../../.agents/route/ROUTE.md) plus its catalog are **discovery**, not a competing permissions policy. Product behavior remains defined by code, tests and [README](../../../README.md).
+[AGENTS.md](../../../AGENTS.md)는 직접 관리하는 저장소 전체 권한·행동 계약입니다. [CHATBOT.md](../../../CHATBOT.md)는 챗 진입점이며, [ROUTE.md](../../../.agents/route/ROUTE.md)와 카탈로그는 자산 **발견용**으로 별도 권한 정책이 아닙니다. 현재 제품 동작의 정본은 코드·테스트·[README](../../../README.md)입니다.
 
-Policies in another project—even those used as a template—do not grant Textweft permission, set its architecture, or authorize cross-repository operations.
+다른 프로젝트의 지침을 템플릿으로 참고하더라도 Textweft의 권한·아키텍처 또는 저장소 간 작업 권한으로 가져오지 않습니다.
 
 ## Project-local authorization
 
-The only allowed write repository is `rwerwer1r/textweft`, using the verified `rwerwer1r` identity. Routine work explicitly requested by the user authorizes a bounded development branch, necessary code/docs changes, checks, and a PR. It does **not** authorize unrelated issues/comments, other accounts, third-party writes, a merge, release, deployment, or new public exposure.
+유일하게 쓰기 가능한 저장소는 `rwerwer1r/textweft`이며 확인된 `rwerwer1r` 계정을 사용합니다. 사용자가 요청한 일상 작업은 범위가 정해진 브랜치, 필요한 코드·문서 변경, 검사 및 PR 생성을 허용합니다. 무관한 이슈·댓글, 다른 계정, 제3자 서비스 쓰기, 병합·릴리스·배포·새로운 공개 노출까지 허용하지 않습니다.
 
-Humans decide material changes to requirements, public API compatibility, architecture, secrets/security, irreversible operations, and significant cost. The agent may resolve ordinary implementation details inside accepted constraints without repeated approvals. All external/platform/tool confirmations remain required.
+요구사항·공개 API 호환성·아키텍처·비밀/보안·비가역적 작업·유의미한 비용의 중대한 결정은 사람이 내립니다. 에이전트는 허용된 제약 안에서 일상적인 구현 세부 사항을 반복 승인 없이 결정합니다. 외부 서비스·플랫폼·도구의 확인 요구는 그대로 지킵니다.
 
 ## Vibe Coding Ownership
 
-Textweft 자체는 **바이브코딩**으로 개발합니다. 사람은 제품 목표·제약·피드백을 주고, AI는 변경·테스트·예제·문서·검증 근거를 주도합니다. 주 대상은 바이브코더이며, 개별 게임 제작이나 플레이어 서비스는 이 저장소의 제품 목표가 아닙니다. 역할 명칭은 [Glossary](../../../docs/GLOSSARY.md), 개발 절차는 [Vibe Coding Workflow](../workflows/vibe-coding.md)를 따릅니다.
+Textweft 자체는 **바이브코딩**으로 개발합니다. 사람은 제품 목표·제약·피드백을 제시하고 AI는 변경·테스트·예제·문서·검증 근거를 주도합니다. 주 대상은 바이브코더이며 개별 게임 제작이나 플레이어 서비스는 이 저장소의 제품 목표가 아닙니다. 역할 용어는 [용어집](../../../docs/GLOSSARY.md), 실행 절차는 [바이브코딩 워크플로](../workflows/vibe-coding.md)를 따릅니다.
 
-이 위임은 제품·보안의 중요 결정이나 병합 승인을 AI에게 넘기지 않습니다. AI 생성 결과도 실제 테스트와 사용 시나리오로 검증하며, 바이브코더를 위한 프레임워크가 AI 런타임에 반드시 의존해야 한다고 가정하지 않습니다.
+이 위임은 제품·보안의 중요 결정이나 병합 승인을 AI에게 넘기지 않습니다. AI 결과도 실제 테스트·사용 시나리오로 검증해야 합니다. 바이브코더를 위한 프레임워크라고 해서 실행 시 AI 서비스가 필수라고 가정하지 않습니다.
 
 ## Product-specific constraints
 
-- Preserve the headless, renderer-neutral scene/choice runtime design unless requested otherwise.
-- Treat choice-transition atomicity, seed-based RNG reproducibility, snapshots, and synchronous hook limitations as contracts to verify when changing `src/`.
-- Use tests to support behavioral claims; do not infer target-runtime validation from syntax checks.
-- This is an early prototype: prefer small reversible improvements, not premature governance frameworks or mandatory generators.
+- 별도 요청이 없다면 headless·렌더러 중립 scene/choice 런타임 설계를 유지합니다.
+- `src/` 변경 시 선택 전이의 원자성, 시드 기반 난수 재현성, 스냅샷, 동기 훅 제약을 검증할 계약으로 취급합니다.
+- 동작에 관한 주장은 테스트 근거로 뒷받침합니다. 문법 검사만으로 타깃 런타임 검증을 주장하지 않습니다.
+- 초기 프로토타입에서는 성급한 거버넌스나 필수 생성 도구보다 작고 되돌리기 쉬운 개선을 우선합니다.
 
 ## Evidence and review
 
-Track what was inspected, what was changed, commands **actually executed** and their results, work not executed, risks, and requested human decisions. Diff review should challenge scope drift, security, tests, contradictory docs, and accidental project-wide assumptions. An LLM's second pass is a self-review unless independent execution occurred.
+확인 내용, 변경 사항, **실행한 명령과 결과**, 미실행 작업, 위험 및 사람의 결정 사항을 구분해 기록합니다. diff 리뷰에서는 범위 이탈·보안·테스트·문서 충돌·의도치 않은 전체 프로젝트 가정을 점검합니다. 동일 LLM의 재검토는 별도 독립 실행이 없는 한 자체 리뷰입니다.
 
-Resumable, noncanonical notes live in [inbox/](../../../inbox/README.md), while durable decisions belong in code or the appropriate project document. The [routine loop](../workflows/routine-loop.md) owns execution sequence.
+복원할 가치가 있는 비정본 작업 메모는 [인박스](../../../inbox/README.md)에, 오래 유지할 결정은 코드 또는 해당 정본 문서에 기록합니다. 작업 진행 절차는 [일상 작업 루프](../workflows/routine-loop.md)를 따릅니다.

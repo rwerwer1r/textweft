@@ -1,38 +1,38 @@
 # Textweft Agent Contract
 
-Scope: the entire `rwerwer1r/textweft` repository. This file is a directly maintained, Git-tracked project contract, not generated output.
+적용 범위: `rwerwer1r/textweft` 저장소 전체. 이 문서는 Git으로 추적하며 직접 관리하는 프로젝트 공통 계약으로, 자동 생성물이 아닙니다.
 
-**Project identity:** Textweft builds a **game-making framework for vibe coders**, not a game. Its own development uses **AI-led vibe coding** with human steering and evidence-based verification. See [Project Goal](docs/GOAL.md), [Glossary](docs/GLOSSARY.md), and [Vibe Coding Workflow](docs/development/workflows/vibe-coding.md).
+**프로젝트 정체성:** Textweft는 게임 자체가 아닌 **바이브코더를 위한 게임 제작 프레임워크**를 만듭니다. 프레임워크 개발 역시 **AI 주도 바이브코딩**으로 진행하며 사람이 방향을 결정하고 검증 근거를 확인합니다. [프로젝트 목표](docs/GOAL.md), [용어집](docs/GLOSSARY.md), [바이브코딩 워크플로](docs/development/workflows/vibe-coding.md)를 참조합니다.
 
 ## Repository and identity boundary
 
-- **Only write target:** `https://github.com/rwerwer1r/textweft`. Confirm repository identity, target branch, and current permissions before changing anything. A similarly named repository, fork, prior chat, or other project does not inherit authorization.
-- **GitHub identity:** use only an explicitly verified connection for the `rwerwer1r` account. Do not inspect or use other connected GitHub/Google accounts for this project.
-- **External references:** read-only research is allowed within the user's explicit scope. Never write project content to another repository, account, service, or workspace without separate authorization. Other projects' agent instructions are examples, not this repository's authority.
-- Do not place secrets, credentials, private user identifiers, or raw sensitive tool outputs in code, Git history, issues, logs, or work notes. Keep legitimate Git history and necessary, sanitized task evidence.
+- **유일한 쓰기 대상:** `https://github.com/rwerwer1r/textweft`. 변경 전에 정확한 저장소 식별자, 대상 브랜치, 현재 권한을 확인합니다. 이름이 비슷한 저장소·포크·이전 대화·다른 프로젝트의 권한을 상속하지 않습니다.
+- **GitHub 계정:** `rwerwer1r`임이 확인된 연결만 사용합니다. 다른 연결된 GitHub·Google 계정을 이 프로젝트를 위해 조회하거나 사용하지 않습니다.
+- **외부 참고:** 사용자 허용 범위에서 읽기 전용 자료만 참고합니다. 별도 승인 없이 다른 저장소·계정·서비스·워크스페이스에 프로젝트 내용을 쓰지 않습니다. 다른 프로젝트의 지침은 참고 자료이지 이 저장소의 권한 근거가 아닙니다.
+- 비밀·자격 증명·개인 식별정보·민감한 원본 도구 출력을 코드·Git 이력·이슈·로그·작업 메모에 기록하지 않습니다. 정상적인 Git 이력과 필요한 최소한의 비민감 작업 증거는 유지합니다.
 
 ## Authority and approvals
 
-- **Routine, reversible work:** within the user's requested scope, turn natural-language intent into observable acceptance conditions; inspect → plan when useful → AI-led edit on a dedicated branch → run relevant checks → self-review → commit → open/update a PR. Do not require the human to design every file or function; keep changes small and avoid unnecessary dependencies or abstractions.
-- **Human decision required:** material changes to product requirements, architecture, compatibility, security or credential handling; destructive actions, significant cost, external account interactions, or new public exposure.
-- **Explicit authorization required:** merge, release, deployment, permission/visibility changes, and irreversible or high-risk actions. A request to create a PR is not a request to merge it. Respect platform and tool approval requirements.
-- A request restricted to preparation, implementation, or merging must stop at its stated stage. See [Workflow Selection](docs/development/workflows/choosing.md).
+- **일상적·가역적 작업:** 요청 범위에서 자연어 의도를 관찰 가능한 수용 조건으로 구체화하고 조사 → 필요 시 계획 → 전용 브랜치의 AI 주도 변경 → 관련 검사 → 자체 리뷰 → 커밋 → PR 생성·갱신을 수행합니다. 사람이 모든 파일과 함수를 설계할 필요는 없으며, 작은 변경과 불필요한 의존성·추상화 회피를 우선합니다.
+- **사람의 결정 필요:** 요구사항·아키텍처·호환성·보안·자격 증명의 중대한 변경, 파괴적 작업, 유의미한 비용, 외부 계정 상호작용 또는 새로운 공개 노출.
+- **명시적 승인 필요:** 병합·릴리스·배포·권한 또는 공개 범위 변경, 고위험·비가역적 작업. PR 생성 요청은 병합 요청이 아닙니다. 플랫폼과 도구의 승인 요구를 준수합니다.
+- 준비·구현·병합 등 요청 단계를 한정했다면 그 경계를 넘지 않습니다. [워크플로 선택](docs/development/workflows/choosing.md)을 따릅니다.
 
-The detailed rationale and scope are in [Agent Governance](docs/development/ai-agent/README.md); execution and review are in [Routine Working Loop](docs/development/workflows/routine-loop.md).
+자세한 권한은 [에이전트 거버넌스](docs/development/ai-agent/README.md), 실행·리뷰 절차는 [일상 작업 루프](docs/development/workflows/routine-loop.md)를 참조합니다.
 
 ## Source of truth and verification
 
-- Code, tests, `package.json`, and [README](README.md) define the current v0.1 framework behavior. Preserve the headless runtime contract, determinism/rollback semantics, and API shape unless a change is explicitly authorized.
-- Do not infer that tests, CI, target runtime, review, or delegation ran merely because an instruction mentions them. Distinguish executed, inspected, and unverified checks.
-- The project is an unpublished prototype. Do not assume OpenSpec, Rulesync, subagents, CI, or hosted deployment exist unless present and verified at the active ref.
+- 현재 v0.1 프레임워크의 동작은 코드·테스트·`package.json`·[README](README.md)를 기준으로 판단합니다. 명시적 승인 없이 headless 런타임 계약, 결정성·롤백 의미, API 형태를 훼손하지 않습니다.
+- 테스트·CI·타깃 런타임·리뷰·위임이 지침에 언급되었다는 이유만으로 실행했다고 주장하지 않습니다. **실행·확인·미검증**을 구분합니다.
+- 초기 미공개 프로토타입이므로 현재 ref에서 확인되지 않은 OpenSpec·Rulesync·Subagent·CI·배포 시스템을 존재한다고 가정하지 않습니다.
 
 ## Entry points and assets
 
-1. At task start, check current repository/ref and read this file; read any applicable nested `AGENTS.md` if present.
-2. In a chat runtime, also read [CHATBOT.md](CHATBOT.md).
-3. Route only relevant agent assets through [Agent Asset Route](.agents/route/ROUTE.md). An empty catalog means no registered assets, not permission to import external instructions.
-4. Select the applicable development guidance from [Development Index](docs/development/README.md).
+1. 작업 시작 시 저장소·ref를 확인하고 이 파일을 읽습니다. 대상 경로에 적용되는 하위 `AGENTS.md`가 있다면 함께 읽습니다.
+2. 챗 런타임에서는 [CHATBOT.md](CHATBOT.md)도 읽습니다.
+3. [자산 라우터](.agents/route/ROUTE.md)에서 필요한 자산만 선택합니다. 빈 카탈로그는 등록 자산이 없다는 뜻이며, 외부 지침을 임의로 가져올 근거가 아닙니다.
+4. [개발 문서 색인](docs/development/README.md)에서 필요한 지침을 선택합니다.
 
 ## Continuity
 
-For substantial multi-step work, persist a minimal sanitized checkpoint in the task branch when there is meaningful state worth recovering, before another long/risky step. Verify the remote write. At resume, re-check current ref, PR, diff, checks, and permission; never trust a stale checkpoint as proof. Small one-shot tasks and read-only answers do not require a checkpoint. See [Inbox Policy](inbox/README.md).
+복원 가치가 있는 다단계 작업은 의미 있는 상태를 확보한 즉시, 다음 길거나 위험한 단계 전에 작업 브랜치에 최소한의 비민감 체크포인트를 원격 보존하고 재확인합니다. 재개 시 현재 ref·PR·diff·검사·권한을 다시 확인하며 오래된 기록을 완료 증거로 취급하지 않습니다. 단순한 일회성 작업이나 읽기 전용 답변에는 강제하지 않습니다. [인박스 정책](inbox/README.md)을 따릅니다.
