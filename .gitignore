@@ -26,10 +26,10 @@ coverage/
 /lefthook-local.yml
 
 # 개발자 로컬 환경·민감 설정
-/.env
-/.env.*
-!/.env.example
-!/.env.sample
+.env
+.env.*
+!.env.example
+!.env.sample
 /mise.local.toml
 /.DS_Store
 *.swp
