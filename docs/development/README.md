@@ -5,6 +5,7 @@ Textweft is a private v0.1 TypeScript prototype, not a published package. Start 
 ## Project direction
 
 - [Project Goal](../GOAL.md): vibe-coder audience, framework goals, principles, and non-goals
+- [Glossary](../GLOSSARY.md): framework developers, game developers, and game players
 - [Language](../LANGUAGE.md): language conventions for documentation and collaboration
 
 ## Agent and contributor guidance

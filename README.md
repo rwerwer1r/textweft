@@ -4,7 +4,7 @@
 
 **Textweft** is an early-stage, genre-agnostic framework for choice-driven text games. It combines **declarative YAML/JSON content** with optional **TypeScript hooks** for game-specific rules. The runtime is headless, so a web, CLI, or custom renderer can consume the same game.
 
-This repository is a **v0.1 prototype**, not a published npm package or a stable API. **Its primary framework users are game developers—especially vibe coders** creating games with AI coding tools from natural-language requirements. **Game players** use games built with Textweft, not necessarily Textweft itself. See [role definitions](docs/GOAL.md#roles-and-terminology). Textweft builds the reusable framework, not an individual game, and uses an [AI-led vibe coding workflow](docs/development/workflows/vibe-coding.md) for its own development.
+This repository is a **v0.1 prototype**, not a published npm package or a stable API. **Its primary users are vibe coders** making games with AI coding tools. Textweft builds the reusable framework, not an individual game. See the [Glossary](docs/GLOSSARY.md) for roles and the [AI-led vibe coding workflow](docs/development/workflows/vibe-coding.md) for its development.
 
 ## Quick start
 

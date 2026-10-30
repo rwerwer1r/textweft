@@ -9,6 +9,7 @@ const required = [
   '.agents/route/ROUTE.md',
   '.agents/route/catalog.json',
   'docs/GOAL.md',
+  'docs/GLOSSARY.md',
   'docs/LANGUAGE.md',
   'docs/development/README.md',
   'docs/development/ai-agent/README.md',
