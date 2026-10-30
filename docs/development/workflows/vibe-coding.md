@@ -1,6 +1,6 @@
 # Vibe Coding Workflow
 
-Textweft는 **바이브코더용 게임 제작 프레임워크**이며 개발도 AI 주도 바이브코딩으로 진행합니다. 역할은 [GLOSSARY](../../../docs/GLOSSARY.md), 제품 목표는 [GOAL](../../../docs/GOAL.md)를 따릅니다.
+Textweft는 **바이브코더용 게임 제작 프레임워크**이며 개발도 AI 주도 바이브코딩으로 진행합니다. 역할은 [GLOSSARY](../../GLOSSARY.md), 제품 목표는 [GOAL](../../GOAL.md)를 따릅니다.
 
 ## Responsibilities
 

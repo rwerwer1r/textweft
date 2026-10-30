@@ -76,6 +76,6 @@ tests/runtime.test.ts      엔진 동작 테스트
 
 ## Development and agent harness
 
-이 v0.1 저장소에는 경량의 프로젝트 전용 [에이전트 계약](AGENTS.md), [제한 런타임 챗봇 하네스](CHATBOT.md), [개발 가이드](docs/development/README.md)가 있습니다. Rule·Skill은 [선택형 라우터](.agents/route/ROUTE.md)의 [Rule 색인](.agents/route/rules.jsonl)과 [Skill 색인](.agents/route/skills.jsonl)에서 발견합니다. 저작 원본·생성물은 [Rulesync 운영 문서](docs/development/tooling/rulesync.md)를 참조합니다.
+개발은 [AGENTS.md](AGENTS.md)를 기준으로 하며, 작업별 상세 문서는 [개발 문서 라우터](docs/development/README.md)에서 고릅니다. [ROUTE](.agents/route/ROUTE.md)는 관련 Rule·Skill만 선택합니다. 실행이 없는/제한된 챗봇만 [CHATBOT.md](CHATBOT.md)를 사용합니다.
 
 의존성 설치 후 `npm run harness:check`로 하네스 구조와 문서의 로컬 링크를 검사할 수 있습니다. 이 명령은 `npm test`나 `npm run typecheck`를 대체하지 않습니다.

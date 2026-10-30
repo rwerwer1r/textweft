@@ -1,19 +1,22 @@
 # Textweft Development
 
-제품 동작은 [README](../../README.md), 목표·역할·언어는 [GOAL](../GOAL.md)·[GLOSSARY](../GLOSSARY.md)·[LANGUAGE](../LANGUAGE.md)를 따릅니다.
+**공통 계약은 [AGENTS.md](../../AGENTS.md).** 이 문서는 작업에 필요한 세부 문서를 **하나씩 선택하기 위한 라우터**입니다. 관련 없는 링크는 따라가지 않습니다.
 
-## Entry Points
+## Route by Task
 
-- **권한 정본:** [AGENTS.md](../../AGENTS.md)
-- **제한된 챗봇만:** [CHATBOT.md](../../CHATBOT.md)
-- **조건부 Rule·Skill:** [ROUTE.md](../../.agents/route/ROUTE.md)
-- **단계:** [Workflow Selection](workflows/choosing.md)
-- **구현·검증·리뷰:** [Routine Loop](workflows/routine-loop.md)
-- **바이브코더·AI 역할:** [Vibe Coding](workflows/vibe-coding.md)
-- **중대한 판단:** [Agent Governance](ai-agent/README.md)
-- **생성 자산:** [Rulesync](tooling/rulesync.md)
-- **복원 상태:** [Inbox](../../inbox/README.md)
+| 작업 | 우선 읽을 문서 |
+| --- | --- |
+| 게임 런타임·API·예제 | [README](../../README.md) 및 관련 코드·테스트 |
+| 제품 목표·역할·문서 언어 | [GOAL](../GOAL.md) · [GLOSSARY](../GLOSSARY.md) · [LANGUAGE](../LANGUAGE.md) 중 필요한 것 |
+| 준비·구현·리뷰·병합 단계 판단 | [Workflow Selection](workflows/choosing.md) |
+| 실제 변경·검증·리뷰 | [Routine Loop](workflows/routine-loop.md) |
+| AI 주도 개발·바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
+| 중요한 사람 결정·리뷰 근거 | [Agent Governance](ai-agent/README.md) |
+| Rule·Skill 선택 | [ROUTE](../../.agents/route/ROUTE.md) |
+| Rulesync 설정·생성·잠금 | [Rulesync](tooling/rulesync.md) |
+| 장기 작업의 원격 체크포인트·재개 | [Inbox](../../inbox/README.md) |
+| **런타임이 없거나 제한된 챗봇만** | [CHATBOT](../../CHATBOT.md) |
 
 ## Checks
 
-변경에 따라 `npm test`(런타임), `npm run typecheck`(타입), `npm run harness:check`(하네스 구조·링크·테스트), `npm run rulesync:check`(실제 Rulesync CLI)를 선택합니다. 미실행 항목을 통과로 보고하지 않습니다.
+변경 범위에 따라 `npm test`(런타임), `npm run typecheck`(타입), `npm run harness:check`(하네스·문서 링크·테스트), `npm run rulesync:check`(Rulesync CLI)를 선택합니다. **미실행 검사를 통과로 보고하지 않습니다.**

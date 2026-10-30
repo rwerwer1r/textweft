@@ -17,10 +17,10 @@
 
 ## Entry and Evidence
 
-1. 현재 ref의 이 파일 및 대상 경로의 하위 `AGENTS.md`를 확인합니다. **제한된 챗봇만** [CHATBOT.md](CHATBOT.md)를 호환 진입점으로 사용하고, 코딩 에이전트는 자체 진입점을 따릅니다.
-2. [ROUTE](.agents/route/ROUTE.md)에서 관련 Rule·Skill만 골라 **원본의 적용 조건**을 읽습니다. 무관한 문서·자산을 일괄 로드하지 않습니다.
-3. 필요한 경우에만 [Routine Loop](docs/development/workflows/routine-loop.md)·[Vibe Coding](docs/development/workflows/vibe-coding.md)을 읽습니다.
+1. 현재 ref의 이 파일과 대상 경로의 하위 `AGENTS.md`를 확인합니다. **제한된 챗봇만** [CHATBOT.md](CHATBOT.md)를 사용합니다. 코딩 에이전트는 도구별 진입점을 따릅니다.
+2. [ROUTE](.agents/route/ROUTE.md)에서 Rule·Skill의 **선택 조건**을 확인하고 관련 원본만 읽습니다. 빈/무관한 색인을 추가 로드하지 않습니다.
+3. [개발 문서 라우터](docs/development/README.md)에서 **요청에 필요한 문서만** 선택합니다. 단순 작업에는 전체 개발 지침을 읽지 않습니다.
 4. 제품 동작의 근거는 코드·테스트·[README](README.md)입니다. **실행/정적 확인/CI/미실행**을 구분하고 실제로 확인하지 않은 기능·리뷰를 주장하지 않습니다.
 5. 복잡한 다단계 작업은 다음 긴/위험한 단계 **전에** [인박스](inbox/README.md)에 최소 상태를 원격 보존·재조회합니다. 재개 시 현재 ref·PR·diff·검사를 다시 확인합니다.
 
-추가 판단 기준은 [Agent Governance](docs/development/ai-agent/README.md), 생성 자산 소유권은 [Rulesync](docs/development/tooling/rulesync.md)를 참조합니다. 둘 다 이 계약을 대체하지 않습니다.
+추가 판단 기준과 Rulesync 소유권은 [개발 문서 라우터](docs/development/README.md)에서 해당 작업일 때만 확인합니다. 이 계약이 우선합니다.
