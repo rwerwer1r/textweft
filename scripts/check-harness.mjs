@@ -8,6 +8,8 @@ const required = [
   'CHATBOT.md',
   '.agents/route/ROUTE.md',
   '.agents/route/catalog.json',
+  'docs/GOAL.md',
+  'docs/LANGUAGE.md',
   'docs/development/README.md',
   'docs/development/ai-agent/README.md',
   'docs/development/workflows/choosing.md',

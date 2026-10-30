@@ -2,6 +2,11 @@
 
 Textweft is a private v0.1 TypeScript prototype, not a published package. Start with the root [README](../../README.md) for runtime behavior and local commands.
 
+## Project direction
+
+- [Project Goal](../GOAL.md): long-term purpose, milestones, principles, and non-goals
+- [Language](../LANGUAGE.md): language conventions for documentation and collaboration
+
 ## Agent and contributor guidance
 
 - [Root agent contract](../../AGENTS.md): repository boundary, identity, approvals, and entrypoints
