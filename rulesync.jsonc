@@ -11,6 +11,23 @@
     ],
     "codexcli": [
       "skills"
+    ],
+    "claudecode": {
+      "rules": {
+        "includeRoot": false
+      },
+      "skills": true
+    },
+    "antigravity-ide": [
+      "rules",
+      "skills"
+    ],
+    "antigravity-cli": [
+      "rules",
+      "skills"
+    ],
+    "androidstudio": [
+      "skills"
     ]
   },
   "sources": [],

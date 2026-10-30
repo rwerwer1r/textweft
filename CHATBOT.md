@@ -14,6 +14,13 @@
 - 실제 소스·예제·테스트를 근거로 작게 변경하고 **의도 → 결과 → 검증/미실행 → 사람이 결정할 사항**을 보고합니다.
 - 바이브코더가 프레임워크를 이해하고 재사용할 수 있는지 평가합니다. AI 생성 코드를 검증 없이 통과한 것으로 간주하지 않습니다.
 
+## Platform entrypoints
+
+- **ChatGPT:** ChatGPT 대화·프로젝트 환경은 Rulesync의 별도 `chatgpt` 타깃이 아닙니다. 이 파일을 진입 안내로 연결하고 실제로 저장소 파일을 읽었는지 확인합니다. 자동 발견을 전제하지 않습니다.
+- **Codex CLI:** 직접 관리하는 [AGENTS.md](AGENTS.md)를 기준으로 작업하며 Rulesync는 Skill 투영만 담당합니다.
+- **Claude Code:** [CLAUDE.md](CLAUDE.md) 진입점에서 [AGENTS.md](AGENTS.md)를 읽고, Rulesync가 별도로 생성하는 경로별 Rule을 적용합니다.
+- **Gemini CLI:** [GEMINI.md](GEMINI.md) 진입점에서 같은 정본을 읽습니다. Antigravity IDE/CLI는 Rulesync의 별도 지원 타깃입니다.
+
 ## Capability bridge
 
 - 셸·원격 클론·CI·편집기·스크립트 실행 도구·Subagent 위임 기능이 존재한다고 가정하지 않습니다. 사용 가능한 역량을 먼저 확인합니다.

@@ -15,3 +15,6 @@ coverage/
 /.agents/agents/
 /.agents/skills/
 /.codex/skills/
+/.claude/rules/
+/.claude/skills/
+/.claude/settings.local.json

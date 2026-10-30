@@ -13,7 +13,23 @@ Textweft는 Rulesync를 **경로별 Rule·재사용 Skill의 도구별 투영 �
 | [`rules.jsonl`](../../../.agents/route/rules.jsonl), [`skills.jsonl`](../../../.agents/route/skills.jsonl) | Git 추적 파생 라우팅 색인. **수동 편집 금지** |
 | `.github/instructions/`, `.agents/rules/`, 타깃별 Skill 복사본 | 로컬 생성물. Git 무시 및 수동 편집 금지 |
 
-현재 `copilot`·`copilotcli`의 Rule/Skill과 `codexcli`의 Skill 투영을 설정했습니다. 애플리케이션 런타임은 Rulesync를 필요로 하지 않습니다. 외부 Skill·Subagent는 포함하지 않습니다.
+지원되는 타깃과 실제 로딩 방식은 다음처럼 구분합니다.
+
+| 환경 | Rulesync 타깃과 기능 | 프로젝트 진입 |
+| --- | --- | --- |
+| **ChatGPT** | 직접 지원하는 `chatgpt` 타깃 없음 | [CHATBOT.md](../../../CHATBOT.md)를 프로젝트·대화 지침에서 명시적으로 연결 |
+| **Codex CLI** | `codexcli`: Skill | 직접 관리하는 [AGENTS.md](../../../AGENTS.md)와 선택형 Skill |
+| **Claude Code** | `claudecode`: 경로별 Rule·Skill, `includeRoot: false` | 직접 관리하는 [CLAUDE.md](../../../CLAUDE.md)가 AGENTS.md를 안내 |
+| **Gemini CLI** | 별도 `geminicli` 타깃 없음 | 직접 관리하는 [GEMINI.md](../../../GEMINI.md)가 AGENTS.md를 안내 |
+| **Google Antigravity** | `antigravity-ide`·`antigravity-cli`: Rule·Skill | 지원되는 프로젝트별 경로별 생성물과 AGENTS.md |
+| **Gemini in Android Studio** | `androidstudio`: Skill | 사용 가능한 Skill이 생겼을 때 투영(현재 0개) |
+| **GitHub Copilot / CLI** | `copilot`·`copilotcli`: Rule·Skill | 기존 설정 유지 |
+
+`agentsmd` 타깃과 Codex의 `rules` 투영을 활성화하지 않은 이유는 직접 작성한 `AGENTS.md`를 덮어쓸 수 있기 때문입니다. Claude의 루트 Rulesync 생성도 꺼 두었습니다. `GEMINI.md`와 `CLAUDE.md`는 **생성물이 아닌 경량 진입점**입니다. 현재 각 버전의 자동 로딩·타깃 투영을 실제 실행하지 않았다면 지원 설정만 완료된 것으로 보고합니다.
+
+공식 타깃과 프로젝트별 기능: [Rulesync Supported Tools](https://rulesync.dyoshikawa.com/reference/supported-tools.html). Gemini CLI의 진입점: [GEMINI.md 안내](https://geminicli.com/docs/cli/gemini-md/).
+
+ 애플리케이션 런타임은 Rulesync를 필요로 하지 않습니다. 외부 Skill·Subagent는 포함하지 않습니다.
 
 ## Lifecycle
 
@@ -52,4 +68,4 @@ npm run harness:test
 
 ## Isolation
 
-다른 도구가 소유한 자산을 Rulesync로 덮거나 삭제하지 않습니다. 특히 직접 작성한 `AGENTS.md`, `CHATBOT.md`, `.agents/route/`는 생성 범위에서 보호합니다. 외부 Skill 업데이트는 별도 리뷰 대상으로 취급합니다.
+다른 도구가 소유한 자산을 Rulesync로 덮거나 삭제하지 않습니다. 특히 직접 작성한 `AGENTS.md`, `CHATBOT.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/route/`는 생성 범위에서 보호합니다. 외부 Skill 업데이트는 별도 리뷰 대상으로 취급합니다.

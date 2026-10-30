@@ -14,7 +14,9 @@
     "inbox:check": "node scripts/check-inbox.mjs",
     "harness:test": "node --test tests/inbox-harness.test.mjs tests/route-harness.test.mjs",
     "rulesync:check": "bash scripts/rulesync-assets check",
-    "rulesync:generate": "bash scripts/rulesync-assets generate"
+    "rulesync:generate": "bash scripts/rulesync-assets generate",
+    "agents:index:check": "node scripts/agent-route-index.mjs check",
+    "agents:index:generate": "node scripts/agent-route-index.mjs generate"
   },
   "dependencies": {
     "yaml": "^2.8.1"

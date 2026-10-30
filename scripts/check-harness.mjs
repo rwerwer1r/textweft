@@ -1,11 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { syncIndexes } from './agent-route-index.mjs';
+import { run } from './agent-route-index.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const required = [
- 'AGENTS.md', 'CHATBOT.md',
+ 'AGENTS.md', 'CHATBOT.md', 'CLAUDE.md', 'GEMINI.md',
  '.agents/route/ROUTE.md', '.agents/route/rules.jsonl', '.agents/route/skills.jsonl',
  '.rulesync/rules/typescript.md', 'rulesync.jsonc', 'rulesync.lock',
  'docs/GOAL.md', 'docs/GLOSSARY.md', 'docs/LANGUAGE.md',
@@ -36,7 +36,7 @@ for(const path of docs) {
   if(!inside(target)||!existsSync(target))errors.push('깨진 상대 링크: '+path+' -> '+link);
  }
 }
-try{if(syncIndexes('check'))errors.push('Rulesync 라우팅 색인 불일치');}
+try{if(run('check').length)errors.push('Rulesync 라우팅 색인 불일치');}
 catch(e){errors.push('라우팅 검사 실패: '+e.message);}
 for(const issue of errors)console.error('ERROR:',issue);
 process.exitCode=errors.length?1:0;
