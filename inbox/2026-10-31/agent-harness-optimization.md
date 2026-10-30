@@ -1,6 +1,6 @@
 ---
 description: KISS·DRY·SRP 기반 문서·하네스 최적화 작업 인계
-updated: 2026-10-30T22:39:28Z
+updated: 2026-10-30T22:43:50Z
 ---
 
 # Harness Optimization Workstate
@@ -29,6 +29,14 @@ updated: 2026-10-30T22:39:28Z
 - `mise.toml`에서 Lefthook `2.2.2` 버전과 `hooks:install`·`hooks:validate` 작업을 고정함.
 - `lefthook.yml`: pre-commit에서 스테이징된 Markdown은 rumdl, JS/TS/JSON은 Biome, 인박스는 메타데이터 검사, 라우팅 자산은 색인 일치 검사로 조건부 실행. 자동 수정·무거운 pre-push 검사는 도입하지 않음.
 - `mise run check`에 Lefthook 설정 검증을 추가함. **mise·Lefthook 설치, Git 훅 등록·실행, lint/테스트/CI는 이 GitHub 도구 환경에서 미실행.**
+
+## Development Environment
+
+- `.editorconfig`: UTF-8·LF·2칸 들여쓰기와 Markdown 개행 보존.
+- `.gitmessage`: Conventional Commits의 한국어 안내 템플릿. Git 설정은 `git config --local`만 사용.
+- `.gitignore`: 민감 환경 파일·mise 로컬 설정·에디터 임시 파일 제외.
+- 실행 가능한 mise 파일 작업 `mise-tasks/bootstrap`·`mise-tasks/update`: 첫 구성과 재동기화 분리. 프로젝트에 버전이 고정된 도구 사용, Lefthook 등록; 최초 bootstrap에만 이 저장소의 커밋 템플릿 설정.
+- 현재 저장소에는 `package-lock.json`이 없어 최초 `npm install` 후 생성할 수 있음. 잠금 파일이 있다면 `npm ci` 사용. **실제 셋업/업데이트·훅·검사는 미실행.**
 
 ## Next Action
 - **현재 실행 경로:** `mise install` → `mise run deps` → `mise run check`. Rulesync 진단은 `mise run rulesync:check`; 프로젝트 고유 인박스 검사는 `mise run inbox:check -- <paths...>`.

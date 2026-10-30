@@ -19,4 +19,4 @@
 
 ## Checks
 
-**[mise.toml](../../mise.toml)이 도구 버전과 검사 작업의 정본**입니다. `mise install` 후 `mise run check`로 전체 검사, 변경 범위에 따라 `mise run lint:md`(rumdl·링크), `mise run lint:code`(Biome), `mise run routes:check`, `mise run test`, `mise run typecheck`를 선택합니다. Rulesync 진단은 `mise run rulesync:check`를 사용합니다. [Lefthook](../../lefthook.yml)은 `mise run hooks:install`로 로컬 Git 훅에 한 번 설치하며 스테이징된 파일만 검사합니다. 훅 통과는 `mise run check`나 CI 성공을 뜻하지 않습니다. **미실행 검사를 통과로 보고하지 않습니다.**
+**[mise.toml](../../mise.toml)이 도구 버전과 검사 작업의 정본**입니다. [개발 환경 초기화](../../mise-tasks/bootstrap)는 `mise run bootstrap`, 기존 환경 [동기화](../../mise-tasks/update)는 `mise run update`를 사용합니다. 초기화는 Git 로컬 커밋 템플릿과 Lefthook도 설치합니다. `mise run check`로 전체 검사, 변경 범위에 따라 `mise run lint:md`(rumdl·링크), `mise run lint:code`(Biome), `mise run routes:check`, `mise run test`, `mise run typecheck`를 선택합니다. Rulesync 진단은 `mise run rulesync:check`를 사용합니다. [Lefthook](../../lefthook.yml)은 `mise run hooks:install`로 로컬 Git 훅에 한 번 설치하며 스테이징된 파일만 검사합니다. 훅 통과는 `mise run check`나 CI 성공을 뜻하지 않습니다. **미실행 검사를 통과로 보고하지 않습니다.**

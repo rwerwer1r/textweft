@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#MISE description="프로젝트에 고정된 도구·npm 의존성·Git 훅을 현재 환경에 동기화"
+set -euo pipefail
+
+root="$(cd "$(dirname "$0")/.." && pwd -P)"
+cd "$root"
+if [[ "$(git rev-parse --show-toplevel 2>/dev/null)" != "$root" ]]; then
+  echo "오류: Textweft 저장소 루트에서만 환경을 갱신할 수 있습니다." >&2
+  exit 1
+fi
+
+mise install
+if [[ -f package-lock.json ]]; then
+  npm ci
+else
+  npm install
+  echo "참고: package-lock.json이 새로 생성되면 변경 사항을 검토해 추적하세요."
+fi
+lefthook install
+echo "개발 환경 동기화 완료. 검사: mise run check"
