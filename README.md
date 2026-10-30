@@ -73,3 +73,9 @@ examples/lighthouse/      Small hybrid game
 ## Ownership and release
 
 Repository owner: **[rwerwer1r](https://github.com/rwerwer1r)**. This prototype is private and has no declared open-source license. No npm publication is configured.
+
+## Development and agent harness
+
+This v0.1 repository has a lightweight, project-local [agent contract](AGENTS.md), [chat entrypoint](CHATBOT.md), and [development guide](docs/development/README.md). Agent Rule/Skill discovery starts with an intentionally empty [catalog](.agents/route/catalog.json).
+
+After installing dependencies, use `npm run harness:check` to validate harness structure and local documentation links. This does not replace `npm test` or `npm run typecheck`.
