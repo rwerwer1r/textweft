@@ -12,7 +12,7 @@
     "example": "node --experimental-strip-types examples/lighthouse/main.ts",
     "harness:check": "node scripts/check-harness.mjs && npm run harness:test",
     "inbox:check": "node scripts/check-inbox.mjs",
-    "harness:test": "node --test tests/inbox-harness.test.mjs tests/route-harness.test.mjs",
+    "harness:test": "node --test tests/inbox-harness.test.mjs tests/route-harness.test.mjs tests/agent-route-index.test.mjs",
     "rulesync:check": "bash scripts/rulesync-assets check",
     "rulesync:generate": "bash scripts/rulesync-assets generate",
     "agents:index:check": "node scripts/agent-route-index.mjs check",

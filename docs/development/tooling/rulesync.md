@@ -20,10 +20,12 @@ Textweft는 Rulesync를 **경로별 Rule·재사용 Skill의 도구별 투영 �
 | **ChatGPT** | 직접 지원하는 `chatgpt` 타깃 없음 | [CHATBOT.md](../../../CHATBOT.md)를 프로젝트·대화 지침에서 명시적으로 연결 |
 | **Codex CLI** | `codexcli`: Skill | 직접 관리하는 [AGENTS.md](../../../AGENTS.md)와 선택형 Skill |
 | **Claude Code** | `claudecode`: 경로별 Rule·Skill, `includeRoot: false` | 직접 관리하는 [CLAUDE.md](../../../CLAUDE.md)가 AGENTS.md를 안내 |
-| **Gemini CLI** | 별도 `geminicli` 타깃 없음 | 직접 관리하는 [GEMINI.md](../../../GEMINI.md)가 AGENTS.md를 안내 |
+| **Gemini CLI (레거시)** | `geminicli`: Skill 투영만 활성화 | 직접 관리하는 [GEMINI.md](../../../GEMINI.md)가 AGENTS.md를 안내 |
 | **Google Antigravity** | `antigravity-ide`·`antigravity-cli`: Rule·Skill | 지원되는 프로젝트별 경로별 생성물과 AGENTS.md |
 | **Gemini in Android Studio** | `androidstudio`: Skill | 사용 가능한 Skill이 생겼을 때 투영(현재 0개) |
 | **GitHub Copilot / CLI** | `copilot`·`copilotcli`: Rule·Skill | 기존 설정 유지 |
+
+`geminicli`는 기존 Gemini CLI 환경을 위한 호환 타깃입니다. Skill만 생성하고 루트 Rule 투영은 제외하여 직접 관리하는 `GEMINI.md`를 보호합니다. 새 Google 코딩 환경에는 Antigravity IDE·CLI를 우선합니다.
 
 `agentsmd` 타깃과 Codex의 `rules` 투영을 활성화하지 않은 이유는 직접 작성한 `AGENTS.md`를 덮어쓸 수 있기 때문입니다. Claude의 루트 Rulesync 생성도 꺼 두었습니다. `GEMINI.md`와 `CLAUDE.md`는 **생성물이 아닌 경량 진입점**입니다. 현재 각 버전의 자동 로딩·타깃 투영을 실제 실행하지 않았다면 지원 설정만 완료된 것으로 보고합니다.
 

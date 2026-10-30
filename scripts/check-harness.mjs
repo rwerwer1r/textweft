@@ -37,6 +37,14 @@ for(const path of docs) {
  }
 }
 try{if(run('check').length)errors.push('Rulesync 라우팅 색인 불일치');}
+try {
+ const config=JSON.parse(readFileSync(resolve(root,'rulesync.jsonc'),'utf8'));
+ for(const name of ['codexcli','claudecode','geminicli','antigravity-ide','antigravity-cli','androidstudio']) {
+  if(!Object.hasOwn(config.targets??{},name)) errors.push('Rulesync 타깃 누락: '+name);
+ }
+ if(config.targets?.claudecode?.rules?.includeRoot!==false) errors.push('Claude 루트 지침 보호 설정 누락');
+ if(!Array.isArray(config.targets?.geminicli)||config.targets.geminicli.join(',')!=='skills') errors.push('Gemini CLI의 호환 Skill 설정 오류');
+} catch(error) { errors.push('Rulesync 타깃 구성 오류: '+error.message); }
 catch(e){errors.push('라우팅 검사 실패: '+e.message);}
 for(const issue of errors)console.error('ERROR:',issue);
 process.exitCode=errors.length?1:0;

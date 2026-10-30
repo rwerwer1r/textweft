@@ -6,7 +6,7 @@ contracts=(AGENTS.md CHATBOT.md CLAUDE.md GEMINI.md)
 generated=(
   .github/copilot-instructions.md .github/instructions .github/agents .github/skills
   .agents/rules .agents/agents .agents/skills .codex/skills
-  .claude/rules .claude/skills
+  .claude/rules .claude/skills .gemini/skills
 )
 fingerprint_contracts(){
   local path
