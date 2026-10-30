@@ -1,0 +1,14 @@
+{
+  "name": "textweft",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.16.0" },
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "example": "node --experimental-strip-types examples/lighthouse/main.ts"
+  },
+  "dependencies": { "yaml": "^2.8.1" },
+  "devDependencies": { "@types/node": "^22.15.0", "typescript": "^5.9.3" }
+}
