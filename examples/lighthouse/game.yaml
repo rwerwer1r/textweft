@@ -1,0 +1,37 @@
+schema: 1
+id: lighthouse
+version: 0.1.0
+start: pier
+state:
+  hasChart: false
+  supplies: 2
+scenes:
+  pier:
+    text: "당신은 오래된 부두에 서 있다."
+    choices:
+      - id: search
+        label: "창고를 조사한다"
+        to: warehouse
+      - id: sail
+        label: "배를 타고 출항한다"
+        when:
+          call: canDepart
+        effects:
+          - call: consumeSupply
+        to:
+          call: decideWeather
+  warehouse:
+    text: "창고 안에서 항해 지도를 발견했다."
+    onEnter:
+      - set:
+          hasChart: true
+    choices:
+      - id: back
+        label: "부두로 돌아간다"
+        to: pier
+  sunny:
+    text: "평온한 바다를 건너 목적지에 도착했다."
+    end: true
+  storm:
+    text: "폭풍이 배를 덮쳤다."
+    end: true
