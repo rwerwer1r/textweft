@@ -11,7 +11,7 @@ Textweft는 아직 공개 패키지가 아닌 비공개 v0.1 TypeScript 프로�
 ## Agent and contributor guidance
 
 - [공통 에이전트 계약](../../AGENTS.md): 저장소·계정 경계, 권한, 승인, 진입점
-- [챗 런타임 진입점](../../CHATBOT.md): 실제 도구 역량을 고려한 안내
+- [제한 런타임 챗봇 하네스](../../CHATBOT.md): 코딩 실행 환경이 없거나 제한된 챗봇에서 동일한 절차·근거·인계를 재현하는 진입점 (코딩 에이전트 기본 진입점 아님)
 - [자산 라우터](../../.agents/route/ROUTE.md): 선택형 Rule·Skill 탐색
 - [Rulesync 운영](tooling/rulesync.md): 저작 원본, 도구별 생성물, 버전 고정·검증
 - [에이전트 거버넌스](ai-agent/README.md): 의사결정 및 위임 범위

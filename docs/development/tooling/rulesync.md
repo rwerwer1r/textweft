@@ -17,7 +17,7 @@ Textweft는 Rulesync를 **경로별 Rule·재사용 Skill의 도구별 투영 �
 
 | 환경 | Rulesync 타깃과 기능 | 프로젝트 진입 |
 | --- | --- | --- |
-| **ChatGPT** | 직접 지원하는 `chatgpt` 타깃 없음 | [CHATBOT.md](../../../CHATBOT.md)를 프로젝트·대화 지침에서 명시적으로 연결 |
+| **도구 실행이 없거나 제한된 ChatGPT 등의 챗봇** | 직접 지원하는 `chatgpt` 타깃 없음 | [CHATBOT.md](../../../CHATBOT.md)로 코딩 에이전트의 규칙·작업 루프·검증 보고를 **가능한 범위에서 재현**. Codex·Claude·Gemini 코딩 에이전트용 진입점과 구분 |
 | **Codex CLI** | `codexcli`: Skill | 직접 관리하는 [AGENTS.md](../../../AGENTS.md)와 선택형 Skill |
 | **Claude Code** | `claudecode`: 경로별 Rule·Skill, `includeRoot: false` | 직접 관리하는 [CLAUDE.md](../../../CLAUDE.md)가 AGENTS.md를 안내 |
 | **Gemini CLI** | Rulesync의 직접 지원 타깃 없음 | 직접 관리하는 [GEMINI.md](../../../GEMINI.md)가 AGENTS.md를 안내 |
