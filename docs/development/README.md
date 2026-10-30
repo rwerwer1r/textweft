@@ -4,7 +4,7 @@ Textweft is a private v0.1 TypeScript prototype, not a published package. Start 
 
 ## Project direction
 
-- [Project Goal](../GOAL.md): long-term purpose, milestones, principles, and non-goals
+- [Project Goal](../GOAL.md): vibe-coder audience, framework goals, principles, and non-goals
 - [Language](../LANGUAGE.md): language conventions for documentation and collaboration
 
 ## Agent and contributor guidance
@@ -15,6 +15,7 @@ Textweft is a private v0.1 TypeScript prototype, not a published package. Start 
 - [Agent governance](ai-agent/README.md): decision and authorization boundaries
 - [Workflow selection](workflows/choosing.md): preparation, implementation, PR and merge scope
 - [Routine working loop](workflows/routine-loop.md): development, evidence, review, completion
+- [Vibe coding workflow](workflows/vibe-coding.md): natural-language intent, AI-led work, verification, human steering
 - [Inbox policy](../../inbox/README.md): minimal resumable workstate
 
 ## Project checks

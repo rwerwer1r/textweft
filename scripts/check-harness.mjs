@@ -14,6 +14,7 @@ const required = [
   'docs/development/ai-agent/README.md',
   'docs/development/workflows/choosing.md',
   'docs/development/workflows/routine-loop.md',
+  'docs/development/workflows/vibe-coding.md',
   'inbox/README.md',
   '.github/pull_request_template.md',
 ];

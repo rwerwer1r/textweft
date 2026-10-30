@@ -2,6 +2,8 @@
 
 Scope: the entire `rwerwer1r/textweft` repository. This file is a directly maintained, Git-tracked project contract, not generated output.
 
+**Project identity:** Textweft builds a **game-making framework for vibe coders**, not a game. Its own development uses **AI-led vibe coding** with human steering and evidence-based verification. See [Project Goal](docs/GOAL.md) and [Vibe Coding Workflow](docs/development/workflows/vibe-coding.md).
+
 ## Repository and identity boundary
 
 - **Only write target:** `https://github.com/rwerwer1r/textweft`. Confirm repository identity, target branch, and current permissions before changing anything. A similarly named repository, fork, prior chat, or other project does not inherit authorization.
@@ -11,7 +13,7 @@ Scope: the entire `rwerwer1r/textweft` repository. This file is a directly maint
 
 ## Authority and approvals
 
-- **Routine, reversible work:** within the user's requested scope, inspect → plan when useful → edit on a dedicated branch → run relevant checks → self-review → commit → open/update a PR. Keep changes small and avoid unnecessary dependencies and abstractions.
+- **Routine, reversible work:** within the user's requested scope, turn natural-language intent into observable acceptance conditions; inspect → plan when useful → AI-led edit on a dedicated branch → run relevant checks → self-review → commit → open/update a PR. Do not require the human to design every file or function; keep changes small and avoid unnecessary dependencies or abstractions.
 - **Human decision required:** material changes to product requirements, architecture, compatibility, security or credential handling; destructive actions, significant cost, external account interactions, or new public exposure.
 - **Explicit authorization required:** merge, release, deployment, permission/visibility changes, and irreversible or high-risk actions. A request to create a PR is not a request to merge it. Respect platform and tool approval requirements.
 - A request restricted to preparation, implementation, or merging must stop at its stated stage. See [Workflow Selection](docs/development/workflows/choosing.md).

@@ -1,12 +1,12 @@
 # Routine Working Loop
 
-The normal path is **inspect → scope/plan → implement → validate → self-review → PR/handoff**, revisiting earlier steps when evidence changes. These are work states, not mandatory ceremonies.
+The normal path is **inspect → scope/plan → implement → validate → self-review → PR/handoff**, revisiting earlier steps when evidence changes. These are work states, not mandatory ceremonies. Textweft는 **바이브코딩**으로 개발하며, 자연어 요구와 역할 분담은 [Vibe Coding Workflow](vibe-coding.md)에서 구체화합니다. 작업 단계·권한 경계는 그대로 유지합니다.
 
 ## 1. Inspect and scope
 
 Verify exact repository, connected account, branch/ref, permissions, the root and applicable nested `AGENTS.md`, and [agent asset routing](../../../.agents/route/ROUTE.md). Read only relevant code and product docs. Check for an existing task branch or PR before starting a duplicate.
 
-State the smallest intended change, acceptance conditions, known risks, and requested stage. If scope includes architecture/security/compatibility changes or destructive external effects, obtain human direction first.
+State the smallest intended change, acceptance conditions, known risks, and requested stage. 자연어 요구는 사용자 경험과 관찰 가능한 결과로 해석하고, 일반적인 코드 구조 결정을 사용자에게 매번 요구하지 않습니다. If scope includes architecture/security/compatibility changes or destructive external effects, obtain human direction first.
 
 ## 2. Change and preserve
 
@@ -24,7 +24,7 @@ npm run typecheck
 npm run harness:check
 ```
 
-Choose checks relevant to the diff. Changes to game runtime contracts should have targeted tests, especially invalid choices, atomicity, deterministic RNG, and restore compatibility when affected. A documentation-only change normally needs links/catalog checks and a focused review; it must not be described as runtime-tested when runtime tests were not executed.
+Choose checks relevant to the diff. Changes to game runtime contracts should have targeted tests, especially invalid choices, atomicity, deterministic RNG, and restore compatibility when affected. 바이브코더 대상 저작 경험을 바꿀 때는 공개 예제로 생성·실행·오류 수정 경로도 확인합니다. A documentation-only change normally needs links/catalog checks and a focused review; it must not be described as runtime-tested when runtime tests were not executed.
 
 Separate **locally executed**, **CI-reported**, **manually inspected**, **unavailable**, and **not run**. Do not treat them as equivalent evidence.
 
