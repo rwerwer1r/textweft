@@ -2,22 +2,22 @@
 
 ## Request-stage boundaries
 
-Honor the user's stated stage. Do not silently advance to a more consequential stage.
+사용자가 지정한 작업 단계를 따르고, 더 영향이 큰 다음 단계로 임의로 진행하지 않습니다.
 
-| Request or intent | Allowed work | Stop before |
+| 요청 또는 의도 | 허용되는 작업 | 다음 단계로 넘어가기 전 중단 지점 |
 | --- | --- | --- |
-| **PR 준비** | Inspect current state, clarify scope/acceptance, write planning docs as needed, and optionally open a Draft PR containing those docs | Product implementation, claiming tests passed, merge |
-| **구현 / 수정 / 하네스 구축 / PR 생성** | Perform the requested bounded changes, run available checks, review diff, commit to a task branch, open or update a PR | Merge, release, deploy |
-| **PR 리뷰** | Inspect PR/diff/check evidence; report findings and, if explicitly requested, propose or implement fixes | Merge without instruction |
-| **PR 병합** | Recheck current head, requested scope, review and CI evidence, permissions, and approval gates | Merge when required evidence or authorization is absent |
+| **PR 준비** | 현재 상태 점검, 범위·수용 조건 정리, 필요한 계획 문서 작성, 해당 문서를 포함한 Draft PR 생성 가능 | 제품 구현, 테스트 통과 주장, 병합 |
+| **구현 / 수정 / 하네스 구축 / PR 생성** | 요청 범위의 실제 변경, 가능한 검사, diff 리뷰, 작업 브랜치 커밋, PR 생성·갱신 | 병합·릴리스·배포 |
+| **PR 리뷰** | PR·diff·검증 근거를 확인하고 발견 사항 보고, 명시 요청 시 수정 제안·구현 | 별도 요청 없는 병합 |
+| **PR 병합** | 최신 head·요청 범위·리뷰·CI·권한·승인 게이트 재확인 | 증거 또는 필수 승인 부족 시 병합 |
 
-Explicitly scoped requests override generic defaults only within the repository and higher safety/approval constraints. A Draft PR is a review surface, not proof of implementation completeness. Routine changes without a special stage follow [Routine Working Loop](routine-loop.md).
+명시적인 작업 단계 제한은 저장소의 상위 안전·승인 기준 안에서 일반 기본값보다 우선합니다. Draft PR은 리뷰를 위한 표면이지 구현 완료 증거가 아닙니다. 별도의 단계 지정이 없는 일상 변경은 [일상 작업 루프](routine-loop.md)를 따릅니다.
 
 ## Work surfaces
 
-- **Canonical behavior:** `src/`, `tests/`, `examples/`, `package.json`, and product documentation.
-- **Canonical agent guidance:** root `AGENTS.md`, `CHATBOT.md`, `.agents/route/`, and `docs/development/`.
-- **Noncanonical research, reviews, handoff, and transient plans:** [inbox/](../../../inbox/README.md), only when retaining them materially helps.
-- **Live change discussion:** GitHub branch/PR and its diff/checks. Avoid duplicating the same state across files.
+- **제품 동작 정본:** `src/`·`tests/`·`examples/`·`package.json` 및 제품 문서.
+- **에이전트 지침 정본:** 루트 `AGENTS.md`·`CHATBOT.md`·`.agents/route/`·`docs/development/`.
+- **비정본 조사·리뷰·인계·임시 계획:** 실질적으로 보존 가치가 있을 때만 [inbox/](../../../inbox/README.md)에 기록.
+- **진행 중 변경 논의:** GitHub 브랜치·PR·diff·검사 결과. 같은 상태를 여러 파일에 불필요하게 복제하지 않습니다.
 
-Textweft does not currently adopt OpenSpec, Rulesync, or any auto-generated instruction layer. If later adopted, define their ownership and validation in a separate, explicitly reviewed change.
+현재 Textweft에는 OpenSpec·Rulesync·자동 생성 지침 계층을 도입하지 않았습니다. 향후 채택한다면 소유권과 검증 방식을 별도의 명시적 리뷰 변경으로 정의합니다.

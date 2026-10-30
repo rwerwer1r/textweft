@@ -1,21 +1,21 @@
 # Inbox: Durable Work Notes
 
-`inbox/` holds **noncanonical** investigation, plans, review notes, validation evidence, and workstate that help another agent or maintainer resume meaningful unfinished work. It is not the source of truth for requirements, code, tests, or permissions.
+`inbox/`에는 중단된 작업을 다른 에이전트나 관리자가 재개하는 데 도움이 되는 **비정본** 조사·계획·리뷰·검증 증거·작업 상태를 보관합니다. 요구사항·코드·테스트·권한의 정본이 아닙니다.
 
 ## When to write
 
-Use a checkpoint for substantial multi-step tasks where losing intermediate decisions would cause significant rework. Skip it for one-shot edits, simple questions, and read-only reviews. Prefer the GitHub PR body for a brief finished summary; do not create a journal per tool call.
+중간 결정을 잃으면 상당한 재작업이 필요한 복잡한 다단계 작업에 체크포인트를 사용합니다. 일회성 수정·간단한 질의·읽기 전용 리뷰에는 강제하지 않습니다. 완료된 작업의 짧은 요약은 GitHub PR 본문을 우선하며 도구 호출마다 일지를 만들지 않습니다.
 
-Work on a task branch under `inbox/YYYY-MM-DD/<short-task>-workstate.md`; maintain one active workstate per task and avoid needless renaming. Do not commit this task state to another account or repository.
+작업 브랜치의 `inbox/YYYY-MM-DD/<short-task>-workstate.md` 경로에 작업당 활성 상태 파일 하나를 유지하고 불필요한 파일명 변경을 피합니다. 이 프로젝트의 상태를 다른 계정이나 저장소에 커밋하지 않습니다.
 
 ## Minimum workstate
 
-Include **Goal / scope**, **Repository + branch + PR**, **Current state** (`active`, `blocked`, `handoff`, or `complete`), **Verified evidence** (files/commits/check results and unrun checks), **Open risks/approvals**, and **Next action**. Keep it short, sanitized, and free of raw sensitive output, credentials, or private user identifiers.
+**목표와 범위**, **저장소·브랜치·PR**, **현재 상태**(`active`, `blocked`, `handoff`, `complete`), **확인된 증거**(파일·커밋·검사 결과와 미실행 항목), **남은 위험·승인**, **다음 행동**을 포함합니다. 간결하고 비민감하게 작성하며 원본 민감 정보·자격 증명·개인 식별정보를 남기지 않습니다.
 
-Commit and push the first useful checkpoint **before** beginning another long or interruption-prone step, then read it back from the remote ref. Update after substantive findings, test results, blockers, and handoff; never assert remote persistence without confirmation.
+첫 유용한 체크포인트를 다음 긴 작업이나 중단 위험이 있는 단계 **전에** 커밋·push하고 원격 ref에서 다시 읽어 확인합니다. 중요한 발견·검증·장애·인계가 생기면 갱신하며, 원격 확인 없이 영속화되었다고 주장하지 않습니다.
 
 ## Recovery
 
-Re-read the current repository/ref, branch/PR, diff, actual files, checks, and applicable instructions. Reconcile them with the latest saved workstate; a note can be stale and never overrides live evidence. Resume only outstanding, authorized work; do not repeat irreversible operations.
+현재 저장소·ref·브랜치·PR·diff·실제 파일·검사·적용 지침을 다시 읽습니다. 마지막 작업 상태와 대조하되 기록이 오래되었을 수 있으므로 현재 증거가 우선합니다. 남은 승인된 작업만 재개하고 비가역적 작업을 중복 실행하지 않습니다.
 
-Promote lasting conclusions to their canonical owner, keep an active workstate while work continues, and do not confuse archived notes with approvals or CI evidence.
+오래 유지할 결론은 정본 문서로 승격하고, 진행 중에는 활성 작업 상태를 유지합니다. 과거 메모를 승인이나 CI 검증 증거로 혼동하지 않습니다.
