@@ -1,0 +1,23 @@
+{
+  "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
+  "targets": {
+    "copilot": [
+      "rules",
+      "skills"
+    ],
+    "copilotcli": [
+      "rules",
+      "skills"
+    ],
+    "codexcli": [
+      "skills"
+    ]
+  },
+  "sources": [],
+  "outputRoots": [
+    "."
+  ],
+  "delete": false,
+  "verbose": false,
+  "silent": false
+}
