@@ -19,3 +19,5 @@ coverage/
 /.claude/skills/
 /.claude/settings.local.json
 
+# rumdl 검사 캐시
+/.rumdl_cache/

@@ -1,6 +1,6 @@
 ---
 description: KISS·DRY·SRP 기반 문서·하네스 최적화 작업 인계
-updated: 2026-10-30T22:32:34Z
+updated: 2026-10-30T22:34:53Z
 ---
 
 # Harness Optimization Workstate
@@ -25,5 +25,6 @@ updated: 2026-10-30T22:32:34Z
 - 라우팅 색인과 인박스 frontmatter는 프로젝트 고유 규약으로 최소한 유지. 설치·Node·Rulesync 실측은 **미실행**.
 
 ## Next Action
-- Node 실행 환경에서 `npm run harness:check`, `npm test`, `npm run typecheck`를 수행하고, 실제 변경 영향에 따라 Rulesync 확인.
+- **현재 실행 경로:** `mise install` → `mise run deps` → `mise run check`. Rulesync 진단은 `mise run rulesync:check`; 프로젝트 고유 인박스 검사는 `mise run inbox:check -- <paths...>`.
+- 위 명령을 실제 개발 환경에서 실행하고 설치·린트·테스트 결과를 기록합니다. 실패 시 규칙 완화보다 원인 수정 우선.
 - 실패 시 수정·재검증 후 사람 리뷰. 승인 전 병합·배포 금지.
