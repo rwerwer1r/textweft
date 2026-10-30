@@ -2,7 +2,7 @@
 
 Scope: the entire `rwerwer1r/textweft` repository. This file is a directly maintained, Git-tracked project contract, not generated output.
 
-**Project identity:** Textweft builds a **game-making framework for vibe coders**, not a game. Its own development uses **AI-led vibe coding** with human steering and evidence-based verification. See [Project Goal](docs/GOAL.md) and [Vibe Coding Workflow](docs/development/workflows/vibe-coding.md).
+**Project identity:** Textweft builds a **game-making framework for vibe coders**, not a game. Distinguish **framework developers** (maintain Textweft), **framework users/game developers** (build games with Textweft), and **game users/players** (play those games). Its own development uses **AI-led vibe coding** with framework-developer steering and evidence-based verification. See [Project Goal and role definitions](docs/GOAL.md#roles-and-terminology) and [Vibe Coding Workflow](docs/development/workflows/vibe-coding.md).
 
 ## Repository and identity boundary
 

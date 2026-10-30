@@ -14,7 +14,7 @@ Humans decide material changes to requirements, public API compatibility, archit
 
 ## Vibe Coding Ownership
 
-Textweft 자체는 **바이브코딩**으로 개발하고, 프레임워크의 **주 사용자는 바이브코더**입니다. 사람은 자연어로 제품 목표·제약·피드백을 주고, AI는 작은 변경·테스트·예제·문서·검증 근거를 주도합니다. 개별 게임 제작이나 플레이어 서비스는 프레임워크 제품 목표가 아닙니다. 작업별 세부 방식은 [Vibe Coding Workflow](../workflows/vibe-coding.md)에서 정의합니다.
+Textweft 자체는 **바이브코딩**으로 개발합니다. **프레임워크 개발자**가 자연어로 제품 목표·제약·피드백을 주고, AI는 작은 변경·테스트·예제·문서·검증 근거를 주도합니다. **프레임워크 사용자(게임 개발자)**는 바이브코더를 주 대상으로 하며, **게임 사용자(게임 플레이어)**는 해당 개발자가 제작한 게임을 플레이하는 별도 역할입니다. 개별 게임 제작이나 플레이어 서비스는 이 프레임워크 저장소의 제품 목표가 아닙니다. 역할 정의는 [Project Goal](../../../docs/GOAL.md#roles-and-terminology)을 따릅니다. 작업별 세부 방식은 [Vibe Coding Workflow](../workflows/vibe-coding.md)에서 정의합니다.
 
 이 위임은 제품·보안의 중요 결정이나 병합 승인을 AI에게 넘기지 않습니다. AI 생성 결과도 실제 테스트와 사용 시나리오로 검증하며, 바이브코더를 위한 프레임워크가 AI 런타임에 반드시 의존해야 한다고 가정하지 않습니다.
 
