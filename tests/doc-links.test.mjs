@@ -9,14 +9,14 @@ test('상대 파일·제목 링크 및 코드 블록 제외', () => {
   const root = mkdtempSync(join(tmpdir(), 'textweft-links-'));
   try {
     mkdirSync(join(root, 'docs'));
-    writeFileSync(join(root, 'docs/guide.md'), '# Guide\n## Quick Start\n');
+    writeFileSync(join(root, 'docs/guide.md'), '# Guide\n## Quick Start\n## Quick Start\n[내부 제목](#quick-start-1)\n');
     writeFileSync(join(root, 'README.md'), [
       '# Home', '[파일](docs/guide.md)', '[제목](docs/guide.md#quick-start)',
       '[외부](https://example.org)', '\x60\x60\x60md', '[예시](missing.md)', '\x60\x60\x60',
     ].join('\n'));
     const ok = checkDocLinks(root);
     assert.equal(ok.documents, 2);
-    assert.equal(ok.links, 2);
+    assert.equal(ok.links, 3);
     assert.deepEqual(ok.errors, []);
 
     writeFileSync(join(root, 'docs/extra.md'), [

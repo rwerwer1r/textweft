@@ -1,6 +1,6 @@
 # Rulesync Tooling
 
-Rulesync는 **Rule·Skill 원본을 AI 도구별 형식으로 생성**하는 개발 도구이며 게임 런타임 의존성이 아닙니다. 직접 관리하는 [AGENTS.md](../../../AGENTS.md)·[CHATBOT.md](../../../CHATBOT.md)·[CLAUDE.md](../../../CLAUDE.md)·[GEMINI.md](../../../GEMINI.md)를 생성·덮어쓰지 않습니다.
+Rulesync는 **Rule·Skill 원본을 AI 도구별 형식으로 생성**하는 개발 도구이며 게임 런타임 의존성이 아닙니다. 직접 관리하는 [AGENTS.md](../../../AGENTS.md)·`CHATBOT.md`·[CLAUDE.md](../../../CLAUDE.md)·[GEMINI.md](../../../GEMINI.md)를 생성·덮어쓰지 않습니다.
 
 ## Ownership
 
