@@ -2,3 +2,16 @@ node_modules/
 dist/
 coverage/
 *.tsbuildinfo
+
+# Rulesync 로컬 도구·기기별 설정·도구별 투영 (Git 비추적)
+/.cache/
+/rulesync.local.jsonc
+/AGENTS.local.md
+/.github/copilot-instructions.md
+/.github/instructions/
+/.github/agents/
+/.github/skills/
+/.agents/rules/
+/.agents/agents/
+/.agents/skills/
+/.codex/skills/

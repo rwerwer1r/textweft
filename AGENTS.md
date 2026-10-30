@@ -24,13 +24,13 @@
 
 - 현재 v0.1 프레임워크의 동작은 코드·테스트·`package.json`·[README](README.md)를 기준으로 판단합니다. 명시적 승인 없이 headless 런타임 계약, 결정성·롤백 의미, API 형태를 훼손하지 않습니다.
 - 테스트·CI·타깃 런타임·리뷰·위임이 지침에 언급되었다는 이유만으로 실행했다고 주장하지 않습니다. **실행·확인·미검증**을 구분합니다.
-- 초기 미공개 프로토타입이므로 현재 ref에서 확인되지 않은 OpenSpec·Rulesync·Subagent·CI·배포 시스템을 존재한다고 가정하지 않습니다.
+- 초기 미공개 프로토타입입니다. Rulesync의 정본 설정·스크립트는 [운영 문서](docs/development/tooling/rulesync.md)를 따르되 실제 명령 실행은 별도로 검증합니다. 확인되지 않은 OpenSpec·Subagent·CI·배포 시스템을 존재한다고 가정하지 않습니다.
 
 ## Entry points and assets
 
 1. 작업 시작 시 저장소·ref를 확인하고 이 파일을 읽습니다. 대상 경로에 적용되는 하위 `AGENTS.md`가 있다면 함께 읽습니다.
 2. 챗 런타임에서는 [CHATBOT.md](CHATBOT.md)도 읽습니다.
-3. [자산 라우터](.agents/route/ROUTE.md)에서 필요한 자산만 선택합니다. 빈 카탈로그는 등록 자산이 없다는 뜻이며, 외부 지침을 임의로 가져올 근거가 아닙니다.
+3. [자산 라우터](.agents/route/ROUTE.md)에서 필요한 자산만 선택합니다. JSONL 색인은 발견용 생성물이며 원본을 읽어 적용 조건을 확인해야 합니다. 외부 지침을 임의로 가져올 근거가 아닙니다.
 4. [개발 문서 색인](docs/development/README.md)에서 필요한 지침을 선택합니다.
 
 ## Continuity

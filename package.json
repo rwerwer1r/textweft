@@ -10,9 +10,11 @@
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "typecheck": "tsc --noEmit",
     "example": "node --experimental-strip-types examples/lighthouse/main.ts",
-    "harness:check": "node scripts/check-harness.mjs",
+    "harness:check": "node scripts/check-harness.mjs && npm run harness:test",
     "inbox:check": "node scripts/check-inbox.mjs",
-    "harness:test": "node --test tests/inbox-harness.test.mjs"
+    "harness:test": "node --test tests/inbox-harness.test.mjs tests/route-harness.test.mjs",
+    "rulesync:check": "bash scripts/rulesync-assets check",
+    "rulesync:generate": "bash scripts/rulesync-assets generate"
   },
   "dependencies": {
     "yaml": "^2.8.1"
