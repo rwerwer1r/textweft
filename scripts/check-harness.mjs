@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
+import { resolve } from 'node:path';
+import { checkDocLinks } from './doc-links.mjs';
 import { fileURLToPath } from 'node:url';
 import { run } from './agent-route-index.mjs';
 
@@ -14,30 +15,17 @@ const required = [
  'docs/development/workflows/choosing.md', 'docs/development/workflows/routine-loop.md',
  'docs/development/workflows/vibe-coding.md', 'inbox/README.md',
  '.github/pull_request_template.md', 'scripts/rulesync', 'scripts/rulesync-assets',
- 'scripts/agent-route-index.mjs', 'scripts/check-inbox.mjs',
+ 'scripts/agent-route-index.mjs', 'scripts/check-inbox.mjs', 'scripts/doc-links.mjs',
 ];
-const docs = ['README.md', ...required.filter(path => path.endsWith('.md'))];
 const errors = [];
-function inside(path) {
- const rel = relative(root, path);
- return rel === '' || (rel !== '..' && !rel.startsWith('..' + sep) && !isAbsolute(rel));
-}
 for (const path of required) {
  if (!existsSync(resolve(root, path))) errors.push('필수 파일 누락: ' + path);
 }
-for (const path of docs) {
- const file = resolve(root, path);
- if (!existsSync(file)) continue;
- const content = readFileSync(file, 'utf8');
- for (const match of content.matchAll(/\]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/g)) {
-  const link = match[1].split('#', 1)[0];
-  if (!link || /^[a-z][a-z0-9+.-]*:/i.test(link) || link.startsWith('/')) continue;
-  let target;
-  try { target = resolve(dirname(file), decodeURIComponent(link)); }
-  catch { errors.push('상대 링크 오류: ' + path + ' -> ' + link); continue; }
-  if (!inside(target) || !existsSync(target)) errors.push('깨진 상대 링크: ' + path + ' -> ' + link);
- }
-}
+try {
+ const report = checkDocLinks(root);
+ errors.push(...report.errors);
+ if (!report.errors.length) console.log('문서 링크:', report.documents, '개 파일,', report.links, '개 내부 링크');
+} catch (error) { errors.push('문서 링크 검사 오류: ' + error.message); }
 try {
  if (run('check').length) errors.push('Rulesync 라우팅 색인 불일치');
 } catch (error) {
