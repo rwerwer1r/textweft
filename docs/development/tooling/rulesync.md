@@ -1,39 +1,55 @@
 # Rulesync Tooling
 
-이 문서는 Textweft 에이전트 자산의 **저작 원본·생성물·검증·업데이트 경계**를 정의합니다. 기본 도구 옵션은 [Rulesync 공식 문서](https://rulesync.dyoshikawa.com/guide/configuration)를 참조합니다.
+Textweft는 Rulesync를 **경로별 Rule·재사용 Skill의 도구별 투영 도구**로 사용합니다. [AGENTS.md](../../../AGENTS.md)와 [CHATBOT.md](../../../CHATBOT.md)는 직접 작성하고 Git으로 추적하는 정본이며 Rulesync가 생성·덮어쓰지 않습니다.
 
 ## Ownership
 
-| 항목 | 역할 | Git 관리 |
-| --- | --- | --- |
-| [AGENTS.md](../../../AGENTS.md), [CHATBOT.md](../../../CHATBOT.md) | 공통 권한 계약·챗 진입점, Rulesync 생성물 아님 | 직접 관리 |
-| [TypeScript Rule](../../../.rulesync/rules/typescript.md) | 경로별 Rule 정본 | 직접 관리 |
-| [프로젝트 Skill](../../../.rulesync/skills/README.md) | 독립적인 재사용 절차의 원본 | 직접 관리 |
-| [rulesync.jsonc](../../../rulesync.jsonc), [rulesync.lock](../../../rulesync.lock) | 타깃·소스 선언과 버전 고정 | 직접 관리 |
-| [라우터](../../../.agents/route/ROUTE.md)의 JSONL | 원본에서 생성하는 발견용 색인 | 생성 후 Git 추적 |
-| `.github/instructions/`, `.github/skills/`, `.agents/rules/` 등 | 도구별 로컬 복사본 | Git 무시 |
+| 자산 | 소유권 |
+| --- | --- |
+| [`AGENTS.md`](../../../AGENTS.md), [`CHATBOT.md`](../../../CHATBOT.md) | 저장소 계약과 챗 진입점, 직접 관리 |
+| [`.rulesync/rules/typescript.md`](../../../.rulesync/rules/typescript.md) | 프로젝트 저작 TypeScript Rule 원본 |
+| [`.rulesync/skills/`](../../../.rulesync/skills/README.md) | 필요 시 직접 작성하는 프로젝트 Skill 원본 |
+| [`rulesync.jsonc`](../../../rulesync.jsonc), [`rulesync.lock`](../../../rulesync.lock) | 타깃 설정과 외부 소스 버전 고정. 현재 외부 `sources`는 비어 있음 |
+| [`rules.jsonl`](../../../.agents/route/rules.jsonl), [`skills.jsonl`](../../../.agents/route/skills.jsonl) | Git 추적 파생 라우팅 색인. **수동 편집 금지** |
+| `.github/instructions/`, `.agents/rules/`, 타깃별 Skill 복사본 | 로컬 생성물. Git 무시 및 수동 편집 금지 |
 
-루트 `AGENTS.md`와 `CHATBOT.md`는 Rulesync로 생성·덮어쓰지 않습니다. 다른 도구가 소유하는 경로를 침범하지 않는지 확인합니다.
+현재 `copilot`·`copilotcli`의 Rule/Skill과 `codexcli`의 Skill 투영을 설정했습니다. 애플리케이션 런타임은 Rulesync를 필요로 하지 않습니다. 외부 Skill·Subagent는 포함하지 않습니다.
 
 ## Lifecycle
 
-Textweft는 [실행 래퍼](../../../scripts/rulesync)에서 **Rulesync 40.2.0**을 고정합니다. 처음 실행할 때 공식 바이너리를 받아 플랫폼별 SHA-256을 확인하고 `.cache/textweft/`에 저장합니다. Rulesync는 **개발 도구**이며 게임 런타임 의존성이 아닙니다.
+저장소 루트에서 다음 명령을 사용합니다.
 
 ```sh
-bash scripts/rulesync-assets install   # 버전 고정된 소스 설치 (현재 외부 소스 없음)
-bash scripts/rulesync-assets generate  # 도구별 로컬 복사본 및 라우팅 JSONL 생성
-bash scripts/rulesync-assets check     # strict 진단·소유권·라우팅 색인 일치 검사
-node scripts/agent-route-index.mjs check # Rulesync 바이너리 없이 원본/색인 비교
+bash scripts/rulesync-assets install
+bash scripts/rulesync-assets generate
+bash scripts/rulesync-assets check
+bash scripts/rulesync-assets update
 ```
 
-`generate`·`check`는 로컬 생성물을 만들 수 있습니다. 해당 도구를 실제 실행하지 않았다면 Rulesync 동기화가 검증됐다고 주장하지 않습니다.
+- **`install`**: 현재 잠금 파일을 기준으로 설치합니다.
+- **`generate`**: 잠금 상태를 설치한 뒤 로컬 타깃 투영과 Git 추적 라우팅 색인을 생성합니다.
+- **`check`**: Rulesync 엄격 진단, 라우팅 색인 일치성, 생성물 Git 소유권 및 정본 `AGENTS.md` 무변형을 검사합니다.
+- **`update`**: 외부 원본과 잠금을 **의도적으로 갱신할 때만** 사용합니다.
 
-## External Sources
+`scripts/rulesync`는 **Rulesync v40.2.0**의 지원 플랫폼별 바이너리를 다운로드하고 **SHA-256을 검증**한 뒤 `.cache/rulesync/`에 캐싱하는 실행 래퍼입니다. 실제 설치·투영에는 셸·Git·Node.js·curl·네트워크·적절한 실행 권한이 필요합니다.
 
-초기 `sources: []` 및 빈 `rulesync.lock`을 사용하며 **외부 Skill·Subagent를 설치하지 않습니다**. 향후 다른 계정이나 저장소의 자산 도입은 계정 경계·라이선스·버전 고정·신뢰 범위를 별도 승인·검토한 뒤 확장합니다. 현재 `update` 명령은 의도적으로 비활성화되어 있습니다.
+```sh
+npm run agents:index:generate
+npm run agents:index:check
+npm run harness:check
+npm run harness:test
+```
 
-## Route Indexes
+`agents:index:check`는 네트워크 없이 소스와 JSONL의 일치성을 확인합니다. `harness:check`는 필수 파일·문서 링크·잠금 구조·라우팅 색인을 확인합니다. **정적 검사만으로 Rulesync 바이너리 실행, 타깃 투영 성공, AI 에이전트 자동 로딩을 주장하지 않습니다.**
 
-[rules.jsonl](../../../.agents/route/rules.jsonl)과 [skills.jsonl](../../../.agents/route/skills.jsonl)은 `name`·`path`·`description`으로 이루어진 한 줄당 하나의 JSON입니다. [색인 생성기](../../../scripts/agent-route-index.mjs)가 원본을 읽어 재생성·일치성 검사를 수행합니다. 색인은 직접 수정하지 않습니다.
+## Rules and Skills
 
-실제 Rule의 `globs`·선택 조건은 [라우터](../../../.agents/route/ROUTE.md)에서 원본을 읽어 검토합니다. 정적 검사가 통과해도 특정 코딩 에이전트가 규칙을 자동 적용했다는 증거는 아닙니다.
+- **Rule:** 경로·확장자별 계약은 `.rulesync/rules/*.md`에서 작성합니다. Rulesync의 `targets`·`globs`를 사용해 적용 범위를 제한하고, 생성 후 해당 파일에 **적용될 사례와 적용되면 안 될 사례**를 확인합니다.
+- **Skill:** 반복되는 독립 작업 절차가 생기면 `.rulesync/skills/<name>/SKILL.md`를 추가합니다. 선택용 `name`·`description`을 frontmatter에 둡니다. 현재 등록된 Skill은 없습니다.
+- **외부 Skill:** 이번 구축에는 가져오지 않았습니다. 추후 사용자가 승인한 원본만 `rulesync.jsonc`에 선언하고 `rulesync.lock`으로 고정한 다음 원본·라이선스·변경 이력을 검증합니다. 참고 프로젝트의 자산은 자동 상속하지 않습니다.
+
+[에이전트 자산 라우터](../../../.agents/route/ROUTE.md)는 `name`·`description`으로 후보를 좁힌 후 실제 `path`에서 적용 조건을 확인합니다. 생성된 색인이나 투영은 **새 권한을 부여하지 않으며**, 승인·보안·계정 경계는 `AGENTS.md`에 따릅니다.
+
+## Isolation
+
+다른 도구가 소유한 자산을 Rulesync로 덮거나 삭제하지 않습니다. 특히 직접 작성한 `AGENTS.md`, `CHATBOT.md`, `.agents/route/`는 생성 범위에서 보호합니다. 외부 Skill 업데이트는 별도 리뷰 대상으로 취급합니다.
