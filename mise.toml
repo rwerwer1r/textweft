@@ -1,0 +1,26 @@
+# 도구 버전과 작업 실행의 단일 진입점. mise install -> mise run <task>.
+[tools]
+node = "22.16.0"
+biome = "2.5.14"
+rumdl = "0.3.2"
+"github:dyoshikawa/rulesync" = { version = "40.2.0", matching = "rulesync-", bin = "rulesync" }
+
+[tasks]
+deps = "npm install"
+test = "npm test"
+typecheck = "npm run typecheck"
+example = "npm run example"
+"lint:md" = "rumdl check README.md AGENTS.md CHATBOT.md CLAUDE.md GEMINI.md docs/ inbox/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .github/pull_request_template.md"
+"lint:code" = "biome lint src/ scripts/ tests/ examples/"
+"format:code" = "biome format --write src/ scripts/ tests/ examples/"
+"routes:generate" = "node scripts/agent-route-index.mjs generate"
+"routes:check" = "node scripts/agent-route-index.mjs check"
+"routes:test" = "node --test tests/agent-route-index.test.mjs"
+"inbox:test" = "node --test tests/inbox-harness.test.mjs"
+"inbox:check" = "node scripts/check-inbox.mjs"
+"rulesync:generate" = ["rulesync generate", "node scripts/agent-route-index.mjs generate"]
+"rulesync:check" = "rulesync doctor --strict"
+
+[tasks.check]
+depends = ["lint:md", "lint:code", "routes:check", "routes:test", "inbox:test", "test", "typecheck"]
+description = "변경 전 검증: rumdl, Biome, 라우팅·인박스 고유 계약, 런타임 테스트와 타입"

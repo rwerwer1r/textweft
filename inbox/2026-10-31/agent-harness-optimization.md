@@ -1,6 +1,6 @@
 ---
 description: KISS·DRY·SRP 기반 문서·하네스 최적화 작업 인계
-updated: 2026-10-30T22:26:41Z
+updated: 2026-10-30T22:32:34Z
 ---
 
 # Harness Optimization Workstate
@@ -17,6 +17,12 @@ updated: 2026-10-30T22:26:41Z
 - `scripts/doc-links.mjs`를 `npm run harness:check`에 연결하고 신규 `tests/doc-links.test.mjs`에 정상/누락/저장소 밖/문서 제목/중복 제목/인박스 하위 문서 사례를 추가함.
 - 원격 Markdown 22개·내부 링크 85개·문서별 중복 대상 링크 0개·없는 파일 0개를 확인함. **이는 원격 정적 검토이며 Node 테스트 실행이 아님.**
 - **미실행:** Node 테스트·타입 검사·Rulesync CLI/AI 도구 실측·CI. 같은 모델 검토는 독립 리뷰 아님.
+
+## Tooling migration
+
+- 작업 범위 추가: mise를 Node·rumdl·Biome·Rulesync 버전 및 작업 실행의 단일 진입점으로 채택.
+- rumdl의 MD051·MD057을 사용하여 직접 구현한 Markdown 링크 검사를 대체. Biome은 JS/TS 린트·포맷 작업 담당.
+- 라우팅 색인과 인박스 frontmatter는 프로젝트 고유 규약으로 최소한 유지. 설치·Node·Rulesync 실측은 **미실행**.
 
 ## Next Action
 - Node 실행 환경에서 `npm run harness:check`, `npm test`, `npm run typecheck`를 수행하고, 실제 변경 영향에 따라 Rulesync 확인.

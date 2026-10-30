@@ -22,7 +22,7 @@ updated: 2026-10-31T09:00:00+09:00
 ---
 ```
 
-예시 시각을 그대로 사용하지 않습니다. **변경된 파일만** `npm run inbox:check -- <paths...>`로 검사합니다. `node scripts/check-inbox.mjs --stdin0`는 NUL 구분 경로를 받으며, 필수 메타데이터만 검증합니다(YAML 전체·사실성 검증 아님).
+예시 시각을 그대로 사용하지 않습니다. **변경된 파일만** `mise run inbox:check -- <paths...>`로 검사합니다. `node scripts/check-inbox.mjs --stdin0`는 NUL 구분 경로를 받으며, 필수 메타데이터만 검증합니다(YAML 전체·사실성 검증 아님).
 
 ## Checkpoint and Recovery
 

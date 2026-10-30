@@ -6,4 +6,4 @@
 2. 후보의 `path`(저장소 루트 상대 경로)에서 **원본**을 읽고 Rule의 `globs`·대상 경로, Skill의 작업 조건을 확인합니다. 일치할 때만 적용합니다.
 3. 대상·작업이 바뀌면 다시 선택합니다. 원본 누락·색인 불일치는 추측하지 않습니다.
 
-두 JSONL은 Git 추적 **발견용 파생 색인**입니다. `npm run agents:index:check`로 검증하며 생성·소유권은 [Rulesync](../../docs/development/tooling/rulesync.md)를 따릅니다. Subagent 위임은 별도 계약과 실행 기능이 필요합니다.
+두 JSONL은 Git 추적 **발견용 파생 색인**입니다. `mise run routes:check`로 검증하며 생성·소유권은 [Rulesync](../../docs/development/tooling/rulesync.md)를 따릅니다. Subagent 위임은 별도 계약과 실행 기능이 필요합니다.
