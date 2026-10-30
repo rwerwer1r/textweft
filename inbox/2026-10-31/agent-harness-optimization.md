@@ -1,6 +1,6 @@
 ---
 description: KISS·DRY·SRP 기반 문서·하네스 최적화 작업 인계
-updated: 2026-10-30T22:34:53Z
+updated: 2026-10-30T22:39:28Z
 ---
 
 # Harness Optimization Workstate
@@ -23,6 +23,12 @@ updated: 2026-10-30T22:34:53Z
 - 작업 범위 추가: mise를 Node·rumdl·Biome·Rulesync 버전 및 작업 실행의 단일 진입점으로 채택.
 - rumdl의 MD051·MD057을 사용하여 직접 구현한 Markdown 링크 검사를 대체. Biome은 JS/TS 린트·포맷 작업 담당.
 - 라우팅 색인과 인박스 frontmatter는 프로젝트 고유 규약으로 최소한 유지. 설치·Node·Rulesync 실측은 **미실행**.
+
+## Lefthook Integration
+
+- `mise.toml`에서 Lefthook `2.2.2` 버전과 `hooks:install`·`hooks:validate` 작업을 고정함.
+- `lefthook.yml`: pre-commit에서 스테이징된 Markdown은 rumdl, JS/TS/JSON은 Biome, 인박스는 메타데이터 검사, 라우팅 자산은 색인 일치 검사로 조건부 실행. 자동 수정·무거운 pre-push 검사는 도입하지 않음.
+- `mise run check`에 Lefthook 설정 검증을 추가함. **mise·Lefthook 설치, Git 훅 등록·실행, lint/테스트/CI는 이 GitHub 도구 환경에서 미실행.**
 
 ## Next Action
 - **현재 실행 경로:** `mise install` → `mise run deps` → `mise run check`. Rulesync 진단은 `mise run rulesync:check`; 프로젝트 고유 인박스 검사는 `mise run inbox:check -- <paths...>`.

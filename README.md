@@ -13,11 +13,12 @@
 ```sh
 mise install
 mise run deps
+mise run hooks:install  # 클론별 최초 1회
 mise run check
 mise run example
 ```
 
-Node.js·Biome·rumdl·Rulesync는 mise가 설치합니다. 게임 프레임워크의 npm 의존성은 `package.json`에서 선언하고 `mise run deps`로 설치합니다.
+Node.js·Biome·rumdl·Rulesync·Lefthook은 mise가 설치합니다. 게임 프레임워크의 npm 의존성은 `package.json`에서 선언하고 `mise run deps`로 설치합니다.
 
 예제는 `examples/lighthouse/game.yaml`과 `examples/lighthouse/main.ts`에 있으며, 조건부 선택지와 무작위 경로가 포함된 짧은 항해를 정의합니다.
 
@@ -80,4 +81,4 @@ tests/runtime.test.ts      엔진 동작 테스트
 
 개발은 [AGENTS.md](AGENTS.md)를 기준으로 하며, 작업별 상세 문서는 [개발 문서 라우터](docs/development/README.md)에서 고릅니다. [ROUTE](.agents/route/ROUTE.md)는 관련 Rule·Skill만 선택합니다. 실행이 없는/제한된 챗봇만 [CHATBOT.md](CHATBOT.md)를 사용합니다.
 
-문서 상대 링크·제목은 `mise run lint:md`(rumdl), JS·TS는 `mise run lint:code`(Biome), 프로젝트 고유 라우팅 계약은 `mise run routes:check`로 검사합니다. 전체 검증은 `mise run check`이며 실제 실행하지 않았다면 통과로 보고하지 않습니다.
+문서 상대 링크·제목은 `mise run lint:md`(rumdl), JS·TS는 `mise run lint:code`(Biome), 프로젝트 고유 라우팅 계약은 `mise run routes:check`로 검사합니다. 커밋할 때 [Lefthook](lefthook.yml)은 스테이징된 Markdown·JS/TS/JSON과 관련 인박스·라우팅만 검사합니다. 실제 Git 훅 설치는 `mise run hooks:install`을 한 작업 환경에서만 적용되며, 전체 검증은 `mise run check`입니다. 실행하지 않은 검사를 통과로 보고하지 않습니다.

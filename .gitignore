@@ -21,3 +21,6 @@ coverage/
 
 # rumdl 검사 캐시
 /.rumdl_cache/
+
+# Lefthook 개인용 훅 재정의
+/lefthook-local.yml
