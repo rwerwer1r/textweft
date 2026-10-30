@@ -19,5 +19,3 @@ coverage/
 /.claude/skills/
 /.claude/settings.local.json
 
-# Gemini CLI 호환 Skill 투영
-/.gemini/skills/
