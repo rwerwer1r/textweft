@@ -1,6 +1,6 @@
 ---
 description: KISS·DRY·SRP 기반 문서·하네스 최적화 작업 인계
-updated: 2026-10-31T17:14:59.177Z
+updated: 2026-10-31T17:28:32.122Z
 ---
 
 # Harness Optimization Workstate
@@ -10,7 +10,7 @@ updated: 2026-10-31T17:14:59.177Z
 - 진입 문서의 불필요한 로드, 반복 지침, 중복 테스트 제거. 권한·승인·검증·인박스 복원·Rulesync 소유권 유지. 게임 코어 변경 없음.
 
 ## State / Evidence
-- 상태: `active`. P0 하네스 강화 루프 실행 중. 기존 4개 Skill 선언/4개 일회성 문서화 유지, 실행 불가와 미검증 상태를 분리. Draft PR #4 유지.
+- 상태: `handoff`. 하네스 개선과 CI Linux 실측 완료. PR은 Draft 유지, 병합·다른 OS·실제 에이전트 자동 로딩은 미승인/미검증.
 - 본문 수정 Markdown 13개의 Git blob: 44,549 → 19,722바이트 (55.7% 감소, 실제 모델 토큰 측정 아님).
 - 최초 최적화: 수정 Markdown 13개 55.7% 축약 및 중복 라우팅 테스트 1개 통합(이전 작업 근거).
 - 링크·라우팅 후속 개선: `docs/development/README.md`를 작업별 문서 라우터로 정리하고, `ROUTE.md`에서는 Rule·Skill 색인을 해당 작업일 때만 선택함.
@@ -58,3 +58,12 @@ updated: 2026-10-31T17:14:59.177Z
 - 실제 시도: Node 22.16.0·npm 10.9.2 로컬 격리 폴더에서 `npm install --package-lock-only --ignore-scripts` 요청. npm registry DNS `EAI_AGAIN`으로 실패하여 **잠금 생성 미완료**. 해당 실패를 성공으로 전환하거나 무결성 없는 lock을 수동 작성하지 않음.
 - 계획: 누락된 lock에 대해 fail-closed 검사·진입점을 명확히 하고 외부 curated Git/Markdown 스캔을 분리, 가벼운 PR/main CI 작업을 추가, 반복 검토 시 중복 로직과 잘못된 성공 주장 제거. 실제 설치·npm·CI 검증 여부는 각각 구분.
 - 이후: 변경 ref/diff 확인 → 문서/설정 동기화 → review 및 검증 사실 기록 → 사람 승인 전 병합 금지.
+
+## P0 Hardening Review and Validation (2026-11-01)
+- **Scope:** P0 개발환경·에이전트 하네스, 문서·검증 코드, Biome에 걸린 `src/core.ts`의 동작 보존적 표현 정리. MVP 기능 추가 없음. 쓰기는 `rwerwer1r/textweft` PR 브랜치에만 수행함.
+- **Dependency locks:** 저장소 PR의 [일회성 잠금 생성 실행](https://github.com/rwerwer1r/textweft/actions/runs/41224083431)에서 npm lock v3 및 Rulesync lock v1 생성 성공. 내용을 확인한 뒤 `package-lock.json`, `rulesync.lock`에 반영. 임시 생성 워크플로는 삭제함. GitHub 공개 레지스트리/원본은 읽기 전용 사용.
+- **Hardening:** `mise run deps`를 `npm ci`로 고정, update 진입 시 잠금 누락 조기 중단; frozen 설치를 npm·Git 훅보다 먼저 배치. 외부 `.curated/` 설치물을 Git/rumdl에서 제외. CI는 최소 권한·checkout credential 비저장으로 PR/main 체크, Actions 토큰은 Rulesync 요청에만 노출해 공개 API rate-limit 실패를 해결함.
+- **Harness parser:** `scripts/agent-route-index.mjs`의 수제 YAML 부분 파싱을 프로젝트 기존 `yaml` 패키지로 대체; folded description, 잘못된 타입/중복의 단위 테스트 보강. 게임 코어는 Biome에서 발견한 early return·RNG 상태 갱신·forEach callback 구문만 동일 동작으로 정리.
+- **Observed evidence:** [PR CI 실행 41224586726](https://github.com/rwerwer1r/textweft/actions/runs/41224586726)에서 checkout·mise 설치·`mise run bootstrap`·`mise run update` 재실행·라우팅 Git drift 비교·`mise run check` **모두 성공**. Node runtime tests 7/7, route tests 2/2, inbox tests 3/3 성공. 타입·rumdl·Biome·Rulesync doctor·Lefthook validate는 CI 전체 검증에 포함되어 종료 코드 0. Biome의 기존 style warning은 남을 수 있음.
+- **Unverified / approvals:** 개발자 로컬 머신 또는 다른 OS의 bootstrap/업데이트, 실제 각 AI 도구의 자산 선택·행동, 보호 규칙 설정, 별도 독립 리뷰는 미확인. GitHub CI 체크가 통과해도 사람이 명시적으로 승인하기 전에는 병합·릴리스·배포하지 않음.
+- **Next:** Draft PR 본문 업데이트 및 최신 문서-only 커밋 CI 재확인 → 사람의 리뷰/병합 승인. 단계 전환은 개발 우선순위의 P0 완료 기준을 따름.
