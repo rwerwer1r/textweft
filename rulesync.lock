@@ -1,4 +1,31 @@
 {
   "lockfileVersion": 1,
-  "sources": {}
+  "sources": {
+    "mols3131d/mols-agent-assets@4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9:src/rulesync/.rulesync/skills": {
+      "requestedRef": "4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9",
+      "resolvedRef": "4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9",
+      "resolvedAt": "2026-10-31T17:21:02.810Z",
+      "skills": {
+        "mols-agent-asset": {
+          "integrity": "sha256-ba10320d7fadba56e9619c4336d3d6adb57c52fcd2f2a45b8347ffe5d8b84d59"
+        },
+        "mols-loops": {
+          "integrity": "sha256-f3f3de0ae4d899fe029748440d537b2a0624074e238a575dce7565916efa5c9f"
+        },
+        "mols-test-design": {
+          "integrity": "sha256-1626668880f540eea45525561f579c97318c6f61170875053ed72c9d3d7670d6"
+        },
+        "review-changes": {
+          "integrity": "sha256-0a12ded4f2a28b9c6cab57d6423e294503b0e2d1e124c5b1925fe1761abbd9aa"
+        }
+      },
+      "skillSelection": [
+        "mols-agent-asset",
+        "mols-loops",
+        "mols-test-design",
+        "review-changes"
+      ],
+      "skillsPath": "src/rulesync/.rulesync/skills"
+    }
+  }
 }
