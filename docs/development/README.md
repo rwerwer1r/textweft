@@ -34,4 +34,4 @@
 
 **[mise.toml](../../mise.toml)이 도구 버전과 검사 작업의 정본**입니다. [개발 환경 초기화](../../mise-tasks/bootstrap)는 `mise run bootstrap`, 기존 환경 [동기화](../../mise-tasks/update)는 `mise run update`를 사용합니다. 초기화는 Git 로컬 커밋 템플릿·Lefthook·고정된 외부 Skill도 설치합니다. 두 잠금 파일은 Git에 고정되어 있으며 갱신은 [선택형 자산 가이드](tooling/agent-assets.md)에서 별도로 관리합니다. 부트스트랩과 CI의 실제 성공은 실행 결과로만 판단합니다. `mise run check`로 전체 검사, 변경 범위에 따라 `mise run lint:md`(rumdl·링크), `mise run lint:code`(Biome), `mise run routes:check`, `mise run test`, `mise run typecheck`를 선택합니다. Rulesync 진단은 `mise run rulesync:check`를 사용합니다. [Lefthook](../../lefthook.yml)은 `mise run hooks:install`로 로컬 Git 훅에 한 번 설치하며 스테이징된 파일만 검사합니다. 훅 통과는 `mise run check`나 CI 성공을 뜻하지 않습니다. **미실행 검사를 통과로 보고하지 않습니다.**
 
-[CI](../../.github/workflows/ci.yml)는 PR/main에서 잠금 재현과 `mise run check`를 수행하도록 구성했습니다. CI 실행 결과·브랜치 보호 적용·실제 개발 환경 부트스트랩은 각각 별도 증거가 필요합니다.
+[CI](../../.github/workflows/ci.yml)는 PR/main의 깨끗한 Linux 환경에서 `mise run bootstrap`·`mise run update` 재실행, 라우팅 색인 일치, `mise run check`를 검사합니다. CI 실행 결과·브랜치 보호 적용·실제 개발 환경 부트스트랩은 각각 별도 증거가 필요합니다.
