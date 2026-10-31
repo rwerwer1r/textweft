@@ -29,7 +29,7 @@
 ## Installation and Evidence
 
 - **선언 확인:** `rulesync.jsonc`의 `sources`에서 위 네 Skill과 고정 source SHA만 지정했는지 확인합니다.
-- **최초 잠금 생성(명시적 작업):** 도구가 설치된 개발 환경에서 `mise exec -- rulesync install`을 실행하여 `rulesync.lock`을 생성한 뒤 출처·선택 목록·integrity·변경을 리뷰하고 커밋합니다. 현재 잠금 파일이 빈 상태이면 `--frozen` 설치가 실패하는 것이 정상입니다.
+- **최초 잠금 생성(명시적 작업):** 도구가 설치된 개발 환경에서 `mise exec -- rulesync install`을 실행하여 `rulesync.lock`을 생성한 뒤 출처·선택 목록·integrity·변경을 리뷰하고 커밋합니다. 현재 잠금 파일이 빈 상태이면 `--frozen` 설치와 이를 호출하는 `mise run bootstrap`·`mise run update`가 실패하는 것이 정상입니다. 최초 잠금 생성 후에도 실제 설치·검증 전에는 성공으로 보고하지 않습니다.
 - **잠금 후 재현:** `mise exec -- rulesync install --frozen` → `mise run rulesync:generate` → `mise run rulesync:check` → `mise run routes:check` → `mise run check`의 실측 결과를 별도로 남깁니다. `rulesync generate` 자체는 외부 source를 fetch하지 않습니다.
 - **라우팅 분리:** [skills.jsonl](../../../.agents/route/skills.jsonl)은 직접 작성한 프로젝트 Skill의 파생 색인입니다. Rulesync의 외부 curated Skill을 여기에 임의로 넣지 않습니다. 코딩 에이전트는 실제 생성된 target-native Skill을 선택하며, 제한 런타임 챗봇은 이 문서에서 외부 후보를 발견하고 접근 가능할 때만 원본을 읽습니다.
 - **승인·제약:** 외부 저장소는 루트 LICENSE를 선언하지 않았으므로 복사·수정·재배포의 권한을 일반화하지 않습니다. 원본 파일 복제 대신 선택형 의존성·출처 명시를 우선합니다. 설치·lock·AI 도구 자동 로딩은 실제 수행과 확인 전까지 미검증입니다.
