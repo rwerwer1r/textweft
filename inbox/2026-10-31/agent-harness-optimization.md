@@ -1,6 +1,6 @@
 ---
 description: KISS·DRY·SRP 기반 문서·하네스 최적화 작업 인계
-updated: 2026-10-30T22:43:50Z
+updated: 2026-10-31T17:00:27.849Z
 ---
 
 # Harness Optimization Workstate
@@ -10,7 +10,7 @@ updated: 2026-10-30T22:43:50Z
 - 진입 문서의 불필요한 로드, 반복 지침, 중복 테스트 제거. 권한·승인·검증·인박스 복원·Rulesync 소유권 유지. 게임 코어 변경 없음.
 
 ## State / Evidence
-- 상태: `handoff`. 문서·테스트 최적화 이후 링크/라우팅 개선을 추가하고 Draft PR #4에 반영함.
+- 상태: `active`. 기존 하네스 최적화에 선별 외부 Skill 의존성과 일회성 절차 문서화를 추가 검토 중. Draft PR #4 유지.
 - 본문 수정 Markdown 13개의 Git blob: 44,549 → 19,722바이트 (55.7% 감소, 실제 모델 토큰 측정 아님).
 - 최초 최적화: 수정 Markdown 13개 55.7% 축약 및 중복 라우팅 테스트 1개 통합(이전 작업 근거).
 - 링크·라우팅 후속 개선: `docs/development/README.md`를 작업별 문서 라우터로 정리하고, `ROUTE.md`에서는 Rule·Skill 색인을 해당 작업일 때만 선택함.
@@ -42,3 +42,9 @@ updated: 2026-10-30T22:43:50Z
 - **현재 실행 경로:** `mise install` → `mise run deps` → `mise run check`. Rulesync 진단은 `mise run rulesync:check`; 프로젝트 고유 인박스 검사는 `mise run inbox:check -- <paths...>`.
 - 위 명령을 실제 개발 환경에서 실행하고 설치·린트·테스트 결과를 기록합니다. 실패 시 규칙 완화보다 원인 수정 우선.
 - 실패 시 수정·재검증 후 사람 리뷰. 승인 전 병합·배포 금지.
+
+## Selective Agent Asset Adoption (2026-11-01)
+- 사용자가 지정한 8개 후보 가운데 반복 사용 4개(`mols-agent-asset`, `review-changes`, `mols-test-design`, `mols-loops`)는 Rulesync 선언형 외부 의존성으로 지정하고, 나머지 4개(`mols-chatbot-bootstrap`, `mols-dev-env-bootstrap-design`, `mols-ci-design`, `check-dependencies`)는 일회성 참조를 Textweft 소유 문서에 최소 반영.
+- 외부 `mols3131d/mols-agent-assets`는 **읽기 전용**으로만 접근, 모든 쓰기는 `rwerwer1r/textweft`의 기존 PR 브랜치로 한정. 외부 자산 원문 복사·자동 설치는 하지 않고 선택된 upstream SHA를 명시.
+- 확인: Rulesync 공식 declarative source 선택 구문 및 frozen lock 정책. 현재 연결 환경에는 실행 가능한 Rulesync/미리 설치된 mise가 없어 설치·lock 갱신·projection·CI는 미실행.
+- 다음 행동: manifest·문서·mise 진입점 적용과 원격 재조회; 로컬/CI에서 `rulesync install`로 `rulesync.lock` 작성·리뷰 후 `rulesync install --frozen`, `rulesync generate`, `mise run check`를 실행하고 PR에 증거 반영. 승인 전 병합 불가.
