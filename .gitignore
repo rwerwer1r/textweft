@@ -4,6 +4,8 @@ coverage/
 *.tsbuildinfo
 
 # Rulesync 로컬 도구·기기별 설정·도구별 투영 (Git 비추적)
+/.rulesync/rules/.curated/
+/.rulesync/skills/.curated/
 /.cache/
 /rulesync.local.jsonc
 /AGENTS.local.md
