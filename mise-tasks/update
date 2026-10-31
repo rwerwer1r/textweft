@@ -9,15 +9,16 @@ if [[ "$(git rev-parse --show-toplevel 2>/dev/null)" != "$root" ]]; then
   exit 1
 fi
 
-mise install
-if [[ -f package-lock.json ]]; then
-  npm ci
-else
-  npm install
-  echo "참고: package-lock.json이 새로 생성되면 변경 사항을 검토해 추적하세요."
+# Bootstrap must not silently resolve or rewrite dependencies.
+if [[ ! -f package-lock.json ]]; then
+  echo "오류: package-lock.json이 없습니다. npm install --package-lock-only로 잠금을 생성·검토·커밋한 뒤 다시 실행하세요." >&2
+  exit 1
 fi
-lefthook install
-# External Skills must be covered by the committed Rulesync lock.
+
+mise install
+# Check upstream lock integrity before changing npm modules or Git hooks.
 mise run rulesync:install
+npm ci
+lefthook install
 mise run rulesync:generate
 echo "개발 환경·하네스 동기화 완료. 검사: mise run check"
