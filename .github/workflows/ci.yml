@@ -1,0 +1,34 @@
+name: P0 Harness Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: harness-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: jdx/mise-action@v4
+        with:
+          install: true
+      - name: Bootstrap and repeat update
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mise run bootstrap
+          mise run update
+          git diff --exit-code -- .agents/route
+      - name: Verify repository contracts
+        run: mise run check

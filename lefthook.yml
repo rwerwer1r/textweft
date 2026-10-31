@@ -1,0 +1,22 @@
+# Git 훅은 변경 파일만 빠르게 검사합니다. 전체 검증은 mise run check.
+glob_matcher: doublestar
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: markdown
+      glob: "**/*.md"
+      run: mise exec -- rumdl check {staged_files}
+    - name: code
+      glob: "**/*.{js,mjs,cjs,ts,tsx,json,jsonc}"
+      run: mise exec -- biome lint {staged_files}
+    - name: inbox
+      glob: "inbox/**/*.md"
+      run: mise run inbox:check {staged_files}
+    - name: routing
+      glob:
+        - ".agents/route/*.jsonl"
+        - ".rulesync/rules/**/*.md"
+        - ".rulesync/skills/**/*.md"
+        - "scripts/agent-route-index.mjs"
+      run: mise run routes:check

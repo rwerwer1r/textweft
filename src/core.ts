@@ -91,7 +91,7 @@ export function validateGame<S extends GameState>(input: unknown, hooks: Hooks<S
   }
   function checkCondition(value: unknown, at: string): void {
     if (!object(value)) return void errors.push(`${at}: invalid condition`);
-    if (has(value, 'call')) return checkCall(value, 'conditions', at);
+    if (has(value, 'call')) { checkCall(value, 'conditions', at); return; }
     if (!nonempty(value.path) || !has(initialState, value.path))
       errors.push(`${at}: unknown state path ${String(value.path)}`);
     if (has(value, 'equals') === has(value, 'gte')) errors.push(`${at}: use exactly one of equals or gte`);
@@ -103,10 +103,10 @@ export function validateGame<S extends GameState>(input: unknown, hooks: Hooks<S
     if (!Array.isArray(value)) return void errors.push(`${at}: expected effect array`);
     value.forEach((effect, index) => {
       const loc = `${at}[${index}]`;
-      if (!object(effect)) return void errors.push(`${loc}: invalid effect`);
-      if (has(effect, 'call')) return checkCall(effect, 'effects', loc);
+      if (!object(effect)) { errors.push(`${loc}: invalid effect`); return; }
+      if (has(effect, 'call')) { checkCall(effect, 'effects', loc); return; }
       const operation = has(effect, 'set') ? 'set' : has(effect, 'add') ? 'add' : null;
-      if (!operation || !object(effect[operation])) return void errors.push(`${loc}: invalid effect operation`);
+      if (!operation || !object(effect[operation])) { errors.push(`${loc}: invalid effect operation`); return; }
       for (const [key, item] of Object.entries(effect[operation])) {
         if (!has(initialState, key)) errors.push(`${loc}: unknown state key ${key}`);
         if (operation === 'set' && !validJson(item)) errors.push(`${loc}: invalid JSON value`);
@@ -126,7 +126,7 @@ export function validateGame<S extends GameState>(input: unknown, hooks: Hooks<S
     const ids = new Set<string>();
     value.choices.forEach((choice, index) => {
       const at = `${sceneId}.choices[${index}]`;
-      if (!object(choice)) return void errors.push(`${at}: invalid choice`);
+      if (!object(choice)) { errors.push(`${at}: invalid choice`); return; }
       if (!nonempty(choice.id) || ids.has(String(choice.id))) errors.push(`${at}: missing or duplicate choice ID`);
       else ids.add(choice.id);
       if (!nonempty(choice.label)) errors.push(`${at}: label required`);
@@ -207,7 +207,7 @@ export function createRuntime<S extends GameState>(game: Game<S>, options: { see
   function start(): GameView {
     if (sceneId !== null) return view();
     let localRng = rngState;
-    const random = () => ((localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0) / 4294967296);
+    const random = () => { localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0; return localRng / 4294967296; };
     const next = transactionEffects(definition.scenes[definition.start].onEnter, copy(state), random);
     const result = render(definition.start, next);
     state = next; sceneId = definition.start; rngState = localRng;
@@ -221,7 +221,7 @@ export function createRuntime<S extends GameState>(game: Game<S>, options: { see
     const choice = scene.choices?.find(c => c.id === choiceId);
     if (!choice || !condition(choice.when, state)) throw new Error(`Unavailable choice: ${choiceId}`);
     let localRng = rngState;
-    const random = () => ((localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0) / 4294967296);
+    const random = () => { localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0; return localRng / 4294967296; };
     const afterChoice = transactionEffects(choice.effects, copy(state), random);
     const target = typeof choice.to === 'string' ? choice.to : hooks.routes![choice.to.call]({ state: copy(afterChoice), args: copy(choice.to.args), random });
     if (!has(definition.scenes, target)) throw new Error(`Unknown target scene: ${target}`);

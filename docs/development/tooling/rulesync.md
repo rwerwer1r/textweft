@@ -1,73 +1,39 @@
 # Rulesync Tooling
 
-Textweft는 Rulesync를 **경로별 Rule·재사용 Skill의 도구별 투영 도구**로 사용합니다. [AGENTS.md](../../../AGENTS.md)와 [CHATBOT.md](../../../CHATBOT.md)는 직접 작성하고 Git으로 추적하는 정본이며 Rulesync가 생성·덮어쓰지 않습니다.
+Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 게임 런타임 의존성이 아닙니다. 버전·설치·명령은 [mise.toml](../../../mise.toml)의 정본을 따릅니다. 자체 바이너리 다운로드·해시 래퍼는 사용하지 않습니다.
 
 ## Ownership
 
-| 자산 | 소유권 |
+| 경로 | 책임 |
 | --- | --- |
-| [`AGENTS.md`](../../../AGENTS.md), [`CHATBOT.md`](../../../CHATBOT.md) | 저장소 계약과 챗 진입점, 직접 관리 |
-| [`.rulesync/rules/typescript.md`](../../../.rulesync/rules/typescript.md) | 프로젝트 저작 TypeScript Rule 원본 |
-| [`.rulesync/skills/`](../../../.rulesync/skills/README.md) | 필요 시 직접 작성하는 프로젝트 Skill 원본 |
-| [`rulesync.jsonc`](../../../rulesync.jsonc), [`rulesync.lock`](../../../rulesync.lock) | 타깃 설정과 외부 소스 버전 고정. 현재 외부 `sources`는 비어 있음 |
-| [`rules.jsonl`](../../../.agents/route/rules.jsonl), [`skills.jsonl`](../../../.agents/route/skills.jsonl) | Git 추적 파생 라우팅 색인. **수동 편집 금지** |
-| `.github/instructions/`, `.agents/rules/`, 타깃별 Skill 복사본 | 로컬 생성물. Git 무시 및 수동 편집 금지 |
+| [AGENTS.md](../../../AGENTS.md)·[CHATBOT.md](../../../CHATBOT.md)·[CLAUDE.md](../../../CLAUDE.md)·[GEMINI.md](../../../GEMINI.md) | 직접 관리하는 진입점, 자동 생성·덮어쓰기 금지 |
+| [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md) | Rule·Skill 원본 |
+| [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 네 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
+| [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
+| `.github/instructions/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
 
-지원되는 타깃과 실제 로딩 방식은 다음처럼 구분합니다.
+## Targets
 
-| 환경 | Rulesync 타깃과 기능 | 프로젝트 진입 |
-| --- | --- | --- |
-| **도구 실행이 없거나 제한된 ChatGPT 등의 챗봇** | 직접 지원하는 `chatgpt` 타깃 없음 | [CHATBOT.md](../../../CHATBOT.md)로 코딩 에이전트의 규칙·작업 루프·검증 보고를 **가능한 범위에서 재현**. Codex·Claude·Gemini 코딩 에이전트용 진입점과 구분 |
-| **Codex CLI** | `codexcli`: Skill | 직접 관리하는 [AGENTS.md](../../../AGENTS.md)와 선택형 Skill |
-| **Claude Code** | `claudecode`: 경로별 Rule·Skill, `includeRoot: false` | 직접 관리하는 [CLAUDE.md](../../../CLAUDE.md)가 AGENTS.md를 안내 |
-| **Gemini CLI** | Rulesync의 직접 지원 타깃 없음 | 직접 관리하는 [GEMINI.md](../../../GEMINI.md)가 AGENTS.md를 안내 |
-| **Google Antigravity** | `antigravity-ide`·`antigravity-cli`: Rule·Skill | 지원되는 프로젝트별 경로별 생성물과 AGENTS.md |
-| **Gemini in Android Studio** | `androidstudio`: Skill | 사용 가능한 Skill이 생겼을 때 투영(현재 0개) |
-| **GitHub Copilot / CLI** | `copilot`·`copilotcli`: Rule·Skill | 기존 설정 유지 |
-
-Rulesync 9.0.0부터 `geminicli` 타깃이 제거되었으므로 40.2.0 설정에 넣지 않습니다. Gemini CLI는 `GEMINI.md`로 직접 연결하고, Rulesync의 Google 계열 타깃은 Antigravity IDE·CLI와 Android Studio Skill을 사용합니다.
-
-`agentsmd` 타깃과 Codex의 `rules` 투영을 활성화하지 않은 이유는 직접 작성한 `AGENTS.md`를 덮어쓸 수 있기 때문입니다. Claude의 루트 Rulesync 생성도 꺼 두었습니다. `GEMINI.md`와 `CLAUDE.md`는 **생성물이 아닌 경량 진입점**입니다. 현재 각 버전의 자동 로딩·타깃 투영을 실제 실행하지 않았다면 지원 설정만 완료된 것으로 보고합니다.
-
-공식 타깃과 프로젝트별 기능: [Rulesync Supported Tools](https://rulesync.dyoshikawa.com/reference/supported-tools.html). Gemini CLI의 진입점: [GEMINI.md 안내](https://geminicli.com/docs/cli/gemini-md/).
-
-애플리케이션 런타임은 Rulesync를 필요로 하지 않습니다. 외부 Skill·Subagent는 포함하지 않습니다.
+설정의 타깃은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. Codex CLI(`codexcli`)는 Skill만, Claude Code(`claudecode`)는 루트 Rule을 제외하여 직접 관리하는 진입점을 보호합니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Gemini CLI는 직접 관리하는 `GEMINI.md`를 사용하고, 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
 
 ## Lifecycle
 
-저장소 루트에서 다음 명령을 사용합니다.
-
 ```sh
-bash scripts/rulesync-assets install
-bash scripts/rulesync-assets generate
-bash scripts/rulesync-assets check
-bash scripts/rulesync-assets update
+mise install
+mise run rulesync:install
+mise run rulesync:generate
+mise run rulesync:check
+mise run routes:check
 ```
 
-- **`install`**: 현재 잠금 파일을 기준으로 설치합니다.
-- **`generate`**: 잠금 상태를 설치한 뒤 로컬 타깃 투영과 Git 추적 라우팅 색인을 생성합니다.
-- **`check`**: Rulesync 엄격 진단, 라우팅 색인 일치성, 생성물 Git 소유권 및 직접 관리하는 `AGENTS.md`·`CHATBOT.md`·`CLAUDE.md`·`GEMINI.md` 무변형을 검사합니다.
-- **`update`**: 외부 소스가 없는 현재 단계에서는 **비활성화**했습니다. 외부 Skill 도입 승인 및 잠금 정책을 마련한 뒤 구현합니다.
+Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rulesync:generate`는 도구별 복사본과 프로젝트 직접 저작 Rule·Skill 라우팅 색인을 갱신합니다. `rulesync:check`는 Rulesync 자체 진단, `routes:check`는 **Textweft 고유 파생 색인의 정합성**만 검사합니다.
 
-`scripts/rulesync`는 **Rulesync v40.2.0**의 지원 플랫폼별 바이너리를 다운로드하고 **SHA-256을 검증**한 뒤 `.cache/rulesync/`에 캐싱하는 실행 래퍼입니다. 실제 설치·투영에는 셸·Git·Node.js·curl·네트워크·적절한 실행 권한이 필요합니다.
+## External Skill Adoption
 
-```sh
-npm run agents:index:generate
-npm run agents:index:check
-npm run harness:check
-npm run harness:test
-```
+[선택한 자산과 일회성 하네스 절차](agent-assets.md)에 지속 사용 Skill 4개와 문서로 흡수한 일회성 참고 4개를 구분합니다. `rulesync.jsonc`는 upstream 커밋·경로·선택 목록을 지정합니다. `.rulesync/skills/.curated/`는 `rulesync install`이 설치하는 외부 의존성(직접 작성 원본이 아님)입니다. 두 `.curated/` 디렉터리는 Git·rumdl에서 제외합니다. 프로젝트가 직접 작성하는 Skill용 `skills.jsonl`에 외부 의존성을 중복 수동 등록하지 않습니다.
 
-`agents:index:check`는 네트워크 없이 소스와 JSONL의 일치성을 확인합니다. `harness:check`는 필수 파일·문서 링크·잠금 구조·라우팅 색인을 확인합니다. **정적 검사만으로 Rulesync 바이너리 실행, 타깃 투영 성공, AI 에이전트 자동 로딩을 주장하지 않습니다.**
+최초 잠금은 설치 가능한 환경에서 `mise run rulesync:resolve`로 생성하고 `rulesync.lock`의 변경·출처·선택·무결성을 검토 후 커밋합니다. 잠금 파일이 완성된 이후의 재설치는 `mise run rulesync:install`(`rulesync install --frozen`)로 고정 상태를 확인하고 `mise run rulesync:generate`로 대상별 투영을 만듭니다. `mise run bootstrap`과 `mise run update`는 npm 잠금 존재를 먼저 확인하고, mise 도구 → frozen Skill 설치 → `npm ci` → Git 훅 → 투영 순으로 동기화합니다. npm 잠금이 없으면 설치 **전에 중단**하고, Rulesync 잠금이 비어 있으면 npm/훅 작업 전에 **중단**합니다. 최초에는 `npm install --package-lock-only --ignore-scripts`와 `mise run rulesync:resolve`로 각각의 lock을 생성·검토·커밋해야 합니다. 부분 실패 후에는 원인을 수정한 뒤 `mise run update`를 재실행합니다.
 
-## Rules and Skills
+[CI](../../../.github/workflows/ci.yml)는 PR/main에서 읽기 전용 권한으로 frozen Skill 설치·`npm ci`·타깃 투영·`mise run check`를 수행하도록 구성합니다. CI는 `mise run bootstrap`과 `mise run update`를 재실행한 뒤 `git diff --exit-code -- .agents/route`로 Git 추적 색인의 drift를 확인하고 `mise run check`를 수행합니다. CI 워크플로 작성만으로 보호 규칙이나 실행 성공이 보장되지는 않습니다.
 
-- **Rule:** 경로·확장자별 계약은 `.rulesync/rules/*.md`에서 작성합니다. Rulesync의 `targets`·`globs`를 사용해 적용 범위를 제한하고, 생성 후 해당 파일에 **적용될 사례와 적용되면 안 될 사례**를 확인합니다.
-- **Skill:** 반복되는 독립 작업 절차가 생기면 `.rulesync/skills/<name>/SKILL.md`를 추가합니다. 선택용 `name`·`description`을 frontmatter에 둡니다. 현재 등록된 Skill은 없습니다.
-- **외부 Skill:** 이번 구축에는 가져오지 않았습니다. 추후 사용자가 승인한 원본만 `rulesync.jsonc`에 선언하고 `rulesync.lock`으로 고정한 다음 원본·라이선스·변경 이력을 검증합니다. 참고 프로젝트의 자산은 자동 상속하지 않습니다.
-
-[에이전트 자산 라우터](../../../.agents/route/ROUTE.md)는 `name`·`description`으로 후보를 좁힌 후 실제 `path`에서 적용 조건을 확인합니다. 생성된 색인이나 투영은 **새 권한을 부여하지 않으며**, 승인·보안·계정 경계는 `AGENTS.md`에 따릅니다.
-
-## Isolation
-
-다른 도구가 소유한 자산을 Rulesync로 덮거나 삭제하지 않습니다. 특히 직접 작성한 `AGENTS.md`, `CHATBOT.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/route/`는 생성 범위에서 보호합니다. 외부 Skill 업데이트는 별도 리뷰 대상으로 취급합니다.
+CI의 일회성 잠금 생성 실행에서 `rulesync install`이 성공하여 `rulesync.lock`을 커밋했습니다. PR CI에서 frozen 재설치·타깃 투영·부트스트랩/업데이트 재실행과 전체 검사는 통과했습니다. 이는 CI Linux 환경의 증거이며, 특정 AI 런타임의 자동 Skill 선택·다른 OS 호환성·브랜치 보호 적용을 보증하지 않습니다. 설치/업데이트 전에 외부 출처·권한·지원 파일/target 동작을 검토합니다. 다른 저장소 계정이나 외부 서비스에는 프로젝트 데이터를 쓰지 않습니다. **정적 검사 성공은 실제 에이전트가 지침을 로드했다는 증거가 아닙니다.**

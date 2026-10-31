@@ -1,0 +1,8 @@
+# <type>(<scope>): <변경 요약>
+#
+# type: feat | fix | docs | refactor | test | build | chore | ci | perf
+# scope는 선택 사항입니다. 제목은 간결한 한국어로 작성합니다.
+#
+# 본문(선택): 무엇을, 왜 변경했는지 설명합니다.
+# 필요 시 관련 Issue·호환성·검증 정보를 덧붙입니다.
+# 비밀·자격 증명·개인 식별정보는 적지 않습니다.

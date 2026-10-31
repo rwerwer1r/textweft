@@ -86,4 +86,4 @@ YAML / JSON game content  +  optional TypeScript hooks
 
 ## Document Boundaries
 
-이 문서는 **왜 이 프레임워크가 존재하고 어떤 품질을 지향하는가**를 소유합니다. 개발 방식은 [Vibe Coding Workflow](development/workflows/vibe-coding.md)에서 정의합니다. [README](../README.md)는 현재 기능과 시작 방법, [Development Guide](development/README.md)는 작업·검증 절차, [Language](LANGUAGE.md)는 문서 언어 기준을 소유합니다. 구현 결정과 실제 동작의 근거는 소스·테스트·Git 이력에서 확인합니다.
+이 문서는 **왜 이 프레임워크가 존재하고 어떤 품질을 지향하는가**를 소유합니다. 개발 방식은 [Vibe Coding Workflow](development/workflows/vibe-coding.md)에서 정의합니다. `README.md`는 현재 기능과 시작 방법, [Development Guide](development/README.md)는 작업·검증 절차, [Language](LANGUAGE.md)는 문서 언어 기준을 소유합니다. 구현 결정과 실제 동작의 근거는 소스·테스트·Git 이력에서 확인합니다.

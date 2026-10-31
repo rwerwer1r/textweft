@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#MISE description="프로젝트에 고정된 도구·npm 의존성·Git 훅을 현재 환경에 동기화"
+set -euo pipefail
+
+root="$(cd "$(dirname "$0")/.." && pwd -P)"
+cd "$root"
+if [[ "$(git rev-parse --show-toplevel 2>/dev/null)" != "$root" ]]; then
+  echo "오류: Textweft 저장소 루트에서만 환경을 갱신할 수 있습니다." >&2
+  exit 1
+fi
+
+# Bootstrap must not silently resolve or rewrite dependencies.
+if [[ ! -f package-lock.json ]]; then
+  echo "오류: package-lock.json이 없습니다. npm install --package-lock-only로 잠금을 생성·검토·커밋한 뒤 다시 실행하세요." >&2
+  exit 1
+fi
+
+mise install
+# Check upstream lock integrity before changing npm modules or Git hooks.
+mise run rulesync:install
+npm ci
+lefthook install
+mise run rulesync:generate
+echo "개발 환경·하네스 동기화 완료. 검사: mise run check"

@@ -4,6 +4,8 @@ coverage/
 *.tsbuildinfo
 
 # Rulesync 로컬 도구·기기별 설정·도구별 투영 (Git 비추적)
+/.rulesync/rules/.curated/
+/.rulesync/skills/.curated/
 /.cache/
 /rulesync.local.jsonc
 /AGENTS.local.md
@@ -19,3 +21,17 @@ coverage/
 /.claude/skills/
 /.claude/settings.local.json
 
+# rumdl 검사 캐시
+/.rumdl_cache/
+
+# Lefthook 개인용 훅 재정의
+/lefthook-local.yml
+
+# 개발자 로컬 환경·민감 설정
+.env
+.env.*
+!.env.example
+!.env.sample
+/mise.local.toml
+/.DS_Store
+*.swp

@@ -8,14 +8,17 @@
 
 ## Quick start
 
-Node.js 22.16 이상과 npm이 필요합니다.
+개발 도구의 버전·설치·검증은 [mise](https://mise.jdx.dev/)의 [mise.toml](mise.toml)에서 관리합니다. mise 설치 후:
 
 ```sh
-npm install
-npm test
-npm run typecheck
-npm run example
+mise run bootstrap   # 최초 1회: 도구·의존성·Lefthook·로컬 Git 템플릿
+mise run check
+mise run example
 ```
+
+**의존성 재현성:** `package-lock.json`과 `rulesync.lock`을 Git에 고정했습니다. 일반적인 부트스트랩은 두 잠금을 **변경하지 않으며**, 잠금 갱신은 [선택형 Agent Asset 가이드](docs/development/tooling/agent-assets.md)에 따라 별도 검토합니다. GitHub CI와 실제 로컬 초기화 결과는 구분합니다.
+
+mise CLI가 먼저 설치되어 있어야 합니다. [부트스트랩](mise-tasks/bootstrap)은 Node.js·Biome·rumdl·Rulesync·Lefthook, 잠금된 npm 및 외부 Skill 의존성을 준비하고 `.gitmessage`를 **이 저장소에만** 등록합니다. 기존 클론은 `mise run update`로 잠금된 환경과 훅을 재동기화합니다. 잠금이나 도구 버전을 조용히 갱신하지 않습니다.
 
 예제는 `examples/lighthouse/game.yaml`과 `examples/lighthouse/main.ts`에 있으며, 조건부 선택지와 무작위 경로가 포함된 짧은 항해를 정의합니다.
 
@@ -76,6 +79,6 @@ tests/runtime.test.ts      엔진 동작 테스트
 
 ## Development and agent harness
 
-이 v0.1 저장소에는 경량의 프로젝트 전용 [에이전트 계약](AGENTS.md), [제한 런타임 챗봇 하네스](CHATBOT.md), [개발 가이드](docs/development/README.md)가 있습니다. Rule·Skill은 [선택형 라우터](.agents/route/ROUTE.md)의 [Rule 색인](.agents/route/rules.jsonl)과 [Skill 색인](.agents/route/skills.jsonl)에서 발견합니다. 저작 원본·생성물은 [Rulesync 운영 문서](docs/development/tooling/rulesync.md)를 참조합니다.
+개발은 [AGENTS.md](AGENTS.md)를 기준으로 하며, 작업별 상세 문서는 [개발 문서 라우터](docs/development/README.md)에서 고릅니다. [ROUTE](.agents/route/ROUTE.md)는 관련 Rule·Skill만 선택합니다. 실행이 없는/제한된 챗봇만 [CHATBOT.md](CHATBOT.md)를 사용합니다.
 
-의존성 설치 후 `npm run harness:check`로 하네스 구조와 문서의 로컬 링크를 검사할 수 있습니다. 이 명령은 `npm test`나 `npm run typecheck`를 대체하지 않습니다.
+문서 상대 링크·제목은 `mise run lint:md`(rumdl), JS·TS는 `mise run lint:code`(Biome), 프로젝트 고유 라우팅 계약은 `mise run routes:check`로 검사합니다. 커밋할 때 [Lefthook](lefthook.yml)은 스테이징된 Markdown·JS/TS/JSON과 관련 인박스·라우팅만 검사합니다. Git 훅은 부트스트랩 또는 `mise run hooks:install`을 실행한 로컬 클론에서만 활성화되며, 전체 검증은 `mise run check`입니다. 실행하지 않은 검사를 통과로 보고하지 않습니다.
