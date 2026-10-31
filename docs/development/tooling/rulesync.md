@@ -8,7 +8,7 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 | --- | --- |
 | [AGENTS.md](../../../AGENTS.md)·[CHATBOT.md](../../../CHATBOT.md)·[CLAUDE.md](../../../CLAUDE.md)·[GEMINI.md](../../../GEMINI.md) | 직접 관리하는 진입점, 자동 생성·덮어쓰기 금지 |
 | [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md) | Rule·Skill 원본 |
-| [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 네 가지 선별 외부 Skill 의존성 선언 및 설치 후 잠금. 현재 원격 lock은 아직 빈 상태 |
+| [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 네 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
 | [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
 | `.github/instructions/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
 
@@ -36,4 +36,4 @@ Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rules
 
 [CI](../../../.github/workflows/ci.yml)는 PR/main에서 읽기 전용 권한으로 frozen Skill 설치·`npm ci`·타깃 투영·`mise run check`를 수행하도록 구성합니다. `rulesync generate`와 달리 Textweft의 라우팅 색인은 CI에서 재생성하지 않아 오래된 Git 추적 색인을 `routes:check`가 발견합니다. CI 워크플로 작성만으로 보호 규칙이나 실행 성공이 보장되지는 않습니다.
 
-현재는 **외부 선언만 반영**했고 잠금 생성·설치·Rulesync 투영·실제 AI 에이전트 로딩은 미실행입니다. 설치/업데이트 전에 외부 출처·권한·지원 파일/target 동작을 검토합니다. 다른 저장소 계정이나 외부 서비스에는 프로젝트 데이터를 쓰지 않습니다. **정적 검사 성공은 실제 에이전트가 지침을 로드했다는 증거가 아닙니다.**
+CI의 일회성 잠금 생성 실행에서 `rulesync install`이 성공하여 `rulesync.lock`을 커밋했습니다. 일반 CI의 frozen 재설치·타깃 투영·실제 AI 에이전트 로딩은 해당 실행 결과로 별도 판단하며, 다른 환경의 성공으로 확대하지 않습니다. 설치/업데이트 전에 외부 출처·권한·지원 파일/target 동작을 검토합니다. 다른 저장소 계정이나 외부 서비스에는 프로젝트 데이터를 쓰지 않습니다. **정적 검사 성공은 실제 에이전트가 지침을 로드했다는 증거가 아닙니다.**
