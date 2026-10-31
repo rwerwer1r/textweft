@@ -7,7 +7,7 @@ lefthook = "2.2.2"
 "github:dyoshikawa/rulesync" = { version = "40.2.0", matching = "rulesync-", bin = "rulesync" }
 
 [tasks]
-deps = "npm install"
+deps = "npm ci"
 test = "npm test"
 typecheck = "npm run typecheck"
 example = "npm run example"
