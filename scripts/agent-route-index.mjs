@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { basename, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseDocument } from 'yaml';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const slug = /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/;
@@ -10,24 +11,22 @@ export function frontmatter(text, fallback = '') {
   if (lines[0] !== '---') throw new Error('frontmatter 시작 누락');
   const end = lines.indexOf('---', 1);
   if (end < 0) throw new Error('frontmatter 종료 누락');
-  const fields = {};
-  for (const line of lines.slice(1, end)) {
-    const match = /^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$/.exec(line);
-    if (!match || !['name','description'].includes(match[1])) continue;
-    const [, key, raw] = match;
-    if (Object.hasOwn(fields,key)) throw new Error(key + ' 중복');
-    let value = raw.trim();
-    if (value.startsWith('"')) value = JSON.parse(value);
-    else if (value.startsWith("'")) {
-      if (!value.endsWith("'")) throw new Error(key + ' 따옴표 오류');
-      value = value.slice(1,-1).replace(/''/g,"'");
-    }
-    if (typeof value !== 'string') throw new Error(key + ' 문자열 필요');
-    fields[key] = value.trim();
+
+  const doc = parseDocument(lines.slice(1, end).join('\n'), { uniqueKeys: true });
+  if (doc.errors.length) {
+    const error = doc.errors[0];
+    throw new Error('frontmatter ' + (error.code === 'DUPLICATE_KEY' ? '중복' : '오류') + ': ' + error.message);
   }
-  const name = fields.name || fallback;
-  if (!slug.test(name) || !fields.description) throw new Error('name/description 누락');
-  return { name, description: fields.description };
+  const fields = doc.toJS();
+  if (!fields || typeof fields !== 'object' || Array.isArray(fields)) {
+    throw new Error('frontmatter 객체 필요');
+  }
+  const name = fields.name ?? fallback;
+  const description = fields.description;
+  if (typeof name !== 'string' || !slug.test(name) || typeof description !== 'string' || !description.trim()) {
+    throw new Error('name/description 누락');
+  }
+  return { name, description: description.trim() };
 }
 
 function listRules(base) {
