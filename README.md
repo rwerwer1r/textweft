@@ -16,16 +16,7 @@ mise run check
 mise run example
 ```
 
-**P0 작업 브랜치는 아직 초기 잠금 설정 단계입니다.** `package-lock.json`이 없고 `rulesync.lock`이 비어 있어 현재 `mise run bootstrap`은 실행을 차단합니다. 유지보수자는 아래 **최초 한 번만** 잠금을 생성·리뷰·커밋한 뒤 위 Quick start를 사용합니다.
-
-```sh
-mise install
-npm install --package-lock-only --ignore-scripts
-mise run rulesync:resolve
-# package-lock.json과 rulesync.lock을 검토·커밋
-```
-
-상세한 잠금·권한·검증 기준은 [선택형 Agent Asset 가이드](docs/development/tooling/agent-assets.md)를 따릅니다. 최종 병합 전 두 잠금 파일의 생성·frozen 재설치를 실제로 확인해야 합니다.
+**의존성 재현성:** `package-lock.json`과 `rulesync.lock`을 Git에 고정했습니다. 일반적인 부트스트랩은 두 잠금을 **변경하지 않으며**, 잠금 갱신은 [선택형 Agent Asset 가이드](docs/development/tooling/agent-assets.md)에 따라 별도 검토합니다. GitHub CI와 실제 로컬 초기화 결과는 구분합니다.
 
 mise CLI가 먼저 설치되어 있어야 합니다. [부트스트랩](mise-tasks/bootstrap)은 Node.js·Biome·rumdl·Rulesync·Lefthook, 잠금된 npm 및 외부 Skill 의존성을 준비하고 `.gitmessage`를 **이 저장소에만** 등록합니다. 기존 클론은 `mise run update`로 잠금된 환경과 훅을 재동기화합니다. 잠금이나 도구 버전을 조용히 갱신하지 않습니다.
 
