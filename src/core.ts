@@ -103,10 +103,10 @@ export function validateGame<S extends GameState>(input: unknown, hooks: Hooks<S
     if (!Array.isArray(value)) return void errors.push(`${at}: expected effect array`);
     value.forEach((effect, index) => {
       const loc = `${at}[${index}]`;
-      if (!object(effect)) return void errors.push(`${loc}: invalid effect`);
-      if (has(effect, 'call')) return checkCall(effect, 'effects', loc);
+      if (!object(effect)) { errors.push(`${loc}: invalid effect`); return; }
+      if (has(effect, 'call')) { checkCall(effect, 'effects', loc); return; }
       const operation = has(effect, 'set') ? 'set' : has(effect, 'add') ? 'add' : null;
-      if (!operation || !object(effect[operation])) return void errors.push(`${loc}: invalid effect operation`);
+      if (!operation || !object(effect[operation])) { errors.push(`${loc}: invalid effect operation`); return; }
       for (const [key, item] of Object.entries(effect[operation])) {
         if (!has(initialState, key)) errors.push(`${loc}: unknown state key ${key}`);
         if (operation === 'set' && !validJson(item)) errors.push(`${loc}: invalid JSON value`);
@@ -126,7 +126,7 @@ export function validateGame<S extends GameState>(input: unknown, hooks: Hooks<S
     const ids = new Set<string>();
     value.choices.forEach((choice, index) => {
       const at = `${sceneId}.choices[${index}]`;
-      if (!object(choice)) return void errors.push(`${at}: invalid choice`);
+      if (!object(choice)) { errors.push(`${at}: invalid choice`); return; }
       if (!nonempty(choice.id) || ids.has(String(choice.id))) errors.push(`${at}: missing or duplicate choice ID`);
       else ids.add(choice.id);
       if (!nonempty(choice.label)) errors.push(`${at}: label required`);
