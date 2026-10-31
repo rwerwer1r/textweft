@@ -26,6 +26,7 @@
 | 중요한 사람 결정·리뷰 근거 | [Agent Governance](ai-agent/README.md) |
 | Rule·Skill 선택 | [ROUTE](../../.agents/route/ROUTE.md) |
 | Rulesync 설정·생성·잠금 | [Rulesync](tooling/rulesync.md) |
+| 외부 Skill 선택·일회성 하네스 절차 | [Selective Agent Assets](tooling/agent-assets.md) |
 | 장기 작업의 원격 체크포인트·재개 | [Inbox](../../inbox/README.md) |
 | **런타임이 없거나 제한된 챗봇만** | [CHATBOT](../../CHATBOT.md) |
 
