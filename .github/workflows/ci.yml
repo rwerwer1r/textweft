@@ -23,14 +23,12 @@ jobs:
       - uses: jdx/mise-action@v4
         with:
           install: true
-      - name: Install locked dependencies
+      - name: Bootstrap and repeat update
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          test -f package-lock.json
-          mise run rulesync:install
-          npm ci
-      - name: Generate agent projections
-        run: mise exec -- rulesync generate
+          mise run bootstrap
+          mise run update
+          git diff --exit-code -- .agents/route
       - name: Verify repository contracts
         run: mise run check
