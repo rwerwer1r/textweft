@@ -31,6 +31,6 @@ Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rules
 
 [선택한 자산과 일회성 하네스 절차](agent-assets.md)에 지속 사용 Skill 4개와 문서로 흡수한 일회성 참고 4개를 구분합니다. `rulesync.jsonc`는 upstream 커밋·경로·선택 목록을 지정합니다. `.rulesync/skills/.curated/`는 `rulesync install`이 설치하는 외부 의존성(직접 작성 원본이 아님)입니다. 프로젝트가 직접 작성하는 Skill용 `skills.jsonl`에 외부 의존성을 중복 수동 등록하지 않습니다.
 
-최초 잠금은 설치 가능한 환경에서 `mise run rulesync:resolve`로 생성하고 `rulesync.lock`의 변경·출처·선택·무결성을 검토 후 커밋합니다. 잠금 파일이 완성된 이후의 재설치는 `mise run rulesync:install`(`rulesync install --frozen`)로 고정 상태를 확인하고 `mise run rulesync:generate`로 대상별 투영을 만듭니다. `mise run update`는 현재 개발 도구·npm·Git 훅만 동기화하므로 외부 Skill 설치 여부를 포함한 하네스 준비 완료로 간주하지 않습니다.
+최초 잠금은 설치 가능한 환경에서 `mise run rulesync:resolve`로 생성하고 `rulesync.lock`의 변경·출처·선택·무결성을 검토 후 커밋합니다. 잠금 파일이 완성된 이후의 재설치는 `mise run rulesync:install`(`rulesync install --frozen`)로 고정 상태를 확인하고 `mise run rulesync:generate`로 대상별 투영을 만듭니다. `mise run bootstrap`과 `mise run update`는 도구·npm·Git 훅 다음에 frozen Skill 설치와 투영까지 동기화합니다. 잠금이 아직 비어 있으면 **정상적으로 실패**하므로, 최초에는 먼저 `mise run rulesync:resolve`로 lock을 작성·검토·커밋해야 합니다. 부분 실패 후에는 원인을 수정한 뒤 `mise run update`를 재실행합니다.
 
 현재는 **외부 선언만 반영**했고 잠금 생성·설치·Rulesync 투영·실제 AI 에이전트 로딩은 미실행입니다. 설치/업데이트 전에 외부 출처·권한·지원 파일/target 동작을 검토합니다. 다른 저장소 계정이나 외부 서비스에는 프로젝트 데이터를 쓰지 않습니다. **정적 검사 성공은 실제 에이전트가 지침을 로드했다는 증거가 아닙니다.**
