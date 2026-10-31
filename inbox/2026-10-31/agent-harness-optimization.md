@@ -1,6 +1,6 @@
 ---
 description: KISS·DRY·SRP 기반 문서·하네스 최적화 작업 인계
-updated: 2026-10-31T17:05:30.319Z
+updated: 2026-10-31T17:14:59.177Z
 ---
 
 # Harness Optimization Workstate
@@ -10,7 +10,7 @@ updated: 2026-10-31T17:05:30.319Z
 - 진입 문서의 불필요한 로드, 반복 지침, 중복 테스트 제거. 권한·승인·검증·인박스 복원·Rulesync 소유권 유지. 게임 코어 변경 없음.
 
 ## State / Evidence
-- 상태: `handoff`. 재사용 Skill 4개는 Rulesync source에 선언, 일회성 Skill 4개는 운영 가이드로 하네싱. 잠금 생성과 도구 실행 검증 전까지 완료 아님. Draft PR #4 유지.
+- 상태: `active`. P0 하네스 강화 루프 실행 중. 기존 4개 Skill 선언/4개 일회성 문서화 유지, 실행 불가와 미검증 상태를 분리. Draft PR #4 유지.
 - 본문 수정 Markdown 13개의 Git blob: 44,549 → 19,722바이트 (55.7% 감소, 실제 모델 토큰 측정 아님).
 - 최초 최적화: 수정 Markdown 13개 55.7% 축약 및 중복 라우팅 테스트 1개 통합(이전 작업 근거).
 - 링크·라우팅 후속 개선: `docs/development/README.md`를 작업별 문서 라우터로 정리하고, `ROUTE.md`에서는 Rule·Skill 색인을 해당 작업일 때만 선택함.
@@ -51,3 +51,10 @@ updated: 2026-10-31T17:05:30.319Z
 - 원격 정적 확인: 선택한 8개 원본이 고정 upstream SHA에 존재, PR #4 head와 변경 반영 일치, 사용자 게임 `src/`·`tests/`·예제 변경 없음.
 - 미실행/차단: `rulesync.lock`은 아직 빈 source 상태. 네 Skill의 설치·버전 잠금·타깃 투영·실제 에이전트 발견, `mise run bootstrap`·`mise run update`·`mise run check`는 검증되지 않았으며 현재 frozen 설치는 의도적으로 실패할 것임.
 - 다음 행동: 도구가 있는 개발 환경에서 `mise install` → `mise run rulesync:resolve` 후 `rulesync.lock`을 검토·커밋, `mise run bootstrap`·`mise run update` 재실행·`mise run check`, 생성된 타깃 Skill 파일/로드 확인, PR 증거 보강·사람 승인 후 병합.
+
+## P0 Iterative Harness Hardening (2026-11-01)
+- 현재 프레임: Prepare → Research → Plan → Work → Review, 필요한 경우 재진입. 목표는 잠금·검증·라우팅의 재현성 향상이며 src/·MVP 기능·외부 저장소 쓰기는 범위 밖.
+- 검토 근거: 현재 PR #4 head 7577b4d7d40d4ebfb837321029d8800154e27510, `package.json`은 3개 의존성을 선언하지만 `package-lock.json` 부재. `rulesync.jsonc`에 4개 Skill 선택이 있고 `rulesync.lock`은 비어 있음. CI workflow 부재. .curated 외부 자산을 .gitignore에 별도 제외하지 않음.
+- 실제 시도: Node 22.16.0·npm 10.9.2 로컬 격리 폴더에서 `npm install --package-lock-only --ignore-scripts` 요청. npm registry DNS `EAI_AGAIN`으로 실패하여 **잠금 생성 미완료**. 해당 실패를 성공으로 전환하거나 무결성 없는 lock을 수동 작성하지 않음.
+- 계획: 누락된 lock에 대해 fail-closed 검사·진입점을 명확히 하고 외부 curated Git/Markdown 스캔을 분리, 가벼운 PR/main CI 작업을 추가, 반복 검토 시 중복 로직과 잘못된 성공 주장 제거. 실제 설치·npm·CI 검증 여부는 각각 구분.
+- 이후: 변경 ref/diff 확인 → 문서/설정 동기화 → review 및 검증 사실 기록 → 사람 승인 전 병합 금지.
