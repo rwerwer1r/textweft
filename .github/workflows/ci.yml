@@ -24,6 +24,8 @@ jobs:
         with:
           install: true
       - name: Install locked dependencies
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           test -f package-lock.json
           mise run rulesync:install
