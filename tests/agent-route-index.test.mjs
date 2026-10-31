@@ -19,4 +19,10 @@ test('frontmatter는 정상 입력을 읽고 누락·중복을 거부한다', ()
   assert.throws(() => frontmatter('plain'), /frontmatter/);
   assert.throws(() => frontmatter('---\nname: x\n---'), /description/);
   assert.throws(() => frontmatter('---\ndescription: a\ndescription: b\n---', 'rule'), /중복/);
+  assert.deepEqual(frontmatter('---\nname: my-skill\ndescription: >-\n  Multi-line skill\n  description\ntargets:\n  - copilot\n---'), {
+    name: 'my-skill',
+    description: 'Multi-line skill description',
+  });
+  assert.throws(() => frontmatter('---\nname: 123\ndescription: okay\n---'), /name\/description/);
+  assert.throws(() => frontmatter('---\ndescription: [not-a-string]\n---', 'rule'), /name\/description/);
 });
