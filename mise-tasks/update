@@ -17,4 +17,7 @@ else
   echo "참고: package-lock.json이 새로 생성되면 변경 사항을 검토해 추적하세요."
 fi
 lefthook install
-echo "개발 환경 동기화 완료. 검사: mise run check"
+# External Skills must be covered by the committed Rulesync lock.
+mise run rulesync:install
+mise run rulesync:generate
+echo "개발 환경·하네스 동기화 완료. 검사: mise run check"
