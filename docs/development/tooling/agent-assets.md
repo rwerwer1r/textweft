@@ -29,7 +29,7 @@
 ## Installation and Evidence
 
 - **선언 확인:** `rulesync.jsonc`의 `sources`에서 위 네 Skill과 고정 source SHA만 지정했는지 확인합니다.
-- **최초 잠금 생성(명시적 작업):** 도구가 설치된 개발 환경에서 `npm install --package-lock-only --ignore-scripts`와 `mise run rulesync:resolve`를 사용하여 **`package-lock.json`과 `rulesync.lock` 둘 다** 생성합니다. 출처·선택 목록·integrity·변경을 리뷰하고 각각 커밋합니다. 현재 잠금 파일이 빈 상태이면 `--frozen` 설치와 이를 호출하는 `mise run bootstrap`·`mise run update`가 실패하는 것이 정상입니다. 최초 잠금 생성 후에도 실제 설치·검증 전에는 성공으로 보고하지 않습니다.
+- **최초 잠금 생성(명시적 작업):** 도구가 설치된 개발 환경에서 `npm install --package-lock-only --ignore-scripts`와 `mise run rulesync:resolve`를 사용하여 **`package-lock.json`과 `rulesync.lock` 둘 다** 생성합니다. 출처·선택 목록·integrity·변경을 리뷰하고 각각 커밋합니다. 두 잠금 파일을 프로젝트 CI의 일회성 생성 작업에서 만들고 리뷰 후 Git에 커밋했습니다. 이후에는 `--frozen` 설치만 정상 경로로 허용하며, 변경이 필요할 때만 잠금 생성 명령을 다시 사용합니다. 잠금 존재만으로 부트스트랩·타깃 로딩을 검증했다고 간주하지 않습니다.
 - **잠금 후 재현:** `mise run bootstrap` → `mise run update` 재실행 → `mise run rulesync:install` → `mise run rulesync:generate` → `mise run rulesync:check` → `mise run routes:check` → `mise run check`의 실측 결과를 별도로 남깁니다. `rulesync generate` 자체는 외부 source를 fetch하지 않습니다.
 - **CI 게이트:** [PR/main CI](../../../.github/workflows/ci.yml)는 `npm ci`, 외부 Skill frozen 설치와 프로젝트 검사를 수행합니다. 잠금 누락은 실패이며 CI 실행 이력·브랜치 보호 규칙은 별도 확인해야 합니다.
 - **라우팅 분리:** [skills.jsonl](../../../.agents/route/skills.jsonl)은 직접 작성한 프로젝트 Skill의 파생 색인입니다. Rulesync의 외부 curated Skill을 여기에 임의로 넣지 않습니다. 코딩 에이전트는 실제 생성된 target-native Skill을 선택하며, 제한 런타임 챗봇은 이 문서에서 외부 후보를 발견하고 접근 가능할 때만 원본을 읽습니다.
