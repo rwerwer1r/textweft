@@ -91,7 +91,7 @@ export function validateGame<S extends GameState>(input: unknown, hooks: Hooks<S
   }
   function checkCondition(value: unknown, at: string): void {
     if (!object(value)) return void errors.push(`${at}: invalid condition`);
-    if (has(value, 'call')) return checkCall(value, 'conditions', at);
+    if (has(value, 'call')) { checkCall(value, 'conditions', at); return; }
     if (!nonempty(value.path) || !has(initialState, value.path))
       errors.push(`${at}: unknown state path ${String(value.path)}`);
     if (has(value, 'equals') === has(value, 'gte')) errors.push(`${at}: use exactly one of equals or gte`);
@@ -207,7 +207,7 @@ export function createRuntime<S extends GameState>(game: Game<S>, options: { see
   function start(): GameView {
     if (sceneId !== null) return view();
     let localRng = rngState;
-    const random = () => ((localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0) / 4294967296);
+    const random = () => { localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0; return localRng / 4294967296; };
     const next = transactionEffects(definition.scenes[definition.start].onEnter, copy(state), random);
     const result = render(definition.start, next);
     state = next; sceneId = definition.start; rngState = localRng;
@@ -221,7 +221,7 @@ export function createRuntime<S extends GameState>(game: Game<S>, options: { see
     const choice = scene.choices?.find(c => c.id === choiceId);
     if (!choice || !condition(choice.when, state)) throw new Error(`Unavailable choice: ${choiceId}`);
     let localRng = rngState;
-    const random = () => ((localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0) / 4294967296);
+    const random = () => { localRng = (Math.imul(localRng, 1664525) + 1013904223) >>> 0; return localRng / 4294967296; };
     const afterChoice = transactionEffects(choice.effects, copy(state), random);
     const target = typeof choice.to === 'string' ? choice.to : hooks.routes![choice.to.call]({ state: copy(afterChoice), args: copy(choice.to.args), random });
     if (!has(definition.scenes, target)) throw new Error(`Unknown target scene: ${target}`);
