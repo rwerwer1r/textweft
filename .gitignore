@@ -9,31 +9,17 @@ coverage/
 /.cache/
 /rulesync.local.jsonc
 /AGENTS.local.md
-# 벤더별 에이전트 진입점·로컬 생성물 (정본: AGENTS.md, Rulesync)
+# 선택된 도구 전용 로컬 생성물 (rulesync.jsonc; 정본은 AGENTS.md/Rulesync)
 /CLAUDE.md
 /GEMINI.md
 /.claude/
 /.gemini/
 /.codex/
 /.agent/
-/.aider/
-/.augment/
-/.continue/
-/.cursor/
-/.factory/
-/.junie/
-/.kilo/
-/.kiro/
-/.opencode/
-/.qwen/
-/.roo/
-/.trae/
-/.windsurf/
 /.github/copilot-instructions.md
 /.github/instructions/
 /.github/agents/
 /.github/skills/
-/.github/prompts/
 /.agents/rules/
 /.agents/agents/
 /.agents/skills/
