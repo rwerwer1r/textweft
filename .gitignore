@@ -21,13 +21,8 @@ coverage/
 /.github/agents/
 /.github/skills/
 /.github/prompts/
-# .agents/ 디렉터리는 Git에서 유지하고 내부 Rulesync 생성물만 제외
-/.agents/rules/*
-!/.agents/rules/.gitkeep
-/.agents/agents/*
-!/.agents/agents/.gitkeep
-/.agents/skills/*
-!/.agents/skills/.gitkeep
+# Antigravity가 로드하는 .agents/rules/·skills/는 Git 로컬 exclude로 관리
+# command 디렉터리 골격만 Git에 유지 (생성 파일은 비추적)
 /.agents/commands/*
 !/.agents/commands/.gitkeep
 

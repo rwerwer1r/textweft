@@ -13,6 +13,7 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 | [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
 | `.github/instructions/`·`.github/prompts/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
 | `.agents/commands/` | Git에서 디렉터리만 보존 (`.gitkeep`); 현재 타깃의 Command 실제 출력 경로는 아님 |
+| `.agents/rules/`·`.agents/agents/`·`.agents/skills/` | 디렉터리 골격만 Git 추적; 생성물 제외는 `mise run update`가 `.git/info/exclude`에 추가 (Antigravity 로딩 호환) |
 
 ## Targets
 
