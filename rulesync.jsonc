@@ -3,7 +3,8 @@
   "targets": {
     "copilot": [
       "rules",
-      "skills"
+      "skills",
+      "commands"
     ],
     "copilotcli": [
       "rules",
@@ -16,15 +17,18 @@
       "rules": {
         "includeRoot": false
       },
-      "skills": true
+      "skills": true,
+      "commands": true
     },
     "antigravity-ide": [
       "rules",
-      "skills"
+      "skills",
+      "commands"
     ],
     "antigravity-cli": [
       "rules",
-      "skills"
+      "skills",
+      "commands"
     ],
     "androidstudio": [
       "skills"

@@ -9,34 +9,22 @@ coverage/
 /.cache/
 /rulesync.local.jsonc
 /AGENTS.local.md
-# 벤더별 에이전트 진입점·로컬 생성물 (정본: AGENTS.md, Rulesync)
+# 선택된 도구 전용 로컬 생성물 (rulesync.jsonc; 정본은 AGENTS.md/Rulesync)
 /CLAUDE.md
 /GEMINI.md
 /.claude/
 /.gemini/
 /.codex/
 /.agent/
-/.aider/
-/.augment/
-/.continue/
-/.cursor/
-/.factory/
-/.junie/
-/.kilo/
-/.kiro/
-/.opencode/
-/.qwen/
-/.roo/
-/.trae/
-/.windsurf/
 /.github/copilot-instructions.md
 /.github/instructions/
 /.github/agents/
 /.github/skills/
 /.github/prompts/
-/.agents/rules/
-/.agents/agents/
-/.agents/skills/
+# Antigravity가 로드하는 .agents/rules/·skills/는 Git 로컬 exclude로 관리
+# command 디렉터리 골격만 Git에 유지 (생성 파일은 비추적)
+/.agents/commands/*
+!/.agents/commands/.gitkeep
 
 # rumdl 검사 캐시
 /.rumdl_cache/
