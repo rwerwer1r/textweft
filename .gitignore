@@ -3,23 +3,40 @@ dist/
 coverage/
 *.tsbuildinfo
 
-# Rulesync 로컬 도구·기기별 설정·도구별 투영 (Git 비추적)
+# Rulesync 로컬 의존성·개인 설정 (Git 비추적)
 /.rulesync/rules/.curated/
 /.rulesync/skills/.curated/
 /.cache/
 /rulesync.local.jsonc
 /AGENTS.local.md
+# 벤더별 에이전트 진입점·로컬 생성물 (정본: AGENTS.md, Rulesync)
+/CLAUDE.md
+/GEMINI.md
+/.claude/
+/.gemini/
+/.codex/
+/.agent/
+/.aider/
+/.augment/
+/.continue/
+/.cursor/
+/.factory/
+/.junie/
+/.kilo/
+/.kiro/
+/.opencode/
+/.qwen/
+/.roo/
+/.trae/
+/.windsurf/
 /.github/copilot-instructions.md
 /.github/instructions/
 /.github/agents/
 /.github/skills/
+/.github/prompts/
 /.agents/rules/
 /.agents/agents/
 /.agents/skills/
-/.codex/skills/
-/.claude/rules/
-/.claude/skills/
-/.claude/settings.local.json
 
 # rumdl 검사 캐시
 /.rumdl_cache/
