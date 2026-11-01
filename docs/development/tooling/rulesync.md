@@ -17,7 +17,9 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 
 ## Targets
 
-설정의 타깃은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. Codex CLI(`codexcli`)는 프로젝트 Skill만, Claude Code(`claudecode`)는 루트 Rule을 제외하고 Command를 활성화합니다. Copilot과 Antigravity IDE·CLI도 Command를 활성화합니다. Command 원본은 `.rulesync/commands/*.md`이고, Copilot은 `.github/prompts/`, Claude Code는 `.claude/commands/`, Antigravity는 `.agents/skills/`에 출력합니다. Codex CLI의 Command는 전역 모드 전용이며, Copilot CLI·Android Studio는 Command 생성을 지원하지 않습니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Claude Code·Gemini CLI의 루트 진입점은 `mise run update`가 로컬에서만 생성하며 공통 [AGENTS.md](../../../AGENTS.md)를 참조합니다. 해당 파일이 이미 있으면 덮어쓰지 않습니다. 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
+설정 타깃은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 프로젝트 Command는 Copilot·Claude Code·Antigravity IDE/CLI에 활성화합니다. 원본은 `.rulesync/commands/*.md`이고, Copilot은 `.github/prompts/`, Claude Code는 `.claude/commands/`, Antigravity는 `.agents/skills/`에 출력합니다. Codex CLI의 Command는 전역 모드만 지원하고 Copilot CLI·Android Studio는 Command를 지원하지 않으므로 활성화하지 않습니다.
+
+Codex CLI는 프로젝트 Skill만, Claude Code는 루트 Rule을 제외합니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Claude Code·Gemini CLI의 루트 진입점은 `mise run update`가 로컬에서만 생성하며 공통 [AGENTS.md](../../../AGENTS.md)를 참조합니다. 기존 파일은 덮어쓰지 않습니다. 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
 
 ## Lifecycle
 
