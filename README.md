@@ -18,7 +18,7 @@ mise run example
 
 **의존성 재현성:** `package-lock.json`과 `rulesync.lock`을 Git에 고정했습니다. 일반적인 부트스트랩은 두 잠금을 **변경하지 않으며**, 잠금 갱신은 [선택형 Agent Asset 가이드](docs/development/tooling/agent-assets.md)에 따라 별도 검토합니다. GitHub CI와 실제 로컬 초기화 결과는 구분합니다.
 
-mise CLI가 먼저 설치되어 있어야 합니다. [부트스트랩](mise-tasks/bootstrap)은 Node.js·Biome·rumdl·Rulesync·Lefthook, 잠금된 npm 및 외부 Skill 의존성을 준비하고 `.gitmessage`를 **이 저장소에만** 등록합니다. 기존 클론은 `mise run update`로 잠금된 환경과 훅을 재동기화합니다. 잠금이나 도구 버전을 조용히 갱신하지 않습니다.
+mise CLI가 먼저 설치되어 있어야 합니다. [부트스트랩](mise-tasks/bootstrap)은 Node.js·Biome·rumdl·Rulesync·Lefthook, 잠금된 npm 및 외부 Skill 의존성을 준비하고 `.gitmessage`를 **이 저장소에만** 등록합니다. 기존 클론은 `mise run update`로 잠금된 환경과 훅을 재동기화합니다. Claude Code·Gemini CLI용 진입점은 로컬에서만 생성하고 Git에는 저장하지 않습니다. 잠금이나 도구 버전을 조용히 갱신하지 않습니다.
 
 예제는 `examples/lighthouse/game.yaml`과 `examples/lighthouse/main.ts`에 있으며, 조건부 선택지와 무작위 경로가 포함된 짧은 항해를 정의합니다.
 

@@ -21,4 +21,18 @@ mise run rulesync:install
 npm ci
 lefthook install
 mise run rulesync:generate
+
+# 벤더 전용 루트 진입점은 Git에 보존하지 않고 로컬에서만 준비합니다.
+# 기존 개인 설정·심볼릭 링크는 덮어쓰지 않습니다.
+for entry in CLAUDE.md GEMINI.md; do
+  if [[ ! -e "$entry" && ! -L "$entry" ]]; then
+    cat > "$entry" <<'EOF'
+# Local Agent Entry
+
+Read [AGENTS.md](AGENTS.md) first. Choose only relevant Rules and Skills via
+[ROUTE](.agents/route/ROUTE.md) and project instructions via
+[Development](docs/development/README.md).
+EOF
+  fi
+done
 echo "개발 환경·하네스 동기화 완료. 검사: mise run check"
