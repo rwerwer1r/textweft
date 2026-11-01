@@ -20,6 +20,7 @@ coverage/
 /.github/instructions/
 /.github/agents/
 /.github/skills/
+/.github/prompts/
 # .agents/ 디렉터리는 Git에서 유지하고 내부 Rulesync 생성물만 제외
 /.agents/rules/*
 !/.agents/rules/.gitkeep
@@ -27,6 +28,8 @@ coverage/
 !/.agents/agents/.gitkeep
 /.agents/skills/*
 !/.agents/skills/.gitkeep
+/.agents/commands/*
+!/.agents/commands/.gitkeep
 
 # rumdl 검사 캐시
 /.rumdl_cache/

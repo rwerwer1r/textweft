@@ -8,14 +8,15 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 | --- | --- |
 | [AGENTS.md](../../../AGENTS.md)·[CHATBOT.md](../../../CHATBOT.md) | Git 추적 공통 진입점, 자동 생성·덮어쓰기 금지 |
 | `CLAUDE.md`·`GEMINI.md` | Git에서 제외하는 로컬 진입점; `mise run update`가 없을 때만 만들며 기존 파일은 보존 |
-| [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md) | Rule·Skill 원본 |
+| [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md)·`.rulesync/commands/` | Rule·Skill·Command 원본 (Command는 아직 정의 없음) |
 | [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 네 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
 | [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
-| `.github/instructions/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
+| `.github/instructions/`·`.github/prompts/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
+| `.agents/commands/` | Git에서 디렉터리만 보존 (`.gitkeep`); 현재 타깃의 Command 실제 출력 경로는 아님 |
 
 ## Targets
 
-설정의 타깃은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. Codex CLI(`codexcli`)는 Skill만, Claude Code(`claudecode`)는 루트 Rule을 제외합니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Claude Code·Gemini CLI의 루트 진입점은 `mise run update`가 로컬에서만 생성하며 공통 [AGENTS.md](../../../AGENTS.md)를 참조합니다. 해당 파일이 이미 있으면 덮어쓰지 않습니다. 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
+설정의 타깃은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. Codex CLI(`codexcli`)는 프로젝트 Skill만, Claude Code(`claudecode`)는 루트 Rule을 제외하고 Command를 활성화합니다. Copilot과 Antigravity IDE·CLI도 Command를 활성화합니다. Command 원본은 `.rulesync/commands/*.md`이고, Copilot은 `.github/prompts/`, Claude Code는 `.claude/commands/`, Antigravity는 `.agents/skills/`에 출력합니다. Codex CLI의 Command는 전역 모드 전용이며, Copilot CLI·Android Studio는 Command 생성을 지원하지 않습니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Claude Code·Gemini CLI의 루트 진입점은 `mise run update`가 로컬에서만 생성하며 공통 [AGENTS.md](../../../AGENTS.md)를 참조합니다. 해당 파일이 이미 있으면 덮어쓰지 않습니다. 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
 
 ## Lifecycle
 
