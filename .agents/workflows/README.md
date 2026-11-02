@@ -2,6 +2,17 @@
 
 이 디렉터리는 **프로젝트 업무 흐름**의 Git 추적 정본입니다. 에이전트 역할이나 권한을 정의하지 않습니다. 공통 권한·승인은 [AGENTS.md](../../AGENTS.md), 요청 단계는 [Workflow Selection](../../docs/development/workflows/choosing.md), 일상 작업 최소 기준은 [Routine Loop](../../docs/development/workflows/routine-loop.md)가 소유합니다.
 
+## Standard Execution: RPI(R)
+
+프로젝트의 기본 실행 방법은 **Research → Plan → Implementation → Review**입니다. 조사·계획의 근거가 구현에 선행하고, Review에서 수용 조건과 실제 결과를 대조해 필요한 최초 단계로 돌아갑니다. 복합·반복 작업의 실행 예산, 재개·종료 처리는 기존 `mols-loops` Skill과 [Inbox](../../.inbox/README.md)를 활용하고, 별도 범용 루프를 만들지 않습니다.
+
+- **Research:** 현재 ref의 계약·코드·테스트·실패 증거와 중요한 미확인을 확인합니다.
+- **Plan:** 범위·비목표·관찰 가능한 수용 조건·작업 순서·검증 방법을 정합니다. 중요한 결정은 사람의 승인 경계를 따릅니다.
+- **Implementation:** 유효한 계획 범위의 작업만 수행합니다. **관찰 가능한 소프트웨어 동작을 변경할 때는 반드시 [Delivery](delivery/WORKFLOW.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 따릅니다.**
+- **Review:** 결과·검증 근거·회귀·남은 위험을 평가합니다. 증거 또는 명세가 부족하면 해당 선행 단계부터 다시 수행하며, 통과했다고 추측하지 않습니다.
+
+조사 자체가 요청 결과라면 Research → Review, 계획까지가 결과라면 Research → Plan → Review에서 종료할 수 있습니다. 작고 명확한 작업은 각 단계를 짧게 수행하되 **순서를 소급해 맞추거나 필수 검증을 생략하지 않습니다.** RPI는 작업 방법이지 구현·병합·배포 권한이 아닙니다.
+
 ## Select by Outcome
 
 사용자의 의도와 허용 범위에 해당하는 **주 Workflow 하나**를 선택하고 해당 `WORKFLOW.md`만 읽습니다. 필요한 경우에만 다른 Workflow를 보조로 호출합니다.
