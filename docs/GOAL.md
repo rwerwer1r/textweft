@@ -18,15 +18,7 @@
 
 이 범위의 구체적인 설계·수용 조건은 [Engine Design Research](architecture/engine-research.md)에서 검토한다. 현재 코드가 이 목표를 모두 구현했다는 뜻은 아니다.
 
-## Product Principles
-
-- **Vibe-coder-first:** 자연어 → 게임 정의 → 실행 → 오류 수정의 반복을 쉽게 한다.
-- **Data-first:** 설명·검증 가능한 콘텐츠를 우선하고, 필요한 게임별 규칙만 명시적으로 확장한다.
-- **Headless core:** 게임 상태·규칙과 화면 표시·입출력·호스팅을 분리한다.
-- **Reliable progress:** 약속한 범위에서 결정적인 상태 전이, 실패 시 원자성, 저장·복원을 검증한다.
-- **Small and reusable:** 특정 장르에 종속되지 않는 가장 작은 검증 가능한 계약을 우선한다.
-
-AI가 생성한 게임 정의와 코드도 테스트·실행 근거로 검증한다. 예제 게임은 프레임워크의 사용성·재사용성을 확인하기 위한 수단이다.
+제품·설계·개발 판단 기준은 [Principles](PRINCIPLES.md)를 따른다.
 
 ## Deferred Capabilities
 
@@ -37,6 +29,7 @@ AI 모델의 런타임 필수화, 범용 3D 엔진, 내장 비주얼 에디터·
 ## Document Ownership
 
 - **이 문서:** 제품 목적, 사용자 경험, 현재·미래 범위
+- **[Principles](PRINCIPLES.md):** 제품·설계·개발 판단 원칙
 - **[Architecture Decision](architecture.md):** Rust 코어 등 채택된 기술 결정
 - **[Engine Design Research](architecture/engine-research.md):** 미확정 초기 엔진 설계와 수용 조건
 - **[Development Guide](development/README.md):** P0 → P1 → P2 작업 순서·검증
