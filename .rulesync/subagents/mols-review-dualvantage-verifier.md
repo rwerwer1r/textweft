@@ -25,14 +25,14 @@ copilot:
     - read
     - search
     - execute
-  disable-model-invocation: true
+  disable-model-invocation: false
   user-invocable: false
 copilotcli:
   tools:
     - read
     - search
     - execute
-  disable-model-invocation: true
+  disable-model-invocation: false
   user-invocable: false
 antigravity-ide:
   tools:
