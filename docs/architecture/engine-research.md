@@ -141,7 +141,7 @@ ComfyUI 공식 예제는 HTTP `/prompt`로 요청을 큐에 넣고 WebSocket으�
 - [wasm-bindgen Guide](https://wasm-bindgen.github.io/wasm-bindgen/) — Rust/JavaScript 바인딩 및 TypeScript 선언 생성.
 - [PixiJS Textures](https://pixijs.com/8.x/guides/components/textures) · [Render Layers](https://pixijs.com/8.x/guides/concepts/render-layers) · [Filters](https://pixijs.com/8.x/guides/components/filters) — 2D 이미지·레이어·시각 효과.
 - [Spine Pixi Runtime](https://esotericsoftware.com/spine-pixi) — 스켈레탈 애니메이션 연동 및 별도 런타임 라이선스 확인.
-- [ComfyUI 공식 WebSocket API 예제](https://github.com/comfyanonymous/ComfyUI/blob/master/script_examples/websockets_api_example.py) — 작업 큐·진행 알림·결과 조회 구조.
+- [ComfyUI 공식 WebSocket API 예제](https://github.com/comfyorg/comfyui/blob/master/script_examples/websockets_api_example.py) — 작업 큐·진행 알림·결과 조회 구조.
 - [MDN Media Autoplay](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay) · [HTMLVideoElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLVideoElement) — 브라우저 미디어 자동재생·포맷 차이.
 
 이 문서는 **설계 조사 및 제안**이다. 확정된 코어 언어와 새 제품 요구를 제외하고, 구현 세부 및 MVP 범위는 후속 P1 결정 사항이다.
