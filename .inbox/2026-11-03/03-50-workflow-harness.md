@@ -1,14 +1,15 @@
 ---
-description: 프로젝트 운영 Workflow 개선 작업의 기준·검증·복구 상태
-updated: 2026-11-03T04:18:27+09:00
+description: 프로젝트 운영 Workflow 개선 결과와 검증·인계 상태
+updated: 2026-11-03T04:27:17+09:00
 ---
 
 # Workflow Harness Improvement
 
-- **Goal:** 개발·리뷰·조사·하네스 개선·평가·실패 복구·세션 재개·병합 준비를 목표 기반으로 선택하고 안전하게 끝내는 프로젝트 Workflow 체계를 수립한다.
-- **Scope:** 오직 `rwerwer1r/textweft`, `feat/workflow-harness-20261103`; `main` 기준 `2332139b0cabe80931cd2d20f5fc0c8f77e1b15f`. `.agents/workflows/`, 선택 라우팅과 lint 연결, 관련 개발 문서·검증 근거만 다룬다. PR #9의 Agent 파일이나 별도 계정·저장소는 변경하지 않는다.
-- **Acceptance:** 각 Workflow는 구체적인 진입/제외 조건, 최소 단계, 근거/완료/중단 경계를 가진다. 기존 승인·인박스·Rulesync·CI 정본을 복제하지 않는다. Markdown 링크·CI 검증과 실제 런타임 행동 미검증을 구분한다.
-- **Method:** Research → Plan → Work → Review를 실질적 Finding이 남아 있는 동안 반복하며, 기존 `mols-loops`는 상위 개선 루프에만 사용. 새 전용 실행 엔진은 도입하지 않는다.
-- **State:** active. 기준 저장소·연결·ref·진입 규칙·기존 CI·PR #9를 확인했다. 구현·변경 후 테스트는 미실행.
-- **Risks:** 작업 파일 자체는 코딩 에이전트의 네이티브 자동 발견을 보장하지 않는다. 전역 정책은 AGENTS.md, 병합 승인과 실제 적용·호출 제한은 현재 런타임의 필수 정책이 우선한다.
-- **Next:** 9개 역할별 Workflow의 정본과 라우터를 작성, 기존 문서에 연결, 변경 diff 자체 리뷰, CI 확인, PR 인계. 병합은 별도 승인 후에만 진행한다.
+- **Goal:** 개발·리뷰·조사·하네스 자기개선·평가·복구·세션 재개·병합 게이트의 프로젝트 Workflow를 하나의 진입점으로 선택하고 안전하게 수행하도록 구성.
+- **Scope:** `rwerwer1r/textweft`, 브랜치 `feat/workflow-harness-20261103`, PR #10. 기존 PR #9의 Agent 파일이나 외부 계정·저장소에는 쓰기 없음. 병합·배포·권한 변경 제외.
+- **State:** handoff. `.agents/workflows/`에 9개 독립 Workflow, 14개 평가 사례, 라우팅 README를 추가했다. AGENTS·개발 문서·mise Markdown 검사 범위를 연결했다.
+- **Review loops:** 첫 설계의 범위·권한과 기존 정본 중복을 자체 검토. 1차 실질 Finding은 승인 없는 병합 사례의 모호한 입력으로 교정. 2차 Finding은 평가 사례의 기대 Workflow가 명시되지 않은 점으로, 라우팅 기대 경로 열과 평가 전용 near-miss를 추가. 3차 정적 검사에서 9개 문서의 필수 섹션과 상대 링크, 주요 근거를 확인했다. 독립된 두 번째 에이전트 리뷰는 수행하지 않았다.
+- **Evidence:** PR HEAD `4810bf0c6980659ee9c6709177fd836b01eb6b16`의 CI `41509843339` 성공. 해당 커밋의 Bootstrap/Update 반복·`mise run check` 검사 성공. 현 인계 기록 갱신 커밋의 CI는 별도로 확인해야 한다.
+- **Limitations:** 실제 Autopilot 직접 선택, Subagent의 위임 거절, 실행 시 Workflow 라우팅·독립 리뷰의 행동 평가는 미실행. 그 평가 시나리오는 아직 테스트 계획이며 성공 근거가 아님. `main` 보호 규칙은 강제 적용으로 확인되지 않았다.
+- **Integration risk:** PR #9와 본 PR이 모두 `docs/development/README.md`·`mise.toml`을 수정하므로 하나를 병합한 뒤 다른 PR의 최신 diff·CI·충돌 여부를 반드시 재확인한다.
+- **Next:** 이 문서의 최신 HEAD CI 확인, 해당 Agent 런타임에서 영향 있는 시나리오를 실제 실행·기록, 필요하면 남은 Finding만 좁게 수정. 병합은 사람의 명시적 승인 후 현재 ref·CI·권한을 다시 확인하고 진행한다.
