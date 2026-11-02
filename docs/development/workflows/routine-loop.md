@@ -1,13 +1,12 @@
 # Routine Working Loop
 
-**확인 → 최소 변경 → 검증 → 자체 리뷰 → PR/인계**를 수행하고 필요할 때만 반복합니다. 작은 작업에 형식적 계획을 강제하지 않습니다. 전문 업무 흐름은 [Project Workflows](../../../.agents/workflows/README.md)에서 선택하며 이 일상 루프의 절차를 재구현하지 않습니다. 요청 단계는 [Workflow Selection](choosing.md), AI 협업·저작 경험은 [Vibe Coding](vibe-coding.md)이 소유합니다.
+프로젝트 표준은 [RPI(R)](../../../.agents/workflows/README.md#standard-execution-rpir)입니다. **Research → Plan → Implementation → Review**로 진행하며, 코드·동작 변경의 Implementation 순서는 [Delivery](../../../.agents/workflows/delivery/WORKFLOW.md)가 소유합니다. 이 문서는 공통 확인·검증·인계만 정의하며 별도 순서로 우회하지 않습니다. 요청 단계의 권한은 [Workflow Selection](choosing.md), AI 협업은 [Vibe Coding](vibe-coding.md)을 따릅니다.
 
-## Work
+## Common Checks and Handoff
 
-1. **확인:** 저장소·계정·ref·권한·[AGENTS.md](../../../AGENTS.md), 필요한 [Rule·Skill](../../../.agents/route/ROUTE.md) 및 관련 코드·테스트·기존 PR만 읽습니다.
-2. **변경:** 수용 조건을 정하고 작은 diff를 작업 브랜치에 구현합니다. 중요한 제품·보안 결정은 사람에게 맡깁니다.
-3. **검증:** [mise 작업](../README.md#checks) 중 해당 항목을 실행합니다. 전체는 `mise run check`, 작은 문서 변경은 `mise run lint:md`처럼 범위를 줄입니다. 커밋 시 [Lefthook](../../../lefthook.yml)은 관련 스테이징 파일만 빠르게 검사하므로 전체 검증을 대체하지 않습니다. **실제 실행/CI/정적 확인/미실행**을 구분합니다.
-4. **리뷰:** 계약 위반·회귀·보안·문서·검사 누락을 자체 점검하고 필요하면 수정·재검증합니다.
-5. **인계:** PR에 의도·변경·근거·미확인 위험·사람의 결정 사항을 적습니다. **병합은 별도 승인**입니다.
+1. **시작:** 현재 저장소·계정·ref·권한·[AGENTS.md](../../../AGENTS.md)와 필요한 [Rule·Skill](../../../.agents/route/ROUTE.md), 기존 PR·코드·테스트를 확인합니다.
+2. **범위:** 수용 조건과 검증 방법을 정하고 작은 작업 단위를 유지합니다. 중요한 제품·보안 결정은 사람에게 맡깁니다.
+3. **검증:** [mise 작업](../README.md#checks) 중 관련 검사를 실행합니다. 전체는 `mise run check`, 작은 문서 변경은 `mise run lint:md` 등으로 범위를 줄입니다. [Lefthook](../../../lefthook.yml)은 관련 스테이징 파일만 검사하므로 전체 검증을 대체하지 않습니다. **실제 실행/CI/정적 확인/미실행**을 구분합니다.
+4. **리뷰·인계:** 계약 위반·회귀·보안·명세와 테스트의 불일치를 자체 리뷰하고, 결과·검증 증거·위험·필요한 결정을 PR에 남깁니다. **병합은 별도 승인**입니다.
 
 복잡한 다단계 작업만 첫 의미 있는 상태 이후 다음 긴/위험한 단계 **전에** [Inbox](../../../.inbox/README.md)에 체크포인트를 원격 보존·재조회합니다. 도구 호출마다 기록하지 않습니다.
