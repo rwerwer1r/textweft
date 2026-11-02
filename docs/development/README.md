@@ -20,7 +20,7 @@
 | --- | --- |
 | 게임 런타임·API·예제 | [README](../../README.md) 및 관련 코드·테스트 |
 | 코어 구현 언어·엔진 아키텍처 결정 | [Rust Core Decision](../architecture.md) |
-| 멀티미디어·2D 연출·MOD 엔진 설계 조사 | [Engine Architecture Research](../architecture/engine-research.md) |
+| 텍스트·정적 이미지 중심 초기 엔진 설계 | [Engine Architecture Research](../architecture/engine-research.md) |
 | 제품 목표·역할·문서 언어 | [GOAL](../GOAL.md) · [GLOSSARY](../GLOSSARY.md) · [LANGUAGE](../LANGUAGE.md) 중 필요한 것 |
 | 준비·구현·리뷰·병합 단계 판단 | [Workflow Selection](workflows/choosing.md) |
 | 실제 변경·검증·리뷰 | [Routine Loop](workflows/routine-loop.md) |
