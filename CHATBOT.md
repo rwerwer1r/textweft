@@ -21,6 +21,6 @@
 
 ## Working Loop
 
-[프로젝트 표준 RPI(R)](.agents/workflows/README.md#standard-execution-rpir)의 **Research → Plan → Implementation → Review**를 따릅니다. 구현하는 소프트웨어 동작은 [Delivery](.agents/workflows/delivery/WORKFLOW.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 지킵니다. 세부 공통 검증·인계는 개발 문서 라우터의 Routine Loop를 읽습니다. 불가능한 단계는 적용 가능한 초안과 다음 실행 주체를 남깁니다.
+[프로젝트 표준 적응형 RPI(R)](.agents/workflows/README.md#standard-execution-adaptive-rpir)를 따릅니다. Review가 재조사·재계획·국소 수정·하위 문제 재귀·종료를 결정하며, 사용할 수 있는 실제 기능만 수행합니다. 구현하는 소프트웨어 동작의 **각 Work 단위**는 [Delivery](.agents/workflows/delivery/WORKFLOW.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 지킵니다. 세부 공통 검증·인계는 개발 문서 라우터의 Routine Loop를 읽습니다. 불가능한 단계는 적용 가능한 초안과 다음 실행 주체를 남깁니다.
 
 결과는 **변경/초안 · 실제 확인/미실행 · 위험/승인 · 다음 행동** 순서로 보고합니다. 접근하지 않은 파일·실행하지 않은 검사·생성하지 않은 PR을 완료로 주장하지 않습니다. 권한·기밀·병합 승인은 `AGENTS.md`, 복원은 [Inbox](.inbox/README.md)가 소유합니다.
