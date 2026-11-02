@@ -2,7 +2,7 @@
 
 **Textweft는 게임 자체를 만드는 프로젝트가 아니라, 다른 개발자와 창작자가 게임을 만들 수 있도록 돕는 프레임워크를 만드는 프로젝트입니다.**
 
-목표 산출물은 특정 게임이나 완성된 이야기 콘텐츠가 아닌, **서사·선택 중심의 웹 게임을 다양하게 제작할 수 있는 엔진·콘텐츠 저작 계약·확장 인터페이스**입니다. 텍스트 전용 게임도 가능해야 하지만 이미지·오디오·동영상과 **이미지 파츠를 본(Bone)에 연결하고 움직이는 Spine 계열 2D 스켈레탈 컷아웃 애니메이션**을 사용하는 게임으로 확장할 수 있어야 합니다. 게임 규칙과 실행·표시 환경은 분리합니다.
+목표 산출물은 특정 게임이나 완성된 이야기 콘텐츠가 아닌, **서사·선택 중심의 웹 게임을 다양하게 제작할 수 있는 엔진·콘텐츠 저작 계약·확장 인터페이스**입니다. **현재 집중 범위는 텍스트와 정적 이미지를 함께 사용하는 웹 게임**입니다. 그 외의 표현 기능은 장래 가능성으로 남기되 지금 구체화하지 않습니다. 게임 규칙과 실행·표시 환경은 분리합니다.
 
 **프레임워크의 주 사용자(게임 개발자)는 바이브코더(vibe coder)**, 즉 자연어로 게임의 의도·규칙을 설명하고 AI 코딩 도구와 협업해 게임을 제작하는 사람입니다. **Textweft 자체도 프레임워크 개발자가 바이브코딩 방식으로 개발**합니다. AI가 구현과 검증을 주도하되, 프레임워크 개발자가 제품 방향과 중요한 의사결정을 책임집니다.
 
@@ -12,23 +12,23 @@
 
 ## Goal
 
-프레임워크 사용자(게임 개발자)는 장면·선택지·게임 규칙과 미디어 에셋의 참조를 정의하고, 필요하면 공개 확장 API로 게임별 로직을 추가할 수 있어야 합니다. **게임 실행 코어의 구현 언어는 Rust**이며, 코어는 렌더러에 의존하지 않고 웹앱을 중심으로 CLI·별도 인터페이스에서도 재사용할 수 있도록 설계합니다. TypeScript 웹 계층·WebAssembly 연결은 우선 설계 방향이며 구체적인 선택은 후속 설계에서 결정합니다.
+프레임워크 사용자(게임 개발자)는 장면·선택지·게임 규칙과 정적 이미지 에셋의 참조를 정의하고, 필요하면 공개 확장 API로 게임별 로직을 추가할 수 있어야 합니다. **게임 실행 코어의 구현 언어는 Rust**이며, 코어는 렌더러에 의존하지 않고 웹앱을 중심으로 CLI·별도 인터페이스에서도 재사용할 수 있도록 설계합니다. TypeScript 웹 계층·WebAssembly 연결은 우선 설계 방향이며 구체적인 선택은 후속 설계에서 결정합니다.
 
 바이브코더는 엔진 내부를 깊게 이해하지 않아도 **자연어 요구 → 게임 정의 생성 → 실행 → 오류 수정 → 확장**을 반복할 수 있어야 합니다. 공개 API·스키마·타입·오류·예제는 AI와 사람이 함께 이해하고 수정하기 쉽게 제공합니다.
 
 **예제 게임은 프레임워크의 사용법과 동작을 검증하기 위한 수단이며, Textweft의 최종 제품이 아닙니다.**
 
 ```text
-Game definitions + media assets + optional extensions / mods
+Game definition + text + static image references
                          |
                   Rust headless core
                 rules · state · transitions
                          |
-             view + presentation signals
+                renderer-neutral view
                          |
-                platform adapter / SDK
+                 platform adapter
                          |
-     Web player (text · images · audio · video · 2D)
+              Web player (text + image)
 ```
 
 작성 경험은 단순해야 하지만, 잘못된 선택·훅 오류·재개 과정에서 게임 상태가 조용히 손상되어서는 안 됩니다.
@@ -57,21 +57,18 @@ Game definitions + media assets + optional extensions / mods
 
 서로 다른 게임 제작 사례로 재사용성을 검증하고, 예제 게임의 완성도보다 프레임워크의 이해 가능성·검증 가능성·확장성을 우선합니다. **AI 생성 코드도 테스트와 재현 가능한 검증을 거쳐야 합니다.**
 
-### 6. Multimedia presentation and optional modding
+### 6. Text and static image presentation
 
-게임 개발자는 필요에 따라 정적 이미지 또는 ComfyUI 같은 외부 생성 API의 이미지, SFX, BGM, 동영상을 사용할 수 있어야 합니다. 2D 연출의 핵심 참고 수준은 **Spine 계열의 2D 스켈레탈 컷아웃 애니메이션**입니다. 캐릭터의 머리·몸통·팔·다리 등 이미지 파츠를 본(Bone) 계층·슬롯/부착 이미지로 조립하고, 이동·회전·크기·겹침 순서·키프레임으로 움직일 수 있어야 합니다. 배경도 여러 이미지 레이어를 조립하고 움직일 수 있어야 합니다. **Darkest Dungeon은 원하는 결과의 참고 사례**이며 특정 상용 도구, 동일한 아트 품질, 3D·고급 물리 효과를 의무화하지 않습니다. 메시 변형·복잡한 IK 등의 고급 기능은 필요에 따라 확장합니다.
+**우선 목표는 텍스트와 정적 이미지만으로 게임 하나를 브라우저에서 끝까지 플레이할 수 있는 프레임워크**입니다. 게임 제작자가 이미지 없이 텍스트만 쓰거나, 장면·인물·배경의 정적 이미지를 선택적으로 표시할 수 있어야 합니다. 이미지 파일과 게임 진행 데이터는 구분하며, 화면 표현이 Rust 코어에 종속되지 않도록 합니다.
 
-MOD 지원 여부는 **게임별 opt-in**입니다. MOD를 제공하지 않는 게임도 정상적으로 만들어져야 하고, MOD를 제공하는 게임은 허용된 콘텐츠·에셋·규칙 확장점, 충돌·호환성·저장 상태를 명시적으로 다룰 수 있어야 합니다. 특히 **일러스트레이터가 프로그래밍 없이 이미지 파츠·배경·본/슬롯·애니메이션·스킨을 저작 도구로 만들고 게임/MOD에 가져올 수 있는 에셋 중심 경로**를 설계 대상으로 삼습니다. 외부 코드 실행은 별도 신뢰·권한 정책 없이 기본 허용하지 않습니다.
-
-이 항목들은 **장기 제품 능력 요구**입니다. 각각의 MVP 포함 여부·완료 기준 및 구체적인 기술 선택은 P1에서 확정합니다. [Engine Architecture Research](architecture/engine-research.md)에서 검토 근거와 경계를 관리합니다.
+효과음·BGM·동영상·ComfyUI 연동·Spine 계열 2D 스켈레탈 애니메이션·게임별 선택적 MOD 지원은 **후속 검토 후보**로만 보존합니다. 지원 확정, 라이브러리 채택, 스키마·API·보안 정책, MVP 포함 여부를 지금 정하지 않습니다. [Engine Architecture Research](architecture/engine-research.md)는 현재 집중 범위의 설계 근거를 관리합니다.
 
 ## Product Principles
 
 - **Genre-agnostic:** 특정 세계관·전투·인벤토리 모델을 엔진의 필수 전제로 만들지 않습니다.
 - **Data-first:** 설명 가능한 선언형 콘텐츠를 우선하고, 필요한 복잡성만 명시적 코드 훅으로 분리합니다.
 - **Headless by default:** Rust 게임 코어는 게임 규칙과 화면 표현·입출력·호스팅을 구분합니다.
-- **Multimedia-capable:** 텍스트 전용을 유지하면서 게임별 선택에 따라 정적/생성 이미지, SFX/BGM, 동영상과 본 계층·이미지 파츠·스킨·키프레임을 활용하는 2D 스켈레탈 컷아웃 애니메이션을 구현할 수 있도록 합니다. 고급 메시 변형·물리 기능은 선택형 확장입니다.
-- **Opt-in modding:** MOD 활성화와 확장·배포·신뢰 범위는 게임 개발자가 선택합니다. 에셋·스켈레탈 애니메이션·스킨 MOD에는 일러스트레이터가 전문 프로그래밍 없이 사용할 수 있는 제작·가져오기 경로를 우선합니다.
+- **Text-and-image first:** 텍스트·정적 이미지의 저작·로드·표시·게임 진행을 먼저 검증합니다. 다른 미디어·MOD의 계약은 필요해질 때 설계합니다.
 - **Deterministic where promised:** 시드 난수와 상태 전이의 재현성·원자성을 명시된 경계에서 지킵니다.
 - **Portable state:** 실행 중 상태와 저장 가능한 상태의 의미를 안정적으로 설명합니다.
 - **Small and testable:** 기능의 폭보다 계약의 일관성, 예측 가능한 실패, 유지보수 비용을 우선합니다.
@@ -97,4 +94,4 @@ MOD 지원 여부는 **게임별 opt-in**입니다. MOD를 제공하지 않는 �
 
 ## Document Boundaries
 
-이 문서는 **왜 이 프레임워크가 존재하고 어떤 품질을 지향하는가**를 소유합니다. 구체적인 Rust 코어 결정은 [Architecture Decision](architecture.md), 멀티미디어·MOD 설계 조사는 [Engine Architecture Research](architecture/engine-research.md)를 참조합니다. 개발 방식은 [Vibe Coding Workflow](development/workflows/vibe-coding.md)에서 정의합니다. `README.md`는 현재 기능과 시작 방법, [Development Guide](development/README.md)는 작업·검증 절차, [Language](LANGUAGE.md)는 문서 언어 기준을 소유합니다. 구현 결정과 실제 동작의 근거는 소스·테스트·Git 이력에서 확인합니다.
+이 문서는 **왜 이 프레임워크가 존재하고 어떤 품질을 지향하는가**를 소유합니다. 구체적인 Rust 코어 결정은 [Architecture Decision](architecture.md), 텍스트·정적 이미지 중심 초기 범위의 설계 조사는 [Engine Architecture Research](architecture/engine-research.md)를 참조합니다. 개발 방식은 [Vibe Coding Workflow](development/workflows/vibe-coding.md)에서 정의합니다. `README.md`는 현재 기능과 시작 방법, [Development Guide](development/README.md)는 작업·검증 절차, [Language](LANGUAGE.md)는 문서 언어 기준을 소유합니다. 구현 결정과 실제 동작의 근거는 소스·테스트·Git 이력에서 확인합니다.
