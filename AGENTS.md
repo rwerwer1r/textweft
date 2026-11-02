@@ -19,7 +19,7 @@
 
 1. 현재 ref의 이 파일과 대상 경로의 하위 `AGENTS.md`를 확인합니다. **제한된 챗봇만** [CHATBOT.md](CHATBOT.md)를 사용합니다. 코딩 에이전트는 도구별 진입점을 따릅니다.
 2. [ROUTE](.agents/route/ROUTE.md)에서 Rule·Skill의 **선택 조건**을 확인하고 관련 원본만 읽습니다. 빈/무관한 색인을 추가 로드하지 않습니다.
-3. 실행 흐름을 선택할 때는 [프로젝트 Workflow](.agents/workflows/README.md)의 관련 원본만 읽고, 문서·절차는 [개발 문서 라우터](docs/development/README.md)에서 선택합니다. 단순 작업에는 전체 지침을 읽지 않습니다.
+3. 목표·구현·검토·복구 등 작업 목적에 맞는 `workflow-*` 후보를 [Skill 라우터](.agents/route/ROUTE.md)에서 선택하고 해당 Skill 원본만 읽습니다. 문서·절차는 [개발 문서 라우터](docs/development/README.md)에서 필요할 때만 선택합니다.
 4. 제품 동작의 근거는 코드·테스트·[README](README.md)입니다. **실행/정적 확인/CI/미실행**을 구분하고 실제로 확인하지 않은 기능·리뷰를 주장하지 않습니다.
 5. 복잡한 다단계 작업은 다음 긴/위험한 단계 **전에** [인박스](.inbox/README.md)에 최소 상태를 원격 보존·재조회합니다. 재개 시 현재 ref·PR·diff·검사를 다시 확인합니다.
 

@@ -1,6 +1,6 @@
 # Routine Working Loop
 
-프로젝트의 복잡한 RPI 실행·재귀·재계획은 [mols-loops 의존성 연결](../../../.agents/workflows/README.md#execution-orchestration-mols-loops)이 담당합니다. 이 문서는 공통 확인·검증·인계만 소유하고, 동작 변경 Work에는 [Delivery](../../../.agents/workflows/delivery/WORKFLOW.md)의 테스트 우선 절차를 적용합니다. 요청 단계의 권한은 [Workflow Selection](choosing.md), AI 협업은 [Vibe Coding](vibe-coding.md)을 따릅니다.
+프로젝트의 복잡한 RPI 실행·재귀·재계획은 [mols-loops 의존성](../tooling/agent-assets.md)이 담당합니다. 이 문서는 공통 확인·검증·인계만 소유하고, 동작 변경 Work에는 [workflow-delivery](../../../.rulesync/skills/workflow-delivery/SKILL.md)의 테스트 우선 절차를 적용합니다. 요청 단계의 권한은 [Workflow Selection](choosing.md), AI 협업은 [Vibe Coding](vibe-coding.md)을 따릅니다.
 
 ## Common Checks and Handoff
 

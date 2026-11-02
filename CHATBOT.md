@@ -21,6 +21,6 @@
 
 ## Working Loop
 
-[프로젝트 Workflow](.agents/workflows/README.md#execution-orchestration-mols-loops)의 RPI 오케스트레이션은 설치·로드가 확인된 경우 **`mols-loops`** 원본을 사용합니다. 복잡한 재귀·루프를 런타임이 지원하지 않으면 미지원 범위를 밝히고 인계합니다. 소프트웨어 동작을 바꾸는 **각 Work 단위**는 [Delivery](.agents/workflows/delivery/WORKFLOW.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 따릅니다. 세부 공통 검증·인계는 개발 문서 라우터의 Routine Loop를 읽습니다. 불가능한 단계는 적용 가능한 초안과 다음 실행 주체를 남깁니다.
+[mols-loops 의존성](docs/development/tooling/agent-assets.md)의 RPI 오케스트레이션은 설치·로드가 확인된 경우 **`mols-loops`** 원본을 사용합니다. 복잡한 재귀·루프를 런타임이 지원하지 않으면 미지원 범위를 밝히고 인계합니다. 소프트웨어 동작을 바꾸는 **각 Work 단위**는 [workflow-delivery](.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 따릅니다. 세부 공통 검증·인계는 개발 문서 라우터의 Routine Loop를 읽습니다. 불가능한 단계는 적용 가능한 초안과 다음 실행 주체를 남깁니다.
 
 결과는 **변경/초안 · 실제 확인/미실행 · 위험/승인 · 다음 행동** 순서로 보고합니다. 접근하지 않은 파일·실행하지 않은 검사·생성하지 않은 PR을 완료로 주장하지 않습니다. 권한·기밀·병합 승인은 `AGENTS.md`, 복원은 [Inbox](.inbox/README.md)가 소유합니다.

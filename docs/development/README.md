@@ -23,7 +23,7 @@
 | 초기 게임 계약·수용 시나리오 | [Engine Design Research](../architecture/engine-research.md) |
 | 제품 목표·역할·문서 언어 | [GOAL](../GOAL.md) · [GLOSSARY](../GLOSSARY.md) · [LANGUAGE](../LANGUAGE.md) 중 필요한 것 |
 | 프로젝트 개발 철학·원칙 | [PRINCIPLES](../PRINCIPLES.md) |
-| 목표·리뷰·하네스 개선·장애 복구 등 실제 실행 흐름 | [Project Workflows](../../.agents/workflows/README.md) |
+| 목표·구현·리뷰·복구·재개 등 업무별 실행 Skill | [Workflow Skills](../../.rulesync/skills/README.md) · [ROUTE](../../.agents/route/ROUTE.md) |
 | 준비·구현·리뷰·병합 단계 판단 | [Workflow Selection](workflows/choosing.md) |
 | 실제 변경·검증·리뷰 | [Routine Loop](workflows/routine-loop.md) |
 | AI 주도 개발·바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
