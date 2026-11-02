@@ -15,6 +15,7 @@
 
 [`mols-review-dualvantage`](../../../.rulesync/subagents/mols-review-dualvantage.md)는 **필요할 때만 호출**하는 검토 전용 에이전트입니다. [Verifier](../../../.rulesync/subagents/mols-review-dualvantage-verifier.md)와 [Challenger](../../../.rulesync/subagents/mols-review-dualvantage-challenger.md)가 각각 현재 근거와 반례를 조사합니다. Root가 중복·반증을 판정하고 결과를 호출자에게 반환하며, 수정·병합·최종 승인은 소유하지 않습니다.
 
+- Copilot 계열에서는 리뷰 Agent 3개의 `user-invocable: false`로 사용자 선택을 숨기고, `disable-model-invocation: false`로 위임 호출을 허용합니다. **이 메타데이터만으로 특정 상위 Agent에서만 호출되는 권한을 네이티브하게 강제하지는 않습니다.** Root·Worker의 호출 범위는 본문 지침과 실제 실행 평가로 확인합니다.
 - 두 specialist는 서로의 결론을 초기에 전달받지 않아야 합니다. 각 호출에서 최대 1회씩, 합계 2회까지만 자동 호출합니다.
 - 실제 병렬·독립 실행은 런타임 기능과 실행 증거가 있을 때만 주장합니다.
 - [workflow-review](../../../.rulesync/skills/workflow-review/SKILL.md)가 리뷰 업무의 수용·검증 절차를 소유하며 DualVantage는 필요할 때 호출하는 전문 실행 단위입니다. Reviewer의 결론은 변경·승인·병합 권한을 만들지 않습니다.
