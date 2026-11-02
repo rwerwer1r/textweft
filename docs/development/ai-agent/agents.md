@@ -8,6 +8,7 @@
 
 - 다른 에이전트가 호출하여 권한을 확대하는 용도로 사용하지 않습니다. 위임 호출을 받았다면 작업을 수행하지 않습니다.
 - 자율성은 작업 선정과 조정에 관한 것이지 병합·배포·고위험 변경 승인이나 무기한 백그라운드 실행을 허가하지 않습니다.
+- **Agent는 실행 주체**, [workflow-autopilot](../../../.rulesync/skills/workflow-autopilot/SKILL.md)은 프로젝트의 선택형 작업 절차입니다. 작업 의미에 맞는 Skill을 로드해도 Agent의 직접 선택 제한이나 `AGENTS.md` 권한은 바뀌지 않습니다.
 - 선택할 가치가 있는 일이 없거나 필수 승인·검사가 막힌 경우 중단 또는 인계할 수 있습니다.
 
 ## Delegated Review
@@ -16,6 +17,7 @@
 
 - 두 specialist는 서로의 결론을 초기에 전달받지 않아야 합니다. 각 호출에서 최대 1회씩, 합계 2회까지만 자동 호출합니다.
 - 실제 병렬·독립 실행은 런타임 기능과 실행 증거가 있을 때만 주장합니다.
+- [workflow-review](../../../.rulesync/skills/workflow-review/SKILL.md)가 리뷰 업무의 수용·검증 절차를 소유하며 DualVantage는 필요할 때 호출하는 전문 실행 단위입니다. Reviewer의 결론은 변경·승인·병합 권한을 만들지 않습니다.
 - 일반적인 작은 변경에는 [기존 자체 리뷰](../workflows/routine-loop.md)만으로 충분할 수 있습니다. 중요한 변경에서 독립 리뷰가 필요한지는 위험과 비용으로 판단합니다.
 
 ## Runtime and Provenance
