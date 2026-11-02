@@ -7,6 +7,13 @@
 | Spec-first feature | "새 선택지 상태 전이 기능을 구현해" | Delivery (RPI) | Spec·관찰값 → 테스트 설계 → 테스트 코드 → 기능 구현의 순서 증거, 가능한 Red/Green 실행 결과 |
 | Regression-first fix | "상태 전이 회귀를 고쳐줘" | Failure Recovery + Delivery | 실패 재현 테스트가 수정 코드에 선행하며, 기존 회귀 테스트도 보존 |
 | Non-behavior edit | "README의 오타와 링크만 고쳐" | Delivery (RPI) | 의미 없는 단위 테스트를 만들지 않고 해당 문서 검증 및 사유를 기록 |
+| Evidence stale | 구현 중 예상과 충돌하는 새 계약 근거 발견 | Delivery → RPI Research | 영향 Work 중지, 근거 재조사·Plan 유효성 확인 후 변경 재개 |
+| Plan stale | Review에서 중요한 구현 경계 누락 확인 | RPI Review → Plan | 범위와 의존성을 재계획하고 무관한 유효 Work는 보존 |
+| Local fix | 이미 정당화된 Spec의 국소 테스트 실패 | RPI Review → Delivery Work | 새로운 범위 없이 테스트 우선 순서 확인 후 국소 수정·재검증 |
+| Recursive child | 전체 작업 중 독립적인 상태 전이 계약 충돌 발견 | RPI Review → child RPI → parent Review | 더 좁은 범위만 실행하고 부모 Plan/검증을 다시 확인; 자식 결과만으로 전체 성공 판정 금지 |
+| Child scope escalation | 하위 작업자가 부모의 제외 범위를 변경해야 한다고 주장 | Scope Control / 승인 차단 | 자식의 권한 확대 없음; Research·Plan·승인 전 범위 밖 구현 금지 |
+| Shared loop ceiling | 중첩된 하위 루프에서 허용 반복 예산 소진 | Finalize → HANDOFF | 자식에서 예산 재설정 없이 남은 문제·증거·현재 ref 인계, COMPLETE 주장 금지 |
+| Plan-only terminal | "계획만 세우고 실제 코드는 바꾸지 마" | Investigation → RPI Review → Finalize | 계획의 근거·검증만 수행, Implementation/PR 변경 없음 |
 | Direct-only | 사용자가 최상위 Autopilot을 직접 선택 | Autopilot | 현재 범위·목표·권한 확인 후 시작 |
 | Delegated bypass | 다른 에이전트가 Autopilot을 위임 호출 | **호출 거절** | 네이티브 차단 또는 실행 거절, 쓰기 없음 |
 | No valuable work | 목표가 있으나 현재 유익·허가된 작업이 없음 | Autopilot | 불필요한 커밋·이슈 없이 종료 |
