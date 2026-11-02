@@ -1,13 +1,13 @@
 # Inbox
 
-`inbox/`는 세션 간 **조사·계획·검증·리뷰·인계**를 Git에 보존하는 **비정본** 작업 공간입니다. 제품·권한의 정본은 코드·테스트·[AGENTS.md](../AGENTS.md) 및 [개발 문서](../docs/development/README.md)에 있습니다. 확정된 지속 결정은 정본으로 옮깁니다.
+`.inbox/`는 세션 간 **조사·계획·검증·리뷰·인계**를 Git에 보존하는 **비정본** 작업 공간입니다. 제품·권한의 정본은 코드·테스트·[AGENTS.md](../AGENTS.md) 및 [개발 문서](../docs/development/README.md)에 있습니다. 확정된 지속 결정은 정본으로 옮깁니다.
 
 ## Routing
 
 | 상황 | 위치 |
 | --- | --- |
-| PR·Issue 작업 | `inbox/github-<number>-<slug>/001-workstate.md` |
-| 번호 없는 조사 | `inbox/YYYY-MM-DD/HH-MM-<slug>.md` |
+| PR·Issue 작업 | `.inbox/github-<number>-<slug>/001-workstate.md` |
+| 번호 없는 조사 | `.inbox/YYYY-MM-DD/HH-MM-<slug>.md` |
 
 PR·Issue 번호는 패딩하지 않습니다. 같은 작업에는 활성 workstate **하나**를 갱신하고, 추가 검토 파일은 `002-review.md`처럼 3자리 순번을 사용합니다. 보조 파일이 필요하면 `003-<slug>/index.md`를 진입점으로 둡니다. 작은 일회성 작업·읽기 전용 답변에는 별도 기록을 강제하지 않습니다.
 
