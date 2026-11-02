@@ -2,16 +2,41 @@
 
 이 디렉터리는 **프로젝트 업무 흐름**의 Git 추적 정본입니다. 에이전트 역할이나 권한을 정의하지 않습니다. 공통 권한·승인은 [AGENTS.md](../../AGENTS.md), 요청 단계는 [Workflow Selection](../../docs/development/workflows/choosing.md), 일상 작업 최소 기준은 [Routine Loop](../../docs/development/workflows/routine-loop.md)가 소유합니다.
 
-## Standard Execution: RPI(R)
+## Standard Execution: Adaptive RPI(R)
 
-프로젝트의 기본 실행 방법은 **Research → Plan → Implementation → Review**입니다. 조사·계획의 근거가 구현에 선행하고, Review에서 수용 조건과 실제 결과를 대조해 필요한 최초 단계로 돌아갑니다. 복합·반복 작업의 실행 예산, 재개·종료 처리는 기존 `mols-loops` Skill과 [Inbox](../../.inbox/README.md)를 활용하고, 별도 범용 루프를 만들지 않습니다.
+프로젝트 기본 실행 모델은 **Prepare → RPI Main Loop → Finalize**입니다. Main Loop의 `Research → Plan → Implementation/Work → Review`는 단방향 단계표가 아니라 **근거와 선행 관계를 지키며 Review가 다음 전이를 결정하는 적응형 루프**입니다. 복잡한 실행의 상세 제어(반복 횟수·강도·범위·재귀·종료)는 이미 채택한 `mols-loops` Skill이 소유합니다. 이 문서는 프로젝트 Workflow와의 연결만 정의하며 이를 별도 엔진으로 복제하지 않습니다.
 
-- **Research:** 현재 ref의 계약·코드·테스트·실패 증거와 중요한 미확인을 확인합니다.
-- **Plan:** 범위·비목표·관찰 가능한 수용 조건·작업 순서·검증 방법을 정합니다. 중요한 결정은 사람의 승인 경계를 따릅니다.
-- **Implementation:** 유효한 계획 범위의 작업만 수행합니다. **관찰 가능한 소프트웨어 동작을 변경할 때는 반드시 [Delivery](delivery/WORKFLOW.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 따릅니다.**
-- **Review:** 결과·검증 근거·회귀·남은 위험을 평가합니다. 증거 또는 명세가 부족하면 해당 선행 단계부터 다시 수행하며, 통과했다고 추측하지 않습니다.
+```mermaid
+flowchart TD
+    A["Prepare: Goal / Active Scope / readiness"] --> R["Research"]
+    R --> P["Plan"]
+    R -->|research terminal| V["Review"]
+    P -->|work needed| W["Implementation / Work"]
+    P -->|plan terminal| V
+    W --> V
+    V -->|evidence gap| R
+    V -->|plan gap| P
+    V -->|bounded work gap| W
+    V -->|narrow material blocker| C["Recursive child RPI"]
+    C -->|return evidence; revalidate parent| V
+    V -->|accepted / blocked / loop ceiling| F["Finalize"]
+    F --> G["COMPLETE / HANDOFF / BLOCKED"]
+```
 
-조사 자체가 요청 결과라면 Research → Review, 계획까지가 결과라면 Research → Plan → Review에서 종료할 수 있습니다. 작고 명확한 작업은 각 단계를 짧게 수행하되 **순서를 소급해 맞추거나 필수 검증을 생략하지 않습니다.** RPI는 작업 방법이지 구현·병합·배포 권한이 아닙니다.
+### Adaptation Rules
+
+- **Prepare:** 현재 저장소·ref·도구·승인과 목표, **Active Scope(Goal / In scope / Out of scope / Acceptance)**를 확인합니다. 유효한 작업 범위와 실제 실행 권한을 혼동하지 않습니다.
+- **Research → Plan → Work:** 중요한 증거를 먼저 수집하고 수용 조건·작업 의존성·검증 기준을 계획한 뒤, 승인된 범위의 Work만 수행합니다. Work는 구현 코드뿐 아니라 문서·설정·분석·테스트 등도 포함합니다. 독립 작업 단위는 의존성을 지키며 선택적으로 구성하고, 이미 유효한 단위는 무조건 재실행하지 않습니다.
+- **Review → Dispatch:** 수용 조건을 검증하고 반례·회귀·미확인을 검토한 다음, **최초로 무효화된 단계**로 돌아갑니다(근거 부족 → Research, 계획/명세 부족 → Plan, 유효한 계획 안의 국소 결함 → Work). Review는 새 범위나 승인 권한을 스스로 만들 수 없습니다.
+- **Recursive child:** Review가 발견한 중요하고 더 좁은 독립 해결 문제에만 하위 Active Scope를 구성합니다. 자식은 부모의 비목표·수용 조건·안전·권한·승인·인계·실행 예산을 **상속하거나 축소**하며, **반복 횟수도 공유**합니다. 자식 결과를 부모에 병합하기 전 부모 Research/Plan/검증의 유효성을 다시 확인합니다. 무의미한 재귀를 강제하지 않습니다.
+- **Scope change:** 범위를 넓힐 필요가 생겨도 먼저 Research로 필요성과 경계를 확인하고 Plan에 반영한 뒤 **기존 승인 게이트를 통과할 때만** 변경합니다. 명시적 제외 범위·중요한 사람 결정을 묵시적으로 변경할 수 없습니다.
+- **Finalize:** Review가 수용 조건 충족, 진행 차단, 또는 반복 예산 소진을 판정할 때만 종료 심사를 진행합니다. 최종 상태는 **COMPLETE / HANDOFF / BLOCKED** 중 하나이며, 미실행 검사·남은 중요한 결함·소진된 예산을 성공으로 표현하지 않습니다.
+
+**Implementation의 지역 불변식:** 관찰 가능한 소프트웨어 동작을 변경하는 **각 작업 단위**에서는 [Delivery](delivery/WORKFLOW.md)의 **Spec → 테스트 설계 → 테스트 구현 → 실제 구현** 순서가 성립해야 합니다. 상위 루프가 Work로 되돌아오거나 재귀 자식이 코드를 수정하더라도 이 선행 조건은 유지됩니다. 테스트/명세가 무효화되었다면 먼저 관련 선행 단계부터 갱신합니다.
+
+**요청 단계 경계:** RPI Research 단계 자체가 최종 목표라면 Research → Review, RPI Plan 단계가 최종 목표라면 Research → Plan → Review 후 Finalize할 수 있습니다. 일반 조사·계획·리뷰 *산출물*은 필요하면 Work 안에서 수행할 수 있으므로 단계 이름만 보고 종료하지 않습니다. 요청이 준비/리뷰에 한정되었다면 Implementation이나 병합으로 넘어가지 않습니다.
+
+**운용 비용:** 단순 작업도 근거·계획·검증의 순서는 유지하되, 형식적인 별도 계획서·자식 루프·반복 횟수 채우기를 강제하지 않습니다. 복구 가치가 있는 복잡한 작업의 중간 상태만 기존 [Inbox](../../.inbox/README.md)에 남기고 재개 시 최신 원격 근거를 우선합니다.
 
 ## Select by Outcome
 
