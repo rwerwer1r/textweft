@@ -1,6 +1,6 @@
 # Routine Working Loop
 
-**확인 → 최소 변경 → 검증 → 자체 리뷰 → PR/인계**를 수행하고 필요할 때만 반복합니다. 작은 작업에 형식적 계획을 강제하지 않습니다. 요청 단계는 [Workflow Selection](choosing.md), AI 협업·저작 경험은 [Vibe Coding](vibe-coding.md)이 소유합니다.
+**확인 → 최소 변경 → 검증 → 자체 리뷰 → PR/인계**를 수행하고 필요할 때만 반복합니다. 작은 작업에 형식적 계획을 강제하지 않습니다. 전문 업무 흐름은 [Project Workflows](../../../.agents/workflows/README.md)에서 선택하며 이 일상 루프의 절차를 재구현하지 않습니다. 요청 단계는 [Workflow Selection](choosing.md), AI 협업·저작 경험은 [Vibe Coding](vibe-coding.md)이 소유합니다.
 
 ## Work
 

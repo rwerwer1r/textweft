@@ -9,4 +9,6 @@
 | **리뷰** | diff·검증·문제 보고, 요청된 수정 | 별도 승인 없는 병합 |
 | **병합** | 최신 ref·리뷰·CI·권한·승인 확인 후 병합 | 필수 조건 미충족 |
 
+요청 단계(준비·구현·리뷰·병합)는 이 문서가 소유하고, **해당 단계 안에서 어떤 일을 진행할지**는 [Project Workflows](../../../.agents/workflows/README.md)에서 선택합니다. Workflow 선택만으로 승인 단계가 확대되지 않습니다.
+
 일상 변경은 [Routine Loop](routine-loop.md)를 따릅니다. Draft PR은 완료 증거가 아닙니다. 작업 기록은 [Inbox](../../../.inbox/README.md), Rule·Skill 소유권은 [Rulesync](../tooling/rulesync.md)를 참조합니다.
