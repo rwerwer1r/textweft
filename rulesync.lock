@@ -9,6 +9,9 @@
         "mols-agent-asset": {
           "integrity": "sha256-ba10320d7fadba56e9619c4336d3d6adb57c52fcd2f2a45b8347ffe5d8b84d59"
         },
+        "mols-chatbot-continuity": {
+          "integrity": "sha256-ca1dfda6001dc481a1ebdc4998249a3d0dfb7bcf645f39db5a252b7d92768d38"
+        },
         "mols-loops": {
           "integrity": "sha256-f3f3de0ae4d899fe029748440d537b2a0624074e238a575dce7565916efa5c9f"
         },
@@ -21,6 +24,7 @@
       },
       "skillSelection": [
         "mols-agent-asset",
+        "mols-chatbot-continuity",
         "mols-loops",
         "mols-test-design",
         "review-changes"
