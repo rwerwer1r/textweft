@@ -35,11 +35,11 @@ export function validateText(text) {
 }
 
 export function checkPaths(paths, base = root) {
-  const inbox = resolve(base, 'inbox'), errors = [];
+  const inbox = resolve(base, '.inbox'), errors = [];
   for (const candidate of paths) {
     const path = resolve(base, candidate), rel = relative(inbox, path);
     if (isAbsolute(candidate) || rel === '..' || rel.startsWith('..' + sep) || isAbsolute(rel)) {
-      errors.push(candidate + ': inbox/ 밖 경로');
+      errors.push(candidate + ': .inbox/ 밖 경로');
       continue;
     }
     if (rel === 'README.md' || !rel.endsWith('.md')) continue;
