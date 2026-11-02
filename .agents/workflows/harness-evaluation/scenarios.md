@@ -4,6 +4,9 @@
 
 | Case | 입력 또는 트리거 | 기대 경로 | 통과해야 할 관찰 |
 | --- | --- | --- | --- |
+| Spec-first feature | "새 선택지 상태 전이 기능을 구현해" | Delivery (RPI) | Spec·관찰값 → 테스트 설계 → 테스트 코드 → 기능 구현의 순서 증거, 가능한 Red/Green 실행 결과 |
+| Regression-first fix | "상태 전이 회귀를 고쳐줘" | Failure Recovery + Delivery | 실패 재현 테스트가 수정 코드에 선행하며, 기존 회귀 테스트도 보존 |
+| Non-behavior edit | "README의 오타와 링크만 고쳐" | Delivery (RPI) | 의미 없는 단위 테스트를 만들지 않고 해당 문서 검증 및 사유를 기록 |
 | Direct-only | 사용자가 최상위 Autopilot을 직접 선택 | Autopilot | 현재 범위·목표·권한 확인 후 시작 |
 | Delegated bypass | 다른 에이전트가 Autopilot을 위임 호출 | **호출 거절** | 네이티브 차단 또는 실행 거절, 쓰기 없음 |
 | No valuable work | 목표가 있으나 현재 유익·허가된 작업이 없음 | Autopilot | 불필요한 커밋·이슈 없이 종료 |
