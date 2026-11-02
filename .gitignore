@@ -6,6 +6,7 @@ coverage/
 # Rulesync 로컬 의존성·개인 설정 (Git 비추적)
 /.rulesync/rules/.curated/
 /.rulesync/skills/.curated/
+/.rulesync/subagents/.curated/
 /.cache/
 /rulesync.local.jsonc
 /AGENTS.local.md

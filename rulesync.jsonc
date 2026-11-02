@@ -4,30 +4,36 @@
     "copilot": [
       "rules",
       "skills",
+      "subagents",
       "commands"
     ],
     "copilotcli": [
       "rules",
-      "skills"
+      "skills",
+      "subagents"
     ],
     "codexcli": [
-      "skills"
+      "skills",
+      "subagents"
     ],
     "claudecode": {
       "rules": {
         "includeRoot": false
       },
       "skills": true,
-      "commands": true
+      "commands": true,
+      "subagents": true
     },
     "antigravity-ide": [
       "rules",
       "skills",
+      "subagents",
       "commands"
     ],
     "antigravity-cli": [
       "rules",
       "skills",
+      "subagents",
       "commands"
     ],
     "androidstudio": [
