@@ -1,14 +1,14 @@
 ---
-description: 에이전트 하네스 자산의 선별 도입과 검증을 이어가기 위한 작업 상태
-updated: 2026-11-03T03:33:35+09:00
+description: 사용자 선택형 에이전트와 전문 리뷰 하네스 도입 결과·인계 상태
+updated: 2026-11-03T03:38:49+09:00
 ---
 
 # Agent Harness Adoption Workstate
 
-- **Goal:** 사용자 직접 선택형 메인 에이전트와 필요한 위임형 리뷰 에이전트를 Textweft의 Rulesync·검증 체계에 도입하고, 유용한 외부 하네스 절차는 기존 정본에 선택적으로 반영한다.
-- **Scope:** `rwerwer1r/textweft`의 작업 브랜치 `feat/agent-harness-adoption-20261103`에서 에이전트 자산·Rulesync 설정·연관 문서·검증만 수정한다. 병합·배포·계정 전환은 제외한다.
-- **State:** active. 기준 main 커밋 `2332139b0cabe80931cd2d20f5fc0c8f77e1b15f`; 현재 설정에서 기존 Skill 4개는 frozen lock으로 선언되어 있다. 새 의존성 잠금은 도구 실행 없이 추측하지 않는다.
-- **Approach:** 현행 외부 자료는 읽기 전용 참고; 프로젝트의 Rulesync 자산 원본과 선택적 운영 절차를 편집한다. 사용자 요청에 따라 PR 설명에는 외부 자산 저장소명을 기술하지 않는다.
-- **Evidence:** GitHub 연결의 저장소·계정·기준 ref·현재 AGENTS/CHATBOT/ROUTE 및 개발 문서, Rulesync 설정을 조회했다. 이 체크포인트 시점에는 변경 후 검증 미실행.
-- **Risks:** 대상 런타임별 Subagent 메타데이터 지원·직접 선택/위임 차단은 실제 실행 평가가 필요하다. 강제 병합 정책이 적용되어 있다고 주장하지 않는다.
-- **Next:** 관련 자산 원본을 프로젝트에 맞는 범위로 채택, 설정·문서 통합, 정적 검토 및 PR CI 확인. 병합은 사람의 별도 승인 후에만 한다.
+- **Goal:** 사용자 직접 선택형 메인 Agent, 전문 검토 Subagent, Rulesync 타깃과 선택형 참조 절차를 Textweft에 반영한다.
+- **Scope:** `rwerwer1r/textweft`, 작업 브랜치 `feat/agent-harness-adoption-20261103`, PR #9. 병합·배포·권한·계정 변경은 제외한다.
+- **State:** handoff. Agent 4개 원본, Rulesync Subagent 타깃, 문서·정적 검사 설정을 작업 브랜치에 반영했다. 기존 frozen Skill 의존성 잠금은 변경하지 않았다.
+- **Evidence:** GitHub Actions `41502353215`에서 `69ac1ced6dfcfe249f5807cba908ce6cf392d9fb`의 부트스트랩/업데이트·전체 검사 성공. 이 작업상태 갱신에 따른 새 HEAD의 CI는 별도 확인한다.
+- **Review:** 관련 파일 범위와 문서 링크·호출 메타데이터를 자체 검토했다. 이는 별도 런타임의 독립 리뷰가 아니다.
+- **Risks:** 대상 런타임에서 사용자 직접 선택, 위임 차단, 실제 병렬·독립 리뷰 동작은 미검증. GitHub 브랜치 보호는 강제됨으로 확인되지 않았다.
+- **Next:** PR 최신 HEAD의 CI 성공 여부 확인. 실제 에이전트 런타임에서 호출 회귀 사례를 실행·기록. 병합은 사람의 명시적 승인 후에만 진행한다.
