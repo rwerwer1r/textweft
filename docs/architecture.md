@@ -24,4 +24,4 @@ Rust의 타입·소유권·컴파일러·Clippy 피드백은 AI 주도 엔진 �
 - 게임별 규칙의 확장 범위와 검증 방식
 - 웹 계층·WASM 연결 및 초기 실행·배포 경로
 
-현재 구현 범위는 [Project Goal](GOAL.md), 초기 설계·수용 조건은 [Engine Design Research](architecture/engine-research.md)에서 관리한다. **P0 개발 하네스 → P1 MVP 설정 → P2 구현** 순서는 [Development Guide](development/README.md)를 따른다.
+현재 **제품 목표와 집중 범위**는 [Project Goal](GOAL.md), 초기 설계·수용 조건은 [Engine Design Research](architecture/engine-research.md)에서 관리한다. **기존 구현 상태는 [README](../README.md)와 코드·테스트**에서 확인한다. **P0 개발 하네스 → P1 MVP 설정 → P2 구현** 순서는 [Development Guide](development/README.md)를 따른다.
