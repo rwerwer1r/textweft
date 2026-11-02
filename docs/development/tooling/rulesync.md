@@ -9,6 +9,7 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 | [AGENTS.md](../../../AGENTS.md)·[CHATBOT.md](../../../CHATBOT.md) | Git 추적 공통 진입점, 자동 생성·덮어쓰기 금지 |
 | `CLAUDE.md`·`GEMINI.md` | Git에서 제외하는 로컬 진입점; `mise run update`가 없을 때만 만들며 기존 파일은 보존 |
 | [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md)·`.rulesync/commands/` | Rule·Skill·Command 원본 (Command는 아직 정의 없음) |
+| [`.rulesync/subagents/`](../../../.rulesync/subagents/mols-autopilot.md) | 사용자 선택형 Agent 및 전문 위임 Agent의 Git 추적 원본. [역할 정의](../ai-agent/agents.md) 참조 |
 | [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 네 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
 | [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
 | `.github/instructions/`·`.github/prompts/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
@@ -19,7 +20,9 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 
 설정 타깃은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 프로젝트 Command는 Copilot·Claude Code·Antigravity IDE/CLI에 활성화합니다. 원본은 `.rulesync/commands/*.md`이고, Copilot은 `.github/prompts/`, Claude Code는 `.claude/commands/`, Antigravity는 `.agents/skills/`에 출력합니다. Codex CLI의 Command는 전역 모드만 지원하고 Copilot CLI·Android Studio는 Command를 지원하지 않으므로 활성화하지 않습니다.
 
-Codex CLI는 프로젝트 Skill만, Claude Code는 루트 Rule을 제외합니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Claude Code·Gemini CLI의 루트 진입점은 `mise run update`가 로컬에서만 생성하며 공통 [AGENTS.md](../../../AGENTS.md)를 참조합니다. 기존 파일은 덮어쓰지 않습니다. 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
+Codex CLI는 프로젝트 Skill·Subagent만, Claude Code는 루트 Rule을 제외합니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Claude Code·Gemini CLI의 루트 진입점은 `mise run update`가 로컬에서만 생성하며 공통 [AGENTS.md](../../../AGENTS.md)를 참조합니다. 기존 파일은 덮어쓰지 않습니다. 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
+
+프로젝트에 채택한 네 Agent 정의는 [Agent Roles](../ai-agent/agents.md)에서 추적합니다. Subagent는 지원 타깃에서만 생성하며, [ROUTE](../../../.agents/route/ROUTE.md)의 Rule·Skill 파생 색인과는 별개입니다. 모델의 실제 위임·사용자 선택 여부는 target-native 실행 평가가 필요합니다. Android Studio에는 Subagent를 생성하지 않습니다.
 
 ## Lifecycle
 

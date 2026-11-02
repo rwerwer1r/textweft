@@ -13,6 +13,10 @@
 
 선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 기존 [일상 작업 루프](../workflows/routine-loop.md)와 승인 게이트가 우선하며, 외부 Skill은 새 권한을 부여하지 않습니다.
 
+## Project-managed Agent definitions
+
+[Agent Roles](../ai-agent/agents.md)에 직접 선택형 메인 Agent 1개와 전문 위임형 리뷰 Agent 3개를 채택했습니다. 원본은 `.rulesync/subagents/`에 Git 추적하며 Rulesync가 타깃별로 투영합니다. 고정된 외부 revision `162aaa38c77adf382f9ba06b099ea1c5624c0924`에서 가져온 원본을 프로젝트가 소유하는 스냅샷으로 관리하며, 이후 변경은 프로젝트 검토·승인 범위에서 수행합니다. 이 네 정의는 `rulesync.lock`의 **Skill 의존성**과 별개입니다. 자세한 호출·권한·독립성·실행 검증 한계는 [Agent Roles](../ai-agent/agents.md)를 따릅니다.
+
 ## Occasional: four reference-based procedures
 
 다음 자산은 **상시 설치하지 않습니다**. 원본을 읽기 전용으로 참고하여 Textweft가 이미 소유한 절차에 필요한 판단만 반영합니다.
@@ -25,6 +29,20 @@
 | [check-dependencies](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/check-dependencies/SKILL.md) | 의존성 변경/보안 점검 시: 먼저 `package.json`·`package-lock.json`을 오프라인 검토. 미고정·미조회·오류와 안전 판정을 구분하고, 공개 레지스트리·OSV에 이름/버전을 보내는 온라인 점검은 범위·비밀·승인을 별도 확인 |
 
 여기에 요약한 판단만 프로젝트 운영 지침으로 적용합니다. 위 외부 링크의 변경이나 새 절차가 Textweft의 정책을 자동 수정하지 않으며, 실행할 때는 기존 정책 및 도구의 현재 동작을 확인합니다. 필요가 반복되어 독립 Skill이 유익해지면 별도 리뷰 후 도입 여부를 결정합니다.
+
+## Further on-demand references
+
+다음 자산은 **상시 설치하지 않고** 독립적인 작업에서 필요할 때 원본을 읽어 판단을 반영합니다.
+
+| 참고 자산 | 텍스트위프트의 적용 범위 |
+| --- | --- |
+| [github-context](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/github-context/SKILL.md) | GitHub 작업의 최신 ref·대상·하위 지침을 최소 범위로 재확인. [AGENTS.md](../../../AGENTS.md) 권한 계약을 복제하지 않음 |
+| [mols-agent-asset-find](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/mols-agent-asset-find/SKILL.md) | 신규 Rule·Skill·Agent 자산 탐색과 사용 가능 상태 판단. 현재 Rulesync의 원본·잠금을 우선 |
+| [mols-coding-context](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/mols-coding-context/SKILL.md) | Rust 코어 및 현재 TypeScript 코드를 설계·검토할 때 필요에 따라 참조 |
+| [mols-documentation](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/mols-documentation/SKILL.md) | 문서 구조·정보 소유권·라우팅을 변경할 때 활용 |
+| [mols-chatbot-continuity](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/mols-chatbot-continuity/SKILL.md) | 실제 예약·이벤트·세션 간 실행 기능을 확인한 뒤에만 무인 재개를 설계 |
+
+[Progressive Context Routing](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/catalog/patterns/context-engineering/progressive-context-routing.md)의 선택적 로딩은 이미 [Agent Route](../../../.agents/route/ROUTE.md)와 [개발 문서 라우터](../README.md)에 적용 중입니다. [Durable Progress Handoff](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/catalog/patterns/workflow/durable-progress-handoff.md)와 [Chatbot-Driven Development](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/catalog/patterns/workflow/chatbot-driven-development.md)는 각각 [Inbox](../../../.inbox/README.md)와 [Vibe Coding](../workflows/vibe-coding.md)의 현재 정본을 보강하는 참고 자료입니다. 같은 워크플로·상태 저장소를 중복 생성하지 않습니다.
 
 ## Installation and Evidence
 
