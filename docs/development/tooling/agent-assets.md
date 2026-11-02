@@ -13,7 +13,7 @@
 
 프로젝트 [Workflow 진입점](../../../.agents/workflows/README.md)의 복합 작업 오케스트레이션은 **`mols-loops` 원본 계약**을 따릅니다. 이 문서는 설치·선택 책임만 가지며, RPI 전이·재귀·반복 예산을 중복 정의하지 않습니다. 간단하고 신뢰할 수 있는 일회성 작업에 Skill을 의례적으로 적용하지 않습니다.
 
-선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 기존 [일상 작업 루프](../workflows/routine-loop.md)와 승인 게이트가 우선하며, 외부 Skill은 새 권한을 부여하지 않습니다.
+선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 외부 Skill은 새 권한을 부여하지 않습니다. 프로젝트별 검증·인계는 [일상 작업 루프](../workflows/routine-loop.md)를, 권한·승인은 [AGENTS.md](../../../AGENTS.md)를 따릅니다.
 
 ## Occasional: four reference-based procedures
 
