@@ -23,7 +23,7 @@ AI 주도 개발에서는 Rust 컴파일러·타입·소유권 검사·Clippy의
 
 멀티미디어·2D 표현·ComfyUI 연동·선택형 MOD를 포함한 권장 컴포넌트 경계 및 근거는 [Engine Architecture Research](architecture/engine-research.md)에 기록한다. 해당 문서의 라이브러리와 프로토콜 예시는 **설계 후보**이며 확정된 구현 약속이 아니다.
 
-## P1에서 남은 결정
+## P1 Open Decisions
 
 - 게임 정의 형식과 게임별 확장 규칙·스크립트 실행 모델
 - Rust 코어의 공개 경계 및 명령/결과·오류·저장 데이터 계약
