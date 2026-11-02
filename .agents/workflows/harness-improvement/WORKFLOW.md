@@ -17,7 +17,7 @@ description: 에이전트·Workflow·Rulesync·CI의 반복 문제를 진단해 
 
 1. **Observe:** 빈번한 실패, 과도한 로딩·토큰 비용, 사용자 개입, CI/검사 공백 등의 실제 징후와 baseline을 확보합니다. 증거가 없으면 가설로 표시합니다.
 2. **Diagnose:** 저장소 정본·에이전트 정의·Skill·Workflow·도구·런타임 중 문제의 실제 owner를 결정합니다. 런타임 한계를 프롬프트 장문으로 우회하지 않습니다.
-3. **Improve:** 기존 owner와 네이티브 검증을 먼저 재사용하고 최소 변경을 진행합니다. 새 Rule·Skill·Subagent·Workflow는 독립 재사용·발견 이익이 분명할 때만 추가합니다.
+3. **Improve:** 기존 owner와 네이티브 검증을 먼저 재사용하고 최소 변경을 진행합니다. 실행 가능한 동작을 바꾼다면 [Delivery](../delivery/WORKFLOW.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 따릅니다. 새 Rule·Skill·Subagent·Workflow는 독립 재사용·발견 이익이 분명할 때만 추가합니다.
 4. **Evaluate:** [Harness Evaluation](../harness-evaluation/WORKFLOW.md)에서 영향 받는 시나리오를 **변경 전후 동일한 조건**으로 비교합니다. 자신이 수정한 기준만으로 통과를 선언하지 않습니다.
 5. **Review:** 계약·보안·회귀·성능·유지보수 비용의 실제 근거를 다시 확인합니다. 실패한 개선은 원인을 기록하고 원래 상태로 되돌리거나 후속 결정을 인계합니다.
 
