@@ -15,7 +15,7 @@ description: 조사·설계·대안 비교·계획을 근거 있는 결과로 �
 
 ## Execute
 
-이 Workflow가 **RPI Research/Plan 단계 자체를 요청받은 경우** [적응형 RPI(R)](../README.md#standard-execution-adaptive-rpir)의 해당 단계와 Review 후 Finalize합니다. 조사·설계 문서가 **Work 산출물인 경우**에는 상위 RPI의 Research·Plan 선행 조건을 생략하지 않습니다. Review에서 근거가 부족하면 Research/Plan으로 되돌아갈 수 있지만, 구현 단계로 넘어갈 권한을 추론하지 않습니다.
+요청된 결과가 RPI Research 또는 Plan 단계 자체이면 [mols-loops](../README.md#execution-orchestration-mols-loops)의 종료 깊이를 따릅니다. 별도 조사·설계 문서가 Work 산출물이라면 상위 RPI를 생략하지 않습니다. 조사 요청만으로 구현 권한을 추론하지 않습니다.
 
 1. 확정된 요구사항과 추정, 근거가 필요한 핵심 질문을 분리합니다. 해당 부분의 코드·문서·검사만 점진적으로 읽습니다.
 2. 가능한 선택지를 목적·복잡도·운영 비용·회귀·호환성 관점에서 비교하고 결정적인 반례를 살핍니다.
