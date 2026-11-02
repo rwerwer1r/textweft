@@ -4,7 +4,7 @@
 
 ## Evidence
 
-- **실행한 검증·결과:** `mise run check` 또는 변경 범위에 따른 `mise run lint:md`·`mise run lint:code` 등
+- **실행한 검증·결과:** PR CI(`npm test`·`npm run typecheck`)의 실제 상태, 추가로 수행한 검사와 결과. `mise run check`·린트·하네스 검사는 변경 위험에 따라 선택
 - **미실행/차단된 검사와 위험:**
 - **diff 자체 리뷰:** 저장소·계정·범위·보안·회귀·문서 링크 확인
 

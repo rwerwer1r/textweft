@@ -1,4 +1,4 @@
-name: P0 Harness Checks
+name: CI
 
 on:
   pull_request:
@@ -9,26 +9,23 @@ permissions:
   contents: read
 
 concurrency:
-  group: harness-${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: jdx/mise-action@v4
+      - uses: actions/setup-node@v4
         with:
-          install: true
-      - name: Bootstrap and repeat update
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+          node-version: '22.16.0'
+      - name: Install
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Test and typecheck
         run: |
-          mise run bootstrap
-          mise run update
-          git diff --exit-code -- .agents/route
-      - name: Verify repository contracts
-        run: mise run check
+          npm test
+          npm run typecheck

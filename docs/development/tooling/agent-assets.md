@@ -2,7 +2,7 @@
 
 이 문서는 Textweft에서 채택한 외부 Agent Asset의 **선택·사용·검증 경계**만 소유합니다. 저장소·계정·승인 정책은 [AGENTS.md](../../../AGENTS.md), 외부 의존성·생성 절차는 [Rulesync](rulesync.md)를 따릅니다. 자산 출처는 읽기 전용인 [mols-agent-assets](https://github.com/mols3131d/mols-agent-assets)이며 해당 저장소에 쓰지 않습니다.
 
-## Persistent: four external Skills
+## Persistent: five external Skills
 
 | Skill | 선택할 작업 |
 | --- | --- |
@@ -10,10 +10,11 @@
 | [review-changes](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/review-changes/SKILL.md) | 범위가 지정된 커밋·PR·diff를 근거 중심으로 검토할 때 |
 | [mols-test-design](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-test-design/SKILL.md) | MVP 및 프레임워크의 관찰 가능한 동작·실패 경계 테스트를 설계·평가할 때 |
 | [mols-loops](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-loops/SKILL.md) | 반복 개선이 명시되거나 한 번의 검토로 결정하기 어려운 복합 작업일 때 |
+| [mols-chatbot-continuity](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-chatbot-continuity/SKILL.md) | 여러 실행에 걸친 예약·이벤트 기반 업무의 트리거·재개·중지 설계. 일회성 작업·단순 알림에는 제외 |
 
-프로젝트 [Workflow Skills](../../../.rulesync/skills/README.md)의 복합 작업 오케스트레이션은 **`mols-loops` 원본 계약**을 따릅니다. 이 문서는 설치·선택 책임만 가지며, RPI 전이·재귀·반복 예산을 중복 정의하지 않습니다. 간단하고 신뢰할 수 있는 일회성 작업에 Skill을 의례적으로 적용하지 않습니다.
+프로젝트 [Workflow Skills](../../../.rulesync/skills/README.md)의 복합 작업 오케스트레이션은 **`mols-loops` 원본 계약**을 사용합니다. 이 문서는 의존성·사용 조건만 소유하며, RPI 전이·재귀·반복 예산은 재구현하지 않습니다.
 
-선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 외부 Skill은 새 권한을 부여하지 않습니다. 프로젝트별 검증·인계는 [일상 작업 루프](../workflows/routine-loop.md)를, 권한·승인은 [AGENTS.md](../../../AGENTS.md)를 따릅니다.
+선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 기존 [일상 작업 루프](../workflows/routine-loop.md)와 승인 게이트가 우선하며, 외부 Skill은 새 권한을 부여하지 않습니다.
 
 ## Occasional: four reference-based procedures
 
@@ -30,9 +31,9 @@
 
 ## Installation and Evidence
 
-- **선언 확인:** `rulesync.jsonc`의 `sources`에서 위 네 Skill과 고정 source SHA만 지정했는지 확인합니다.
+- **선언 확인:** `rulesync.jsonc`의 `sources`에서 위 다섯 Skill과 고정 source SHA만 지정했는지 확인합니다.
 - **최초 잠금 생성(명시적 작업):** 도구가 설치된 개발 환경에서 `npm install --package-lock-only --ignore-scripts`와 `mise run rulesync:resolve`를 사용하여 **`package-lock.json`과 `rulesync.lock` 둘 다** 생성합니다. 출처·선택 목록·integrity·변경을 리뷰하고 각각 커밋합니다. 두 잠금 파일을 프로젝트 CI의 일회성 생성 작업에서 만들고 리뷰 후 Git에 커밋했습니다. 이후에는 `--frozen` 설치만 정상 경로로 허용하며, 변경이 필요할 때만 잠금 생성 명령을 다시 사용합니다. 잠금 존재만으로 부트스트랩·타깃 로딩을 검증했다고 간주하지 않습니다.
 - **잠금 후 재현:** `mise run bootstrap` → `mise run update` 재실행 → `mise run rulesync:install` → `mise run rulesync:generate` → `mise run rulesync:check` → `mise run routes:check` → `mise run check`의 실측 결과를 별도로 남깁니다. `rulesync generate` 자체는 외부 source를 fetch하지 않습니다.
-- **CI 게이트:** [PR/main CI](../../../.github/workflows/ci.yml)는 새 Linux 환경에서 `mise run bootstrap`과 `mise run update`를 재실행하고, 고정된 npm·Skill 설치, 생성된 라우팅 색인의 Git drift, `mise run check`를 검증합니다. 다른 OS·에이전트의 자동 선택·브랜치 보호 설정은 별도 확인합니다.
+- **CI 게이트:** [PR/main CI](../../../.github/workflows/ci.yml)는 `npm ci`·`npm test`·`npm run typecheck`만 수행합니다. Rulesync 설치·생성, 라우팅 색인, Markdown·훅 검사는 수동 하네스 점검에 남깁니다. CI 통과가 에이전트 자동 로딩·브랜치 보호 설정을 보증하지 않습니다.
 - **라우팅 분리:** [skills.jsonl](../../../.agents/route/skills.jsonl)은 직접 작성한 프로젝트 Skill의 파생 색인입니다. Rulesync의 외부 curated Skill을 여기에 임의로 넣지 않습니다. 코딩 에이전트는 실제 생성된 target-native Skill을 선택하며, 제한 런타임 챗봇은 이 문서에서 외부 후보를 발견하고 접근 가능할 때만 원본을 읽습니다.
 - **승인·제약:** 외부 저장소는 루트 LICENSE를 선언하지 않았으므로 복사·수정·재배포의 권한을 일반화하지 않습니다. 원본 파일 복제 대신 선택형 의존성·출처 명시를 우선합니다. 설치·lock·AI 도구 자동 로딩은 실제 수행과 확인 전까지 미검증입니다.
