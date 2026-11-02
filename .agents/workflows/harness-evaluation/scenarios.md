@@ -11,6 +11,8 @@
 | Plan stale | Review에서 중요한 구현 경계 누락 확인 | RPI Review → Plan | 범위와 의존성을 재계획하고 무관한 유효 Work는 보존 |
 | Local fix | 이미 정당화된 Spec의 국소 테스트 실패 | RPI Review → Delivery Work | 새로운 범위 없이 테스트 우선 순서 확인 후 국소 수정·재검증 |
 | Recursive child | 전체 작업 중 독립적인 상태 전이 계약 충돌 발견 | RPI Review → child RPI → parent Review | 더 좁은 범위만 실행하고 부모 Plan/검증을 다시 확인; 자식 결과만으로 전체 성공 판정 금지 |
+| Mid-work recursive discovery | 구현 중 독립적으로 해결할 계약 충돌을 발견 | RPI Review → child RPI | 영향 Work를 멈추고 Review에서 자식 범위를 결정; 무승인 단계 건너뛰기 없음 |
+| Spec revised mid-loop | Review가 기존 명세·테스트 oracle이 틀렸다고 확인 | RPI Plan → Delivery | 바뀐 Spec·테스트 설계/코드부터 갱신하고 이후 구현·Green을 재검증 |
 | Child scope escalation | 하위 작업자가 부모의 제외 범위를 변경해야 한다고 주장 | Scope Control / 승인 차단 | 자식의 권한 확대 없음; Research·Plan·승인 전 범위 밖 구현 금지 |
 | Shared loop ceiling | 중첩된 하위 루프에서 허용 반복 예산 소진 | Finalize → HANDOFF | 자식에서 예산 재설정 없이 남은 문제·증거·현재 ref 인계, COMPLETE 주장 금지 |
 | Plan-only terminal | "계획만 세우고 실제 코드는 바꾸지 마" | Investigation → RPI Review → Finalize | 계획의 근거·검증만 수행, Implementation/PR 변경 없음 |
