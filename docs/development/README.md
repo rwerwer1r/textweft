@@ -19,7 +19,10 @@
 | 작업 | 우선 읽을 문서 |
 | --- | --- |
 | 게임 런타임·API·예제 | [README](../../README.md) 및 관련 코드·테스트 |
+| 확정된 Rust 코어·계층 경계 | [Architecture Decision](../architecture.md) |
+| 초기 게임 계약·수용 시나리오 | [Engine Design Research](../architecture/engine-research.md) |
 | 제품 목표·역할·문서 언어 | [GOAL](../GOAL.md) · [GLOSSARY](../GLOSSARY.md) · [LANGUAGE](../LANGUAGE.md) 중 필요한 것 |
+| 프로젝트 개발 철학·원칙 | [PRINCIPLES](../PRINCIPLES.md) |
 | 준비·구현·리뷰·병합 단계 판단 | [Workflow Selection](workflows/choosing.md) |
 | 실제 변경·검증·리뷰 | [Routine Loop](workflows/routine-loop.md) |
 | AI 주도 개발·바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
