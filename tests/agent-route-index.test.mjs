@@ -10,7 +10,21 @@ test('Rulesync 원본에서 생성한 Rule·Skill 색인', () => {
     path: '.rulesync/rules/typescript.md',
     description: 'TypeScript game-framework runtime, example, and test conventions',
   }]);
-  assert.equal(indexes['.agents/route/skills.jsonl'], '');
+  const skills = indexes['.agents/route/skills.jsonl'].trim().split('\n').map(JSON.parse);
+  assert.deepEqual(skills.map(x => x.name), [
+    'workflow-autopilot',
+    'workflow-delivery',
+    'workflow-failure-recovery',
+    'workflow-harness-evaluation',
+    'workflow-harness-improvement',
+    'workflow-integration',
+    'workflow-investigation',
+    'workflow-resumption',
+    'workflow-review',
+  ]);
+  assert.ok(skills.every(x => x.path === `.rulesync/skills/${x.name}/SKILL.md`));
+  assert.ok(skills.every(x => x.description && !x.description.includes('undefined')));
+  assert.equal(new Set(skills.map(x => x.name)).size, 9);
 });
 
 test('frontmatter는 정상 입력을 읽고 누락·중복을 거부한다', () => {
