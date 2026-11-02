@@ -12,6 +12,8 @@
 | [mols-loops](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-loops/SKILL.md) | 반복 개선이 명시되거나 한 번의 검토로 결정하기 어려운 복합 작업일 때 |
 | [mols-chatbot-continuity](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-chatbot-continuity/SKILL.md) | 여러 실행에 걸친 예약·이벤트 기반 업무의 트리거·재개·중지 설계. 일회성 작업·단순 알림에는 제외 |
 
+프로젝트 [Workflow Skills](../../../.rulesync/skills/README.md)의 복합 작업 오케스트레이션은 **`mols-loops` 원본 계약**을 사용합니다. 이 문서는 의존성·사용 조건만 소유하며, RPI 전이·재귀·반복 예산은 재구현하지 않습니다.
+
 선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 기존 [일상 작업 루프](../workflows/routine-loop.md)와 승인 게이트가 우선하며, 외부 Skill은 새 권한을 부여하지 않습니다.
 
 ## Occasional: four reference-based procedures

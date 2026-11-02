@@ -35,7 +35,7 @@ Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rules
 
 ## External Skill Adoption
 
-[선택한 자산과 일회성 하네스 절차](agent-assets.md)에 지속 사용 Skill 5개와 문서로 흡수한 일회성 참고 4개를 구분합니다. `rulesync.jsonc`는 upstream 커밋·경로·선택 목록을 지정합니다. `.rulesync/skills/.curated/`는 `rulesync install`이 설치하는 외부 의존성(직접 작성 원본이 아님)입니다. 두 `.curated/` 디렉터리는 Git·rumdl에서 제외합니다. 프로젝트가 직접 작성하는 Skill용 `skills.jsonl`에 외부 의존성을 중복 수동 등록하지 않습니다.
+[선택한 자산과 일회성 하네스 절차](agent-assets.md)에 지속 사용 Skill 5개와 문서로 흡수한 일회성 참고 4개를 구분합니다. `rulesync.jsonc`는 upstream 커밋·경로·선택 목록을 지정합니다. `.rulesync/skills/.curated/`는 `rulesync install`이 설치하는 외부 의존성(직접 작성 원본이 아님)입니다. 두 `.curated/` 디렉터리는 Git·rumdl에서 제외합니다. 프로젝트가 직접 작성하는 `workflow-*` Skill 정본은 `.rulesync/skills/workflow-*/SKILL.md`이며 해당 `skills.jsonl`은 `mise run routes:generate`로 생성합니다. 외부 의존성은 이 색인에 중복 수동 등록하지 않습니다.
 
 최초 잠금은 설치 가능한 환경에서 `mise run rulesync:resolve`로 생성하고 `rulesync.lock`의 변경·출처·선택·무결성을 검토 후 커밋합니다. 잠금 파일이 완성된 이후의 재설치는 `mise run rulesync:install`(`rulesync install --frozen`)로 고정 상태를 확인하고 `mise run rulesync:generate`로 대상별 투영을 만듭니다. `mise run bootstrap`과 `mise run update`는 npm 잠금 존재를 먼저 확인하고, mise 도구 → frozen Skill 설치 → `npm ci` → Git 훅 → 투영 순으로 동기화합니다. npm 잠금이 없으면 설치 **전에 중단**하고, Rulesync 잠금이 비어 있으면 npm/훅 작업 전에 **중단**합니다. 최초에는 `npm install --package-lock-only --ignore-scripts`와 `mise run rulesync:resolve`로 각각의 lock을 생성·검토·커밋해야 합니다. 부분 실패 후에는 원인을 수정한 뒤 `mise run update`를 재실행합니다.
 
