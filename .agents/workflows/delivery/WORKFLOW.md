@@ -15,7 +15,7 @@ description: 승인된 범위의 코드·문서·설정 변경을 검증하여 P
 
 ## Execute
 
-이 Workflow는 [적응형 RPI(R)](../README.md#standard-execution-adaptive-rpir)의 **Work 단위**로 실행합니다. 부모 또는 재귀 자식이 Work를 호출하더라도 선행 Research·Plan 및 아래의 **테스트 우선 순서**가 필요합니다. 전체 Run을 선형 단계로 고정하지 않고, Review 결과에 따라 영향을 받은 선행 단계로 복귀합니다.
+이 Workflow는 [mols-loops 오케스트레이션](../README.md#execution-orchestration-mols-loops) 아래의 **Work 단위**입니다. 부모나 자식이 호출해도 아래의 테스트 우선 순서는 동일합니다. 단계 재진입·재귀·종료 판단은 `mols-loops`가 소유합니다.
 
 **관찰 가능한 소프트웨어 동작을 변경하는 각 최소 Work 단위:**
 
