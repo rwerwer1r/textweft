@@ -24,4 +24,4 @@ AI 개발 하네스의 설계 원칙과 판단 기준을 정의합니다. 권한
 
 diff에서 **계약·회귀·보안·문서 불일치·검증 공백**을 점검합니다. 같은 모델의 반복 검토는 독립 리뷰가 아닙니다. 테스트·CI·정적 확인·미실행을 구분합니다.
 
-제품 동작의 근거는 코드·테스트·[README](../../../README.md)입니다. 런타임별 진입은 [CHATBOT](../../../CHATBOT.md)과 [ROUTE](../../../.agents/route/ROUTE.md), 개발 절차는 [Routine Loop](../workflows/routine-loop.md), 환경·검사는 [개발 문서](../README.md)를 따릅니다.
+제품 동작의 근거는 코드·테스트·[README](../../../README.md)입니다. 런타임별 진입은 [CHATBOT](../../../CHATBOT.md)과 [ROUTE](../../../.agents/route/ROUTE.md), AI 협업은 [Vibe Coding](../workflows/vibe-coding.md), 개발 절차는 [Routine Loop](../workflows/routine-loop.md), 환경·검사는 [개발 문서](../README.md)를 따릅니다.
