@@ -2,7 +2,7 @@
 
 **Textweft는 게임 자체를 만드는 프로젝트가 아니라, 다른 개발자와 창작자가 게임을 만들 수 있도록 돕는 프레임워크를 만드는 프로젝트입니다.**
 
-목표 산출물은 특정 게임이나 완성된 이야기 콘텐츠가 아닌, **다양한 선택형 텍스트 게임에 재사용할 수 있는 엔진·콘텐츠 저작 계약·확장 인터페이스**입니다. 이 프레임워크는 게임 콘텐츠와 실행·표시 환경을 분리하고, 게임마다 필요한 규칙을 조합할 수 있어야 합니다.
+목표 산출물은 특정 게임이나 완성된 이야기 콘텐츠가 아닌, **서사·선택 중심의 웹 게임을 다양하게 제작할 수 있는 엔진·콘텐츠 저작 계약·확장 인터페이스**입니다. 텍스트 전용 게임도 가능해야 하지만 이미지·오디오·동영상·고급 2D 연출을 사용하는 게임으로 확장할 수 있어야 합니다. 게임 규칙과 실행·표시 환경은 분리합니다.
 
 **프레임워크의 주 사용자(게임 개발자)는 바이브코더(vibe coder)**, 즉 자연어로 게임의 의도·규칙을 설명하고 AI 코딩 도구와 협업해 게임을 제작하는 사람입니다. **Textweft 자체도 프레임워크 개발자가 바이브코딩 방식으로 개발**합니다. AI가 구현과 검증을 주도하되, 프레임워크 개발자가 제품 방향과 중요한 의사결정을 책임집니다.
 
@@ -12,22 +12,23 @@
 
 ## Goal
 
-프레임워크 사용자(게임 개발자)는 장면과 선택지를 선언형 콘텐츠로 표현하고, 게임별 규칙이 필요할 때 TypeScript 훅을 명시적으로 연결할 수 있어야 합니다. 프레임워크의 실행 엔진은 렌더러에 의존하지 않아, 제작자가 정의한 서로 다른 게임을 CLI·웹·별도 인터페이스에서 실행할 수 있어야 합니다.
+프레임워크 사용자(게임 개발자)는 장면·선택지·게임 규칙과 미디어 에셋의 참조를 정의하고, 필요하면 공개 확장 API로 게임별 로직을 추가할 수 있어야 합니다. **게임 실행 코어의 구현 언어는 Rust**이며, 코어는 렌더러에 의존하지 않고 웹앱을 중심으로 CLI·별도 인터페이스에서도 재사용할 수 있도록 설계합니다. TypeScript 웹 계층·WebAssembly 연결은 우선 설계 방향이며 구체적인 선택은 후속 설계에서 결정합니다.
 
 바이브코더는 엔진 내부를 깊게 이해하지 않아도 **자연어 요구 → 게임 정의 생성 → 실행 → 오류 수정 → 확장**을 반복할 수 있어야 합니다. 공개 API·스키마·타입·오류·예제는 AI와 사람이 함께 이해하고 수정하기 쉽게 제공합니다.
 
 **예제 게임은 프레임워크의 사용법과 동작을 검증하기 위한 수단이며, Textweft의 최종 제품이 아닙니다.**
 
 ```text
-YAML / JSON game content  +  optional TypeScript hooks
+Game definitions + media assets + optional extensions / mods
                          |
-                    Textweft core
-              scene · choice · state
-              transitions · snapshots
+                  Rust headless core
+                rules · state · transitions
                          |
-               renderer-neutral view
+             view + presentation signals
                          |
-                CLI / web / custom UI
+                platform adapter / SDK
+                         |
+     Web player (text · images · audio · video · 2D)
 ```
 
 작성 경험은 단순해야 하지만, 잘못된 선택·훅 오류·재개 과정에서 게임 상태가 조용히 손상되어서는 안 됩니다.
@@ -40,7 +41,7 @@ YAML / JSON game content  +  optional TypeScript hooks
 
 ### 2. Declarative stories with explicit extensions
 
-대부분의 분기는 YAML/JSON의 장면·조건·효과·경로로 작성할 수 있어야 합니다. 선언형 표현만으로 부족한 규칙은 등록된 TypeScript 훅으로 확장하되, 콘텐츠가 임의 코드를 암묵적으로 실행하지 않도록 경계를 명확히 유지합니다.
+기본 장면·조건·효과·경로와 미디어 참조는 검증 가능한 선언형 콘텐츠로 표현할 수 있어야 합니다. 부족한 게임별 규칙은 명시적인 확장 API로 구현할 수 있어야 하며, 콘텐츠가 임의 코드를 암묵적으로 실행하지 않도록 경계를 유지합니다. 확장 언어·권한·실행 모델은 P1에서 결정합니다.
 
 ### 3. Trustworthy and reproducible transitions
 
@@ -56,11 +57,21 @@ YAML / JSON game content  +  optional TypeScript hooks
 
 서로 다른 게임 제작 사례로 재사용성을 검증하고, 예제 게임의 완성도보다 프레임워크의 이해 가능성·검증 가능성·확장성을 우선합니다. **AI 생성 코드도 테스트와 재현 가능한 검증을 거쳐야 합니다.**
 
+### 6. Multimedia presentation and optional modding
+
+게임 개발자는 필요에 따라 정적 이미지 또는 ComfyUI 같은 외부 생성 API의 이미지, SFX, BGM, 동영상, 레이어·스프라이트·관절형 애니메이션·카메라 이펙트를 사용할 수 있어야 합니다. **Darkest Dungeon 수준의 2D 이미지 연출은 게임 제작자의 표현 범위에 관한 참고 목표**이며 특정 게임의 콘텐츠·미술 품질이나 동일 구현을 자동 보장하지 않습니다.
+
+MOD 지원 여부는 **게임별 opt-in**입니다. MOD를 제공하지 않는 게임도 정상적으로 만들어져야 하고, MOD를 제공하는 게임은 허용된 콘텐츠·에셋·규칙 확장점, 충돌·호환성·저장 상태를 명시적으로 다룰 수 있어야 합니다. 외부 코드 실행은 별도 신뢰·권한 정책 없이 기본 허용하지 않습니다.
+
+이 항목들은 **장기 제품 능력 요구**입니다. 각각의 MVP 포함 여부·완료 기준 및 구체적인 기술 선택은 P1에서 확정합니다. [Engine Architecture Research](architecture/engine-research.md)에서 검토 근거와 경계를 관리합니다.
+
 ## Product Principles
 
 - **Genre-agnostic:** 특정 세계관·전투·인벤토리 모델을 엔진의 필수 전제로 만들지 않습니다.
 - **Data-first:** 설명 가능한 선언형 콘텐츠를 우선하고, 필요한 복잡성만 명시적 코드 훅으로 분리합니다.
-- **Headless by default:** 게임 규칙과 화면 표현·입출력·호스팅을 구분합니다.
+- **Headless by default:** Rust 게임 코어는 게임 규칙과 화면 표현·입출력·호스팅을 구분합니다.
+- **Multimedia-capable:** 텍스트 전용을 유지하면서 게임별 선택에 따라 정적/생성 이미지, SFX/BGM, 동영상, 레이어·스프라이트·스켈레탈 애니메이션 등의 고급 2D 연출을 구현할 수 있도록 합니다.
+- **Opt-in modding:** MOD를 지원할 수 있는 게임 제작 경로를 준비하지만, MOD 활성화와 확장·배포·신뢰 범위는 게임 개발자가 선택합니다.
 - **Deterministic where promised:** 시드 난수와 상태 전이의 재현성·원자성을 명시된 경계에서 지킵니다.
 - **Portable state:** 실행 중 상태와 저장 가능한 상태의 의미를 안정적으로 설명합니다.
 - **Small and testable:** 기능의 폭보다 계약의 일관성, 예측 가능한 실패, 유지보수 비용을 우선합니다.
@@ -76,7 +87,7 @@ YAML / JSON game content  +  optional TypeScript hooks
 또한 초기 목표는 아래 기능을 모두 제공하는 범용 게임 제작 플랫폼도 아닙니다.
 
 - 특정 장르에 고정된 전투·인벤토리·퀘스트 엔진
-- 내장 그래픽 렌더러, 비주얼 에디터 또는 호스팅 서비스
+- Rust 코어에 직접 결합된 범용 그래픽 렌더러, 필수 비주얼 에디터 또는 프레임워크 자체 호스팅 서비스
 - 자유 텍스트 명령 파서나 AI 기반 이야기 자동 생성 서비스
 - 임의 코드 실행을 허용하는 데이터 포맷
 - 모든 게임의 영속 저장·동기화·세이브 마이그레이션을 책임지는 백엔드
@@ -86,4 +97,4 @@ YAML / JSON game content  +  optional TypeScript hooks
 
 ## Document Boundaries
 
-이 문서는 **왜 이 프레임워크가 존재하고 어떤 품질을 지향하는가**를 소유합니다. 개발 방식은 [Vibe Coding Workflow](development/workflows/vibe-coding.md)에서 정의합니다. `README.md`는 현재 기능과 시작 방법, [Development Guide](development/README.md)는 작업·검증 절차, [Language](LANGUAGE.md)는 문서 언어 기준을 소유합니다. 구현 결정과 실제 동작의 근거는 소스·테스트·Git 이력에서 확인합니다.
+이 문서는 **왜 이 프레임워크가 존재하고 어떤 품질을 지향하는가**를 소유합니다. 구체적인 Rust 코어 결정은 [Architecture Decision](architecture.md), 멀티미디어·MOD 설계 조사는 [Engine Architecture Research](architecture/engine-research.md)를 참조합니다. 개발 방식은 [Vibe Coding Workflow](development/workflows/vibe-coding.md)에서 정의합니다. `README.md`는 현재 기능과 시작 방법, [Development Guide](development/README.md)는 작업·검증 절차, [Language](LANGUAGE.md)는 문서 언어 기준을 소유합니다. 구현 결정과 실제 동작의 근거는 소스·테스트·Git 이력에서 확인합니다.
