@@ -4,7 +4,7 @@
 
 ## Standard Execution: Adaptive RPI(R)
 
-프로젝트 기본 실행 모델은 **Prepare → RPI Main Loop → Finalize**입니다. Main Loop의 `Research → Plan → Implementation/Work → Review`는 단방향 단계표가 아니라 **근거와 선행 관계를 지키며 Review가 다음 전이를 결정하는 적응형 루프**입니다. 복잡한 실행의 상세 제어(반복 횟수·강도·범위·재귀·종료)는 이미 채택한 `mols-loops` Skill이 소유합니다. 이 문서는 프로젝트 Workflow와의 연결만 정의하며 이를 별도 엔진으로 복제하지 않습니다.
+프로젝트 기본 실행 모델은 **Prepare → RPI Main Loop → Finalize**입니다. Main Loop의 `Research → Plan → Implementation/Work → Review`는 단방향 단계표가 아니라 **근거와 선행 관계를 지키며 Review가 다음 전이를 결정하는 적응형 루프**입니다. 복잡한 실행의 상세 제어(반복 횟수·강도·범위·재귀·종료)는 [선택형 외부 자산](../../docs/development/tooling/agent-assets.md)에 등록된 `mols-loops` Skill을 실제로 로드할 수 있을 때 그 원본이 소유합니다. 로드할 수 없다면 이 문서의 경계 안에서 가능한 절차만 수행하고 그 한계를 밝힙니다. 이 문서는 프로젝트 Workflow와의 연결만 정의하며 이를 별도 엔진으로 복제하지 않습니다.
 
 ```mermaid
 flowchart TD
