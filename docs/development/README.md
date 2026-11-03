@@ -28,6 +28,7 @@
 | 실제 변경·검증·리뷰 | [Routine Loop](workflows/routine-loop.md) |
 | AI 주도 개발·바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
 | 중요한 사람 결정·리뷰 근거 | [Agent Governance](ai-agent/README.md) |
+| 사용자 선택형 Agent·전문 위임·호출 제한 | [Agent Roles](ai-agent/agents.md) |
 | Rule·Skill 선택 | [ROUTE](../../.agents/route/ROUTE.md) |
 | Rulesync 설정·생성·잠금 | [Rulesync](tooling/rulesync.md) |
 | 외부 Skill 선택·일회성 하네스 절차 | [Selective Agent Assets](tooling/agent-assets.md) |

@@ -16,6 +16,10 @@
 
 선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 기존 [일상 작업 루프](../workflows/routine-loop.md)와 승인 게이트가 우선하며, 외부 Skill은 새 권한을 부여하지 않습니다.
 
+## Project-managed Agent definitions
+
+[Agent Roles](../ai-agent/agents.md)에 사용자 직접 선택형 메인 Agent 1개와 위임형 전문 리뷰 Agent 3개를 프로젝트 원본 `.rulesync/subagents/`로 채택했습니다. 초기 도입은 읽기 전용으로 검토한 외부 revision `162aaa38c77adf382f9ba06b099ea1c5624c0924`를 기준으로 하며, 이후 수정은 Textweft에서 소유합니다. 이 정의들은 기존 외부 **5개 Skill 잠금**과 별개입니다. 실제 사용자 선택·위임·독립성·안전성은 대상 런타임 관찰로 평가합니다.
+
 ## Occasional: four reference-based procedures
 
 다음 자산은 **상시 설치하지 않습니다**. 원본을 읽기 전용으로 참고하여 Textweft가 이미 소유한 절차에 필요한 판단만 반영합니다.
@@ -28,6 +32,19 @@
 | [check-dependencies](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/check-dependencies/SKILL.md) | 의존성 변경/보안 점검 시: 먼저 `package.json`·`package-lock.json`을 오프라인 검토. 미고정·미조회·오류와 안전 판정을 구분하고, 공개 레지스트리·OSV에 이름/버전을 보내는 온라인 점검은 범위·비밀·승인을 별도 확인 |
 
 여기에 요약한 판단만 프로젝트 운영 지침으로 적용합니다. 위 외부 링크의 변경이나 새 절차가 Textweft의 정책을 자동 수정하지 않으며, 실행할 때는 기존 정책 및 도구의 현재 동작을 확인합니다. 필요가 반복되어 독립 Skill이 유익해지면 별도 리뷰 후 도입 여부를 결정합니다.
+
+## Additional read-only references
+
+에이전트·라우팅·문서 설계가 필요할 때만 기존 하네스와 중복되지 않게 다음 원본을 참고합니다.
+
+| 참고 자산 | 선택 상황 |
+| --- | --- |
+| [github-context](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/github-context/SKILL.md) | GitHub ref·권한과 변경 대상의 최신 상태 확인 |
+| [mols-agent-asset-find](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/mols-agent-asset-find/SKILL.md) | 기존 자산 탐색·선택·동기화가 실제로 필요한 경우 |
+| [mols-coding-context](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/mols-coding-context/SKILL.md) | 코드 관련 설계·검토와 현재 계약 확인 |
+| [mols-documentation](https://github.com/mols3131d/mols-agent-assets/blob/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/skills/mols-documentation/SKILL.md) | 문서 구조·정보 소유권·라우팅 개선 |
+
+`mols-chatbot-continuity`는 이미 고정 외부 Skill로 설치 대상으로 등록되었으므로 별도 일회성 참고 목록에 중복하지 않습니다.
 
 ## Installation and Evidence
 
