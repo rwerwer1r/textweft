@@ -10,7 +10,7 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 | `CLAUDE.md`·`GEMINI.md` | Git에서 제외하는 로컬 진입점; `mise run update`가 없을 때만 만들며 기존 파일은 보존 |
 | [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md)·`.rulesync/commands/` | Rule·Skill·Command 원본 (Command는 아직 정의 없음) |
 | [`.rulesync/subagents/`](../../../.rulesync/subagents/mols-autopilot.md) | 사용자 직접 선택형 메인 Agent·위임형 전문 리뷰 Agent의 원본. [Agent Roles](../ai-agent/agents.md) 참조 |
-| [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 다섯 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
+| [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 여섯 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
 | [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
 | `.github/instructions/`·`.github/prompts/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
 | `.agents/commands/` | Git에서 디렉터리만 보존 (`.gitkeep`); 현재 타깃의 Command 실제 출력 경로는 아님 |
@@ -38,7 +38,7 @@ Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rules
 
 ## External Skill Adoption
 
-[선택한 자산과 일회성 하네스 절차](agent-assets.md)에 지속 사용 Skill 5개와 문서로 흡수한 일회성 참고 4개를 구분합니다. `rulesync.jsonc`는 upstream 커밋·경로·선택 목록을 지정합니다. `.rulesync/skills/.curated/`는 `rulesync install`이 설치하는 외부 의존성(직접 작성 원본이 아님)입니다. 두 `.curated/` 디렉터리는 Git·rumdl에서 제외합니다. 프로젝트가 직접 작성하는 `workflow-*` Skill 정본은 `.rulesync/skills/workflow-*/SKILL.md`이며 해당 `skills.jsonl`은 `mise run routes:generate`로 생성합니다. 외부 의존성은 이 색인에 중복 수동 등록하지 않습니다.
+[선택한 자산과 일회성 하네스 절차](agent-assets.md)에 지속 사용 Skill 6개와 문서로 흡수한 일회성 참고 4개를 구분합니다. `rulesync.jsonc`는 upstream 커밋·경로·선택 목록을 지정합니다. `.rulesync/skills/.curated/`는 `rulesync install`이 설치하는 외부 의존성(직접 작성 원본이 아님)입니다. 두 `.curated/` 디렉터리는 Git·rumdl에서 제외합니다. 프로젝트가 직접 작성하는 `workflow-*` Skill 정본은 `.rulesync/skills/workflow-*/SKILL.md`이며 해당 `skills.jsonl`은 `mise run routes:generate`로 생성합니다. 외부 의존성은 이 색인에 중복 수동 등록하지 않습니다.
 
 최초 잠금은 설치 가능한 환경에서 `mise run rulesync:resolve`로 생성하고 `rulesync.lock`의 변경·출처·선택·무결성을 검토 후 커밋합니다. 잠금 파일이 완성된 이후의 재설치는 `mise run rulesync:install`(`rulesync install --frozen`)로 고정 상태를 확인하고 `mise run rulesync:generate`로 대상별 투영을 만듭니다. `mise run bootstrap`과 `mise run update`는 npm 잠금 존재를 먼저 확인하고, mise 도구 → frozen Skill 설치 → `npm ci` → Git 훅 → 투영 순으로 동기화합니다. npm 잠금이 없으면 설치 **전에 중단**하고, Rulesync 잠금이 비어 있으면 npm/훅 작업 전에 **중단**합니다. 최초에는 `npm install --package-lock-only --ignore-scripts`와 `mise run rulesync:resolve`로 각각의 lock을 생성·검토·커밋해야 합니다. 부분 실패 후에는 원인을 수정한 뒤 `mise run update`를 재실행합니다.
 
