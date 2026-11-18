@@ -33,11 +33,12 @@ Codex CLI는 프로젝트 Skill·Subagent만, Claude Code는 루트 Rule을 제�
 mise install
 mise run rulesync:install
 mise run rulesync:generate
+mise run rulesync:preview
 mise run rulesync:check
 mise run routes:check
 ```
 
-Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rulesync:generate`는 도구별 복사본과 프로젝트 직접 저작 Rule·Skill 라우팅 색인을 갱신합니다. `rulesync:check`는 Rulesync 자체 진단, `routes:check`는 **Textweft 고유 파생 색인의 정합성**만 검사합니다.
+Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rulesync:generate`는 도구별 복사본과 프로젝트 직접 저작 Rule·Skill 라우팅 색인을 갱신합니다. `rulesync:preview`는 strict 진단과 dry-run 생성 계획을 확인하며 파일을 쓰지 않습니다. `rulesync:check`는 Rulesync 자체 진단, `routes:check`는 **Textweft 고유 파생 색인의 정합성**만 검사합니다. `rulesync:refresh`는 명시적인 upstream 갱신 작업으로 `rulesync install --update` 후 생성·라우팅 색인을 갱신합니다. lock과 생성 diff를 반드시 리뷰하며 일반 bootstrap/update 경로에서 자동 실행하지 않습니다.
 
 ## External Skill Adoption
 

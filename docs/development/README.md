@@ -38,6 +38,9 @@ description: "개발 우선순위, 에이전트 협업, 작업 워크플로, 도
 | 사용자 선택형 Agent·전문 위임·호출 제한 | [Agent Roles](ai-agent/agents.md) |
 | 실제 지침·Skill 로딩 증거 | [Harness Verification](ai-agent/harness.md) · [Instruction Ownership](ai-agent/rule-ownership.md) |
 | Rule·Skill 선택 | [ROUTE](../../.agents/route/ROUTE.md) |
+| 브랜치·Worktree·커밋·통합·복구 | [Git](../tools/git/README.md) |
+| GitHub Issue·PR·댓글·리뷰 작성 보조 자료 | [GitHub Templates](../../.github/templates/README.md) |
+| 프로젝트 스크립트 유지보수 | [Scripts](tooling/scripts.md) |
 | Rulesync 설정·생성·잠금 | [Rulesync](tooling/rulesync.md) |
 | 외부 Skill 선택·일회성 하네스 절차 | [Selective Agent Assets](tooling/agent-assets.md) |
 | Change 티켓·상태·명세 delta | [STDD Workspace](../../stdd/README.md) · [외부 Skill](tooling/agent-assets.md) |
