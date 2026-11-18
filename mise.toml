@@ -11,9 +11,9 @@ deps = "npm ci"
 test = "npm test"
 typecheck = "npm run typecheck"
 example = "npm run example"
-"lint:md" = "rumdl check README.md AGENTS.md CHATBOT.md docs/ .inbox/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md"
+"lint:md" = "rumdl check README.md AGENTS.md CHATBOT.md docs/ .inbox/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md .github/ISSUE_TEMPLATE/ .github/templates/"
 "lint:code" = "biome lint src/ scripts/ tests/ examples/lighthouse/main.ts"
-"format:md" = "rumdl fmt README.md AGENTS.md CHATBOT.md docs/ .inbox/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md"
+"format:md" = "rumdl fmt README.md AGENTS.md CHATBOT.md docs/ .inbox/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md .github/ISSUE_TEMPLATE/ .github/templates/"
 "format:code" = "biome format --write src/ scripts/ tests/ examples/lighthouse/main.ts"
 "routes:generate" = "node scripts/agent-route-index.mjs generate"
 "routes:check" = "node scripts/agent-route-index.mjs check"
@@ -29,6 +29,8 @@ example = "npm run example"
 "rulesync:install" = "rulesync install --frozen"
 "rulesync:generate" = ["rulesync generate", "node scripts/agent-route-index.mjs generate"]
 "rulesync:check" = "rulesync doctor --strict"
+"rulesync:preview" = ["rulesync doctor --strict", "rulesync generate --dry-run"]
+"rulesync:refresh" = ["rulesync install --update", "rulesync generate", "node scripts/agent-route-index.mjs generate"]
 
 [tasks.check]
 depends = ["lint:md", "lint:code", "hooks:validate", "routes:check", "routes:test", "inbox:test", "docs:index:check", "rulesync:check", "test", "typecheck"]

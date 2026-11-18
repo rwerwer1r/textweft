@@ -1,15 +1,17 @@
 ---
 name: workflow-parallel-development
 description: >-
-  Use when coordinating multiple independent Work units through isolated
-  delegated agents and integrating their results. Not for sequential work,
-  shared-write workspaces, or unsupported runtimes.
+  Use when planning or coordinating multiple independent Work units;
+  concurrent writes require verified delegated agents and isolated workspaces.
+  Not for sequential work or shared-write workspaces.
 targets:
   - copilot
   - copilotcli
+  - codexcli
   - claudecode
   - antigravity-ide
   - antigravity-cli
+  - androidstudio
 ---
 # Parallel Agentic Development
 

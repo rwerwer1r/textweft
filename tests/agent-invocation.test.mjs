@@ -57,3 +57,23 @@ test('autopilot delegates parallel work only with verified isolation', () => {
   assert.match(source, /workflow-parallel-development/);
   assert.match(source, /verified workspace isolation/);
 });
+
+function skillMetadata(name) {
+  const source = readFileSync(new URL(`../.rulesync/skills/${name}/SKILL.md`, import.meta.url), 'utf8');
+  const end = source.indexOf('\n---\n', 4);
+  assert.ok(source.startsWith('---\n') && end > 4, `invalid skill frontmatter: ${name}`);
+  const doc = parseDocument(source.slice(4, end), { uniqueKeys: true });
+  assert.deepEqual(doc.errors, []);
+  return doc.toJS();
+}
+
+test('parallel workflow is selectable on Skill targets without implying worker support', () => {
+  const skill = skillMetadata('workflow-parallel-development');
+  assert.deepEqual(skill.targets, [
+    'copilot', 'copilotcli', 'codexcli', 'claudecode',
+    'antigravity-ide', 'antigravity-cli', 'androidstudio',
+  ]);
+  const worker = agentMetadata('mols-work-unit-worker');
+  assert.ok(!worker.targets.includes('codexcli'));
+  assert.ok(!worker.targets.includes('androidstudio'));
+});
