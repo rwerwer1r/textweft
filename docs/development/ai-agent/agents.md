@@ -18,7 +18,7 @@ description: "Autopilot, Work Unit Worker, 독립 리뷰 Agent의 선택·위임
 
 [`mols-work-unit-worker`](../../../.rulesync/subagents/mols-work-unit-worker.md)는 coordinator가 명시적으로 할당한 독립 Work 하나를 수행하는 위임형 Agent입니다. 사용자가 직접 선택하는 메인 Agent가 아니며 backlog를 스스로 선택하지 않습니다. Worker는 지정된 Change/Work ID, Spec, dependency, base ref, writable paths, Out of Scope, 테스트와 보고 형식을 받아 해당 범위만 수정합니다. 행동 변경은 [workflow-delivery](../../../.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 구현 순서를 따릅니다. 동시 쓰기는 별도 worktree/branch 또는 동등한 runtime isolation과 겹치지 않는 파일 소유권이 확인된 경우에만 허용합니다. 부모 Change 상태·통합·최종 완료·PR 병합은 coordinator가 소유하며 Worker는 실제 변경·검증·미실행 근거를 반환합니다. timeout 또는 종료 불명확 상태에서 재할당하지 않습니다.
 
-Worker 정의는 Claude Code·Copilot·Copilot CLI·Antigravity 대상에만 생성됩니다. Codex CLI·Android Studio 등에서 동등한 write subagent와 workspace 격리가 확인되지 않으면 병렬 쓰기를 하지 않고 순차 실행합니다.
+Worker 정의는 Claude Code·Copilot·Copilot CLI·Antigravity 대상에만 생성됩니다. 직접 호출 제한은 런타임별로 다르므로 native control이 없는 환경에서는 instruction-level 제한으로 취급합니다. Codex CLI·Android Studio 등에서 동등한 write subagent와 workspace 격리가 확인되지 않으면 병렬 쓰기를 하지 않고 순차 실행합니다.
 
 ## Delegated Review
 
