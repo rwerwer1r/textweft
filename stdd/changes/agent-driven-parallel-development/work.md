@@ -47,11 +47,12 @@ Template의 문서 구조와 에이전트 중심 개발 운영 방식을 Textwef
 
 - PR #14는 `d95d88c703842202634e6149b39b826e6d13d9ba`로 main에 병합되었습니다. PR #16은 main을 base로 동기화했고, 현재 비교는 26 commits ahead / 0 behind이며 GitHub가 mergeable로 보고합니다.
 - PR #16은 [열린 상태](https://github.com/rwerwer1r/textweft/pull/16)로 유지합니다. 병합은 요청되지 않았습니다.
-- GitHub Actions [CI run #147](https://github.com/rwerwer1r/textweft/actions/runs/44352842791)은 head `bfd3b907aff936d4a206e970609d8c1e16fa674e`에서 `npm ci`, `npm test`(27 tests pass), `npm run typecheck`를 성공적으로 완료했습니다.
+- GitHub Actions [CI run #148](https://github.com/rwerwer1r/textweft/actions/runs/44353771831)은 head `fe734526e447959cf8001f8623c022a5dfb0af58`에서 `npm ci`, `npm test`(27 tests pass / 0 fail), `npm run typecheck`를 성공적으로 완료했습니다.
 - 해당 테스트 실행에는 docs index, route/Agent metadata, Issue Forms, Inbox metadata 테스트가 포함됩니다. docs index의 committed output 비교도 테스트합니다.
 - Self-review에서 dangling index symlink 테스트 fixture의 이중 이스케이프를 수정하고, 전체 docs tree 검증이 이미 symlink를 차단하므로 중복된 사후 lstat 검사를 제거했습니다.
 - Inbox bundle README 템플릿의 아직 생성되지 않은 자식 문서 링크를 파일명 placeholder로 바꿔 템플릿 자체의 잘못된 상대 링크를 제거했습니다.
 - PR 변경 Markdown 64개 파일의 상대 링크 경로를 검사했고, 위 템플릿 링크를 수정했습니다. 제품 런타임·의존성·CI 정의는 변경하지 않았습니다.
+- CI 이후의 이 기록 갱신은 handoff metadata만 변경하며 코드·테스트·의존성에는 영향을 주지 않습니다.
 
 ## Remaining Limitations
 
