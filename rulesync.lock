@@ -30,6 +30,19 @@
         "review-changes"
       ],
       "skillsPath": "src/rulesync/.rulesync/skills"
+    },
+    "mols3131d/mols-agent-assets@a4b8a6a7f58650cb937b99da4a02c76a1f828f96:src/rulesync/.rulesync/skills": {
+      "requestedRef": "a4b8a6a7f58650cb937b99da4a02c76a1f828f96",
+      "resolvedRef": "a4b8a6a7f58650cb937b99da4a02c76a1f828f96",
+      "skills": {
+        "mols-stdd": {
+          "integrity": "sha256-789d2211330e04a065e2f00a6994c1c376bba844a5ce1faea199e7495b16f1a5"
+        }
+      },
+      "skillSelection": [
+        "mols-stdd"
+      ],
+      "skillsPath": "src/rulesync/.rulesync/skills"
     }
   }
 }

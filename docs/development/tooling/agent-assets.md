@@ -2,7 +2,7 @@
 
 이 문서는 Textweft에서 채택한 외부 Agent Asset의 **선택·사용·검증 경계**만 소유합니다. 저장소·계정·승인 정책은 [AGENTS.md](../../../AGENTS.md), 외부 의존성·생성 절차는 [Rulesync](rulesync.md)를 따릅니다. 자산 출처는 읽기 전용인 [mols-agent-assets](https://github.com/mols3131d/mols-agent-assets)이며 해당 저장소에 쓰지 않습니다.
 
-## Persistent: five external Skills
+## Persistent: six external Skills
 
 | Skill | 선택할 작업 |
 | --- | --- |
@@ -10,15 +10,16 @@
 | [review-changes](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/review-changes/SKILL.md) | 범위가 지정된 커밋·PR·diff를 근거 중심으로 검토할 때 |
 | [mols-test-design](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-test-design/SKILL.md) | MVP 및 프레임워크의 관찰 가능한 동작·실패 경계 테스트를 설계·평가할 때 |
 | [mols-loops](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-loops/SKILL.md) | 반복 개선이 명시되거나 한 번의 검토로 결정하기 어려운 복합 작업일 때 |
+| [mols-stdd](https://github.com/mols3131d/mols-agent-assets/blob/a4b8a6a7f58650cb937b99da4a02c76a1f828f96/src/rulesync/.rulesync/skills/mols-stdd/SKILL.md) | [STDD](../../../stdd/README.md)의 Change 티켓·백로그·상태·명세 delta와 완료 근거를 관리할 때 |
 | [mols-chatbot-continuity](https://github.com/mols3131d/mols-agent-assets/blob/4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9/src/rulesync/.rulesync/skills/mols-chatbot-continuity/SKILL.md) | 여러 실행에 걸친 예약·이벤트 기반 업무의 트리거·재개·중지 설계. 일회성 작업·단순 알림에는 제외 |
 
 프로젝트 [Workflow Skills](../../../.rulesync/skills/README.md)의 복합 작업 오케스트레이션은 **`mols-loops` 원본 계약**을 사용합니다. 이 문서는 의존성·사용 조건만 소유하며, RPI 전이·재귀·반복 예산은 재구현하지 않습니다.
 
-선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 기존 [일상 작업 루프](../workflows/routine-loop.md)와 승인 게이트가 우선하며, 외부 Skill은 새 권한을 부여하지 않습니다.
+선택 목록과 외부 revision은 [rulesync.jsonc](../../../rulesync.jsonc)가 소유합니다. 기존 다섯 Skill의 고정 revision은 유지하고, `mols-stdd`만 별도 고정 source로 추가합니다. 실행 환경에서 설치할 때만 원본 Skill과 필요한 부속 파일을 가져오며, 이 저장소의 `.rulesync/skills/`에 동일한 원본을 수동 복제하지 않습니다. Skill의 설명과 적용 조건을 보고 **필요한 경우에만 로드**합니다. 기존 [일상 작업 루프](../workflows/routine-loop.md)와 승인 게이트가 우선하며, 외부 Skill은 새 권한을 부여하지 않습니다.
 
 ## Project-managed Agent definitions
 
-[Agent Roles](../ai-agent/agents.md)에 사용자 직접 선택형 메인 Agent 1개와 위임형 전문 리뷰 Agent 3개를 프로젝트 원본 `.rulesync/subagents/`로 채택했습니다. 초기 도입은 읽기 전용으로 검토한 외부 revision `162aaa38c77adf382f9ba06b099ea1c5624c0924`를 기준으로 하며, 이후 수정은 Textweft에서 소유합니다. 이 정의들은 기존 외부 **5개 Skill 잠금**과 별개입니다. 실제 사용자 선택·위임·독립성·안전성은 대상 런타임 관찰로 평가합니다.
+[Agent Roles](../ai-agent/agents.md)에 사용자 직접 선택형 메인 Agent 1개와 위임형 전문 리뷰 Agent 3개를 프로젝트 원본 `.rulesync/subagents/`로 채택했습니다. 초기 도입은 읽기 전용으로 검토한 외부 revision `162aaa38c77adf382f9ba06b099ea1c5624c0924`를 기준으로 하며, 이후 수정은 Textweft에서 소유합니다. 이 정의들은 기존 외부 **Skill 잠금**과 별개입니다. 실제 사용자 선택·위임·독립성·안전성은 대상 런타임 관찰로 평가합니다.
 
 ## Occasional: four reference-based procedures
 
@@ -48,7 +49,7 @@
 
 ## Installation and Evidence
 
-- **선언 확인:** `rulesync.jsonc`의 `sources`에서 위 다섯 Skill과 고정 source SHA만 지정했는지 확인합니다.
+- **선언 확인:** `rulesync.jsonc`의 `sources`에서 위 여섯 Skill과 각 고정 source SHA를 지정했는지 확인합니다.
 - **최초 잠금 생성(명시적 작업):** 도구가 설치된 개발 환경에서 `npm install --package-lock-only --ignore-scripts`와 `mise run rulesync:resolve`를 사용하여 **`package-lock.json`과 `rulesync.lock` 둘 다** 생성합니다. 출처·선택 목록·integrity·변경을 리뷰하고 각각 커밋합니다. 두 잠금 파일을 프로젝트 CI의 일회성 생성 작업에서 만들고 리뷰 후 Git에 커밋했습니다. 이후에는 `--frozen` 설치만 정상 경로로 허용하며, 변경이 필요할 때만 잠금 생성 명령을 다시 사용합니다. 잠금 존재만으로 부트스트랩·타깃 로딩을 검증했다고 간주하지 않습니다.
 - **잠금 후 재현:** `mise run bootstrap` → `mise run update` 재실행 → `mise run rulesync:install` → `mise run rulesync:generate` → `mise run rulesync:check` → `mise run routes:check` → `mise run check`의 실측 결과를 별도로 남깁니다. `rulesync generate` 자체는 외부 source를 fetch하지 않습니다.
 - **CI 게이트:** [PR/main CI](../../../.github/workflows/ci.yml)는 `npm ci`·`npm test`·`npm run typecheck`만 수행합니다. Rulesync 설치·생성, 라우팅 색인, Markdown·훅 검사는 수동 하네스 점검에 남깁니다. CI 통과가 에이전트 자동 로딩·브랜치 보호 설정을 보증하지 않습니다.
