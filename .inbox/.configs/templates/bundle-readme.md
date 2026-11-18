@@ -7,7 +7,7 @@ description: "[이 번들이 다루는 작업 결과와 자식 문서의 선택 
 
 ## Documents
 
-- [Findings](findings.md): [선택 기준]
-- [Evidence](evidence.md): [선택 기준]
+- `findings.md` — [선택 기준]
+- `evidence.md` — [선택 기준]
 
-<!-- 실제 파일만 남기고 placeholder와 사용하지 않는 섹션을 제거합니다. 복사 후 description과 updated를 추가합니다. -->
+<!-- 실제로 만든 자식 문서만 남깁니다. 파일을 생성한 뒤 파일명을 상대 링크로 바꾸고 placeholder를 제거합니다. 복사 후 description과 updated를 추가합니다. -->
