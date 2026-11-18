@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -74,10 +74,11 @@ test("the committed documentation index matches all current docs", () => {
 
 test("refuses dangling index symlinks without following them", (t) => {
   const { docs, write } = fixture(t);
-  write("guide.md", '---\\ndescription: "Valid"\\n---\\n');
+  write("guide.md", '---\ndescription: "Valid"\n---\n');
   const index = join(docs, "INDEX.tsv");
   const destination = join(docs, "missing-target.tsv");
   symlinkSync(destination, index);
   assert.throws(() => syncIndex(docs), /symlink/);
   assert.equal(readlinkSync(index), destination);
+  assert.equal(existsSync(destination), false);
 });
