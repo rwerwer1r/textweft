@@ -24,6 +24,9 @@ The current development documentation does not yet provide one discoverable, end
 8. **Harness evidence:** configured, reachable, and observed-applied are distinct evidence levels. Static manifests and generated files do not prove runtime loading or behavioral compliance.
 9. **Progressive documentation:** docs has a short root map, topical directory entrypoints, canonical owners, concise selection metadata, and a deterministic shallow index. Existing document owners and established paths remain stable.
 10. **Bounded automation:** existing mise, Rulesync, rumdl, Biome, Lefthook, tests, and CI are reused. No new CI job or custom framework is introduced unless a demonstrated gap requires it.
+11. **Git collaboration:** branch, Worktree, commit, stacked PR, integration, and recovery guidance must preserve isolated write ownership, current-ref verification, and explicit merge approval.
+12. **GitHub authoring:** generic Issue, conversation, review, and inline-comment aids are manual templates; GitHub/API application and review decisions remain explicit platform actions.
+13. **Capability routing:** Skills are exposed only to supported Skill targets; delegated write Workers are declared separately and never imply verified workspace isolation or parallel runtime behavior.
 
 ## Acceptance Scenarios
 
