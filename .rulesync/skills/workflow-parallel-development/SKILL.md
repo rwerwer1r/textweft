@@ -7,11 +7,9 @@ description: >-
 targets:
   - copilot
   - copilotcli
-  - codexcli
   - claudecode
   - antigravity-ide
   - antigravity-cli
-  - androidstudio
 ---
 # Parallel Agentic Development
 

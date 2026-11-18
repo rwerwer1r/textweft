@@ -12,7 +12,7 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 | [AGENTS.md](../../../AGENTS.md)·[CHATBOT.md](../../../CHATBOT.md) | Git 추적 공통 진입점, 자동 생성·덮어쓰기 금지 |
 | `CLAUDE.md`·`GEMINI.md` | Git에서 제외하는 로컬 진입점; `mise run update`가 없을 때만 만들며 기존 파일은 보존 |
 | [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md)·`.rulesync/commands/` | Rule·Skill·Command 원본 (Command는 아직 정의 없음) |
-| [`.rulesync/subagents/`](../../../.rulesync/subagents/mols-autopilot.md) | 사용자 직접 선택형 메인 Agent·위임형 전문 리뷰 Agent의 원본. [Agent Roles](../ai-agent/agents.md) 참조 |
+| [`.rulesync/subagents/`](../../../.rulesync/subagents/mols-autopilot.md) | 사용자 직접 선택형 Autopilot·위임형 Work Unit Worker·전문 리뷰 Agent의 원본. [Agent Roles](../ai-agent/agents.md) 참조 |
 | [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 여섯 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
 | [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
 | `.github/instructions/`·`.github/prompts/` 등 도구별 투영 | 로컬 생성물, Git 무시 |

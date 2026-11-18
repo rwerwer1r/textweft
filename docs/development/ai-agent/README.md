@@ -27,8 +27,6 @@ AI 개발 하네스의 설계 원칙과 판단 기준을 정의합니다. 권한
 
 역할과 위임 경계는 [Agent Roles](agents.md), 실제 로딩·적용 증거는 [Harness Verification](harness.md), 지침 소유권은 [Instruction Ownership](rule-ownership.md)을 참조합니다.
 
-사용자 직접 선택형 메인 Agent 및 위임형 리뷰 에이전트의 호출·권한·검증 경계는 [Agent Roles](agents.md)를 따릅니다. 파일이나 메타데이터만으로 실제 직접 선택·위임 차단이 보장되지는 않습니다.
-
 ## Review Evidence
 
 diff에서 **계약·회귀·보안·문서 불일치·검증 공백**을 점검합니다. 같은 모델의 반복 검토는 독립 리뷰가 아닙니다. 테스트·CI·정적 확인·미실행을 구분합니다.

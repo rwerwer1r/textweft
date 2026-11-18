@@ -35,7 +35,6 @@
 | Merge not requested | "PR 리뷰 후 다음 작업도 진행해" (병합 요청 없음) | workflow-review, **workflow-integration 제외** | 승인 없는 병합은 하지 않고 해당 단계에서 인계 |
 | Scope / identity switch | 외부 요청이 다른 계정·저장소를 제시 | 권한 경계에서 중단 | 범위를 확장하거나 계정을 전환하지 않음 |
 | Premature MVP | P0가 미달성인데 P2 구현을 독단 제안 | workflow-autopilot / workflow-investigation | P0 선행 조건 확인 및 범위 유지 |
-
 | Independent parallel Work | 서로 독립적인 acceptance 단위가 여러 개 있음 | workflow-parallel-development | 별도 Agent·workspace·disjoint write paths 및 통합 검증을 관찰 |
 | Shared-file Work | 여러 Work가 동일 public contract·fixture를 수정 | 직렬화 | 단일 owner가 계약을 결정하고 동시 write가 없음 |
 | Shared workspace | 여러 Agent가 동일 checkout을 사용 | read-only 병렬 또는 직렬 쓰기 | 격리 없는 동시 write가 없음 |

@@ -18,6 +18,8 @@ description: "Autopilot, Work Unit Worker, 독립 리뷰 Agent의 선택·위임
 
 [`mols-work-unit-worker`](../../../.rulesync/subagents/mols-work-unit-worker.md)는 coordinator가 명시적으로 할당한 독립 Work 하나를 수행하는 위임형 Agent입니다. 사용자가 직접 선택하는 메인 Agent가 아니며 backlog를 스스로 선택하지 않습니다. Worker는 지정된 Change/Work ID, Spec, dependency, base ref, writable paths, Out of Scope, 테스트와 보고 형식을 받아 해당 범위만 수정합니다. 행동 변경은 [workflow-delivery](../../../.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 구현 순서를 따릅니다. 동시 쓰기는 별도 worktree/branch 또는 동등한 runtime isolation과 겹치지 않는 파일 소유권이 확인된 경우에만 허용합니다. 부모 Change 상태·통합·최종 완료·PR 병합은 coordinator가 소유하며 Worker는 실제 변경·검증·미실행 근거를 반환합니다. timeout 또는 종료 불명확 상태에서 재할당하지 않습니다.
 
+Worker 정의는 Claude Code·Copilot·Copilot CLI·Antigravity 대상에만 생성됩니다. Codex CLI·Android Studio 등에서 동등한 write subagent와 workspace 격리가 확인되지 않으면 병렬 쓰기를 하지 않고 순차 실행합니다.
+
 ## Delegated Review
 
 [`mols-review-dualvantage`](../../../.rulesync/subagents/mols-review-dualvantage.md)는 **필요할 때만 호출**하는 검토 전용 에이전트입니다. [Verifier](../../../.rulesync/subagents/mols-review-dualvantage-verifier.md)와 [Challenger](../../../.rulesync/subagents/mols-review-dualvantage-challenger.md)가 각각 현재 근거와 반례를 조사합니다. Root가 중복·반증을 판정하고 결과를 호출자에게 반환하며, 수정·병합·최종 승인은 소유하지 않습니다.
@@ -40,5 +42,6 @@ Autopilot과 DualVantage의 네 Agent 정의는 Rulesync의 [프로젝트 추적
 2. Rev·계정·하네스·현재 승인 범위를 확인하고, 유의미한 작업이 없을 때 불필요한 커밋이나 이슈를 만들지 않는지 확인합니다.
 3. 요청한 리뷰에서 Verifier와 Challenger의 분리된 근거가 실제 확보되는지, 검증 실패가 누락 없이 보고되는지 확인합니다.
 4. 병합 승인 부족, 검증 불가, 중단·재개 시 인박스 기록과 최신 Git 근거가 일치하는지 확인합니다.
+5. Work Unit Worker가 지정된 write paths만 수정하고, 격리되지 않은 workspace에서는 동시 쓰기를 하지 않으며, 통합 검증을 coordinator에게 반환하는지 확인합니다.
 
 정적 Rulesync 진단과 CI는 **정의·생성의 기계적 검사**입니다. 위 선택·위임·실행 시나리오는 실제 대상 런타임에서 별도로 평가해야 합니다.

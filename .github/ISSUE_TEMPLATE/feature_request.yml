@@ -1,7 +1,6 @@
 name: Feature proposal
 description: 문제와 관찰 가능한 결과를 제안합니다.
 title: "[Proposal] "
-labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
