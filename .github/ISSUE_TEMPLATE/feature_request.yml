@@ -1,0 +1,40 @@
+name: Feature proposal
+description: 문제와 관찰 가능한 결과를 제안합니다.
+title: "[Proposal] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        문제와 원하는 결과를 먼저 작성합니다. 제안이나 가정은 현재 구현된 사실로 취급하지 않습니다.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: 현재 사용자 또는 개발 흐름에서 어떤 문제가 발생합니까?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: 어떤 관찰 가능한 결과가 달라져야 합니까?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: 독립적으로 확인할 수 있는 조건을 적습니다.
+      placeholder: |
+        - Given [scenario], [observable result]
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Scope and risks
+      description: 제외 범위, 호환성, 의존성, capability·권한 제약을 적습니다.
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: 알려진 코드 경로, Spec, 관련 Issue/PR을 적습니다. 확인하지 않은 경로를 추측하지 않습니다.

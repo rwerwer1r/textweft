@@ -20,6 +20,8 @@ example = "npm run example"
 "routes:test" = "node --test tests/agent-route-index.test.mjs"
 "inbox:test" = "node --test tests/inbox-harness.test.mjs"
 "inbox:check" = "node scripts/check-inbox.mjs"
+"docs:index" = "node scripts/generate-docs-index.mjs"
+"docs:index:check" = "node scripts/generate-docs-index.mjs --check"
 "hooks:install" = "lefthook install"
 "hooks:validate" = "lefthook validate"
 # resolve는 최초 잠금 생성/명시 갱신에만 사용. frozen은 기존 lock을 바꾸지 않습니다.
@@ -29,5 +31,5 @@ example = "npm run example"
 "rulesync:check" = "rulesync doctor --strict"
 
 [tasks.check]
-depends = ["lint:md", "lint:code", "hooks:validate", "routes:check", "routes:test", "inbox:test", "rulesync:check", "test", "typecheck"]
-description = "변경 전 검증: rumdl, Biome, 라우팅·인박스 고유 계약, 런타임 테스트와 타입"
+depends = ["lint:md", "lint:code", "hooks:validate", "routes:check", "routes:test", "inbox:test", "docs:index:check", "rulesync:check", "test", "typecheck"]
+description = "변경 전 검증: rumdl, Biome, 라우팅·인박스·문서 인덱스 계약, 런타임 테스트와 타입"

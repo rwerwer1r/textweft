@@ -7,7 +7,7 @@
     "node": ">=22.16.0"
   },
   "scripts": {
-    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "test": "node --experimental-strip-types --test tests/*.test.ts tests/*.test.mjs",
     "typecheck": "tsc --noEmit",
     "example": "node --experimental-strip-types examples/lighthouse/main.ts"
   },

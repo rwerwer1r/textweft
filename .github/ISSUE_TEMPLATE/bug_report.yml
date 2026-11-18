@@ -1,0 +1,41 @@
+name: Bug report
+description: 재현 가능한 결함과 실제 관찰 근거를 기록합니다.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        관찰된 동작과 추정 원인을 구분합니다. 자격 증명·개인정보·민감 로그는 제거하고, 실행하지 않은 검증은 표시하지 않습니다.
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: 어떤 동작·오류가 어디서 발생했습니까?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: 가장 작은 재현 절차와 입력을 적습니다. 재현되지 않으면 그 사실을 명시합니다.
+      placeholder: |
+        1. ...
+        2. ...
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: 기대하는 관찰 결과와 관련 Spec/계약을 적습니다.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: 관련 OS·런타임·설정·확인한 버전. 확인하지 않은 버전은 추측하지 않습니다.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: 민감정보를 제거한 로그·경로·ref·실행한 검사와 결과·미확인 항목.
