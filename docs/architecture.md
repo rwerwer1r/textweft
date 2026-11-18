@@ -1,12 +1,15 @@
+---
+description: "확정된 Rust 코어 결정, 계층 경계와 아직 결정되지 않은 아키텍처 항목을 확인할 때 읽습니다."
+---
 # Core Architecture Decision
 
-- **결정:** 게임 실행 코어는 **Rust**로 구현한다(2026-11-02, 프레임워크 개발자 결정).
+- **결정:** 게임 실행 코어는 Rust로 구현한다(2026-11-02, 프레임워크 개발자 결정).
 - **적용 범위:** 새 코어 설계. 기존 TypeScript 프로토타입의 구조·훅 계약은 설계를 구속하지 않는다.
 - **상태:** 설계 결정 기록. 구현·배포·병합 승인을 의미하지 않는다.
 
 ## Rationale
 
-Rust의 타입·소유권·컴파일러·Clippy 피드백은 AI 주도 엔진 개발에서 오류를 조기에 발견하고 불변식을 표현하는 데 유용하다. **Rust 자체가 게임 규칙의 정확성이나 바이브코딩 생산성을 보장하지는 않는다.** 실행·계약 테스트로 검증해야 한다.
+Rust의 타입·소유권·컴파일러·Clippy 피드백은 AI 주도 엔진 개발에서 오류를 조기에 발견하고 불변식을 표현하는 데 유용하다. Rust 자체가 게임 규칙의 정확성이나 바이브코딩 생산성을 보장하지는 않는다. 실행·계약 테스트로 검증해야 한다.
 
 ## Boundaries
 
@@ -24,4 +27,4 @@ Rust의 타입·소유권·컴파일러·Clippy 피드백은 AI 주도 엔진 �
 - 게임별 규칙의 확장 범위와 검증 방식
 - 웹 계층·WASM 연결 및 초기 실행·배포 경로
 
-현재 **제품 목표와 집중 범위**는 [Project Goal](GOAL.md), 초기 설계·수용 조건은 [Engine Design Research](architecture/engine-research.md)에서 관리한다. **기존 구현 상태는 [README](../README.md)와 코드·테스트**에서 확인한다. **P0 개발 하네스 → P1 MVP 설정 → P2 구현** 순서는 [Development Guide](development/README.md)를 따른다.
+제품 목표는 [GOAL](GOAL.md), 초기 설계·수용 조건은 [Engine Design Research](architecture/engine-research.md), 현재 구현은 [README](../README.md)와 코드·테스트가 소유한다.

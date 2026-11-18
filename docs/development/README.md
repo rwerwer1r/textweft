@@ -1,43 +1,41 @@
+---
+description: "개발 우선순위, 에이전트 협업, 작업 워크플로, 도구와 검증 경로를 선택할 때 읽습니다."
+---
 # Textweft Development
 
-**공통 계약은 [AGENTS.md](../../AGENTS.md).** 이 문서는 작업에 필요한 세부 문서를 **하나씩 선택하기 위한 라우터**입니다. 관련 없는 링크는 따라가지 않습니다.
+**공통 계약은 [AGENTS.md](../../AGENTS.md).** 이 문서는 작업에 필요한 세부 문서를 하나씩 선택하기 위한 라우터입니다. 관련 없는 링크는 따라가지 않습니다.
 
 ## Execution Priorities
 
-현재 실행 순서는 **P0 개발 환경·하네스 구축 → P1 MVP 설정 → P2 MVP 구현**입니다. 다음 단계는 앞 단계의 완료 조건과 검증 근거를 확인한 뒤 진행합니다. 기존 v0.1 런타임 계약은 보존하되 P0 동안 MVP 기능 확장을 앞당기지 않습니다.
+현재 실행 순서는 **P0 개발 환경·하네스 구축 → P1 MVP 설정 → P2 MVP 구현**입니다. 다음 단계는 앞 단계의 완료 조건과 검증 근거를 확인한 뒤 진행합니다.
 
 | 단계 | 작업 범위 | 다음 단계 진입 조건 |
 | --- | --- | --- |
-| **P0 — 개발 환경·하네스 구축** | mise 기반 버전·의존성 관리, 부트스트랩/업데이트, rumdl·Biome·Lefthook, Rulesync·에이전트 라우팅, 재현 가능한 검증 체계 | 새 클론에서 `mise run bootstrap`과 `mise run check`를 실제로 실행·기록하고 `mise run update` 재실행을 확인. npm 잠금 파일 등 재현성 문제를 해결하고 변경을 리뷰·승인된 정본에 반영 |
-| **P1 — MVP 설정** | 바이브코더의 최소 사용 시나리오, MVP 범위·비목표, 핵심 API/콘텐츠 계약, 초기 구성·실행 경로, 수용 조건과 테스트 계획 | 구현 가능한 최소 수직 기능 범위와 중요한 제품 결정을 확정하고 검토 가능한 설정·명세 확보 |
-| **P2 — MVP 구현** | 합의된 범위만 코드·예제·테스트·문서에 구현하고 사용 흐름을 검증 | 자연어 의도 → 게임 정의 → 실행 → 수정 경로를 재현하고 관련 테스트·타입·실행 검증 근거 확보 |
-
-**현재 초점은 P0**입니다. P1·P2에 필요한 선행 조사나 초안은 가능하지만, P0의 미검증 사항을 건너뛰어 MVP 구현으로 전환하지 않습니다. 단계 전환도 [AGENTS.md](../../AGENTS.md)의 병합·릴리스·중요 결정 승인 요건을 대체하지 않습니다.
+| P0 — 개발 환경·하네스 | mise, Rulesync, 에이전트 라우팅, 검증, 재현 가능한 개발 환경 | 새 클론의 bootstrap·check·update 재실행 근거 |
+| P1 — MVP 설정 | 사용자 시나리오, MVP 범위, 핵심 계약, 수용 조건과 테스트 계획 | 구현 가능한 최소 수직 범위와 검토된 명세 |
+| P2 — MVP 구현 | 합의된 범위의 코드·테스트·예제·문서 구현 | 실제 게임 제작 흐름과 관련 검증 근거 |
 
 ## Route by Task
 
 | 작업 | 우선 읽을 문서 |
 | --- | --- |
-| 게임 런타임·API·예제 | [README](../../README.md) 및 관련 코드·테스트 |
-| 확정된 Rust 코어·계층 경계 | [Architecture Decision](../architecture.md) |
-| 초기 게임 계약·수용 시나리오 | [Engine Design Research](../architecture/engine-research.md) |
-| 제품 목표·역할·문서 언어 | [GOAL](../GOAL.md) · [GLOSSARY](../GLOSSARY.md) · [LANGUAGE](../LANGUAGE.md) 중 필요한 것 |
-| 프로젝트 개발 철학·원칙 | [PRINCIPLES](../PRINCIPLES.md) |
-| 목표·구현·리뷰·복구·재개 등 업무별 실행 Skill | [Workflow Skills](../../.rulesync/skills/README.md) · [ROUTE](../../.agents/route/ROUTE.md) |
-| 준비·구현·리뷰·병합 단계 판단 | [Workflow Selection](workflows/choosing.md) |
-| 실제 변경·검증·리뷰 | [Routine Loop](workflows/routine-loop.md) |
-| AI 주도 개발·바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
-| 중요한 사람 결정·리뷰 근거 | [Agent Governance](ai-agent/README.md) |
-| 사용자 선택형 Agent·전문 위임·호출 제한 | [Agent Roles](ai-agent/agents.md) |
-| Rule·Skill 선택 | [ROUTE](../../.agents/route/ROUTE.md) |
-| Rulesync 설정·생성·잠금 | [Rulesync](tooling/rulesync.md) |
-| 외부 Skill 선택·일회성 하네스 절차 | [Selective Agent Assets](tooling/agent-assets.md) |
-| Change 티켓·상태·명세 delta | [STDD Workspace](../../stdd/README.md) · [외부 Skill](tooling/agent-assets.md) |
-| 장기 작업의 원격 체크포인트·재개 | [Inbox](../../.inbox/README.md) |
-| **런타임이 없거나 제한된 챗봇만** | [CHATBOT](../../CHATBOT.md) |
+| 제품 목표·역할·언어·원칙 | [Goal](../goal/README.md) |
+| 확정된 코어 결정·초기 설계 | [Architecture](../architecture/README.md) |
+| AI 주도 개발 원칙과 역할 | [Agent-driven Development](workflows/agent-driven-development.md) · [Agent Roles](ai-agent/agents.md) |
+| 에이전트 로딩·지침 소유권 | [Harness Verification](ai-agent/harness.md) · [Instruction Ownership](ai-agent/rule-ownership.md) |
+| 병렬 Work 분해·위임·통합 | [Parallel Agentic Development](workflows/parallel-agentic-development.md) |
+| Change·Spec 중심 개발 | [Spec-driven Development](workflows/spec-driven-development.md) · [STDD](../../stdd/README.md) |
+| 테스트 우선 개발 | [Test-driven Development](workflows/test-driven-development.md) · [Delivery Skill](../../.rulesync/skills/workflow-delivery/SKILL.md) |
+| 준비·구현·리뷰·병합 단계 | [Workflow Selection](workflows/choosing.md) |
+| 일상 변경·검증·인계 | [Routine Loop](workflows/routine-loop.md) |
+| 바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
+| Rule·Skill 선택 | [ROUTE](../../.agents/route/ROUTE.md) · [Workflow Skills](../../.rulesync/skills/README.md) |
+| Rulesync·외부 자산 | [Tooling](tooling/README.md) |
+| 세션 복구·증거 | [Inbox](../../.inbox/README.md) |
+| 런타임이 없거나 제한된 챗봇만 | [CHATBOT](../../CHATBOT.md) |
 
 ## Checks
 
-**[mise.toml](../../mise.toml)이 도구 버전과 검사 작업의 정본**입니다. [개발 환경 초기화](../../mise-tasks/bootstrap)는 `mise run bootstrap`, 기존 환경 [동기화](../../mise-tasks/update)는 `mise run update`를 사용합니다. 초기화는 Git 로컬 커밋 템플릿·Lefthook·고정된 외부 Skill도 설치합니다. 두 잠금 파일은 Git에 고정되어 있으며 갱신은 [선택형 자산 가이드](tooling/agent-assets.md)에서 별도로 관리합니다. 부트스트랩과 CI의 실제 성공은 실행 결과로만 판단합니다. `mise run check`로 전체 검사, 변경 범위에 따라 `mise run lint:md`(rumdl·링크), `mise run lint:code`(Biome), `mise run routes:check`, `mise run test`, `mise run typecheck`를 선택합니다. Rulesync 진단은 `mise run rulesync:check`를 사용합니다. [Lefthook](../../lefthook.yml)은 `mise run hooks:install`로 로컬 Git 훅에 한 번 설치하며 스테이징된 파일만 검사합니다. 훅 통과는 `mise run check`나 CI 성공을 뜻하지 않습니다. **미실행 검사를 통과로 보고하지 않습니다.**
+도구 버전과 task는 [mise.toml](../../mise.toml)이 소유합니다. 최초 설정은 `mise run bootstrap`, 기존 환경 동기화는 `mise run update`입니다. `mise run check`는 관련 Markdown·코드·라우팅·인박스·문서 인덱스·런타임 검사를 수행합니다. 작은 변경은 `mise run lint:md`, `mise run routes:check`, `mise run docs:index:check`, `mise run test` 등으로 범위를 줄입니다.
 
-[CI](../../.github/workflows/ci.yml)는 PR/main에서 **`npm ci`·`npm test`·`npm run typecheck`만** 실행하는 최소 게이트입니다. Markdown/코드 스타일, Rulesync·라우팅, 훅, 부트스트랩/업데이트 검사는 CI 필수 항목이 아니며 필요할 때 `mise run check` 등으로 별도 검증합니다. CI 통과는 개발 환경 부트스트랩이나 에이전트 투영 검증을 뜻하지 않습니다.
+[CI](../../.github/workflows/ci.yml)는 의도적으로 `npm ci`, `npm test`, `npm run typecheck`만 실행합니다. `npm test`는 런타임과 문서 인덱스의 결정론적 테스트를 포함합니다. Rulesync 설치·실제 에이전트 로딩·로컬 훅·전체 스타일 검사는 CI가 증명하지 않습니다. 실행·정적 확인·CI·미실행을 구분하고 미실행 검사를 통과로 보고하지 않습니다.
