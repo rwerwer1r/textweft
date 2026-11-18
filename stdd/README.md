@@ -12,7 +12,7 @@ stdd/
 ```
 
 - **Change ID**는 `stdd/changes/` 아래 정규화된 상대 경로입니다. 독립적으로 검증·완료할 수 있는 결과 하나에 ID 하나를 사용합니다.
-- `work.md`는 목표·완료 조건·다음 행동과 `status: todo | doing | done | cancelled`를 기록합니다. `depends_on`은 선택적으로 사용하며, `ready`·`blocked`는 실제 선행 상태에서 계산하고 저장하지 않습니다.
+- `work.md`는 목표·완료 조건·다음 행동과 `status: todo | doing | done | cancelled`를 기록합니다. `depends_on`은 선택 사항입니다. `ready`·`blocked`·`unknown`은 저장하지 않고 계산합니다. 모든 선행 Change가 `done`이고 외부 차단이 없는 `todo`만 `ready`입니다. 미완료·취소된 선행 Change는 `blocked`, 선행 Change의 누락·순환·조회 실패는 `unknown`이며 확인할 수 없는 상태를 `ready`로 추정하지 않습니다.
 - 명세 delta는 동작 계약이 바뀔 때만 기록합니다. 이미 정본인 도메인 문서가 있으면 해당 정본을 유지하고 중복 명세를 만들지 않습니다. 제품 코드·테스트는 기존 위치를 사용합니다.
 - Change를 발행하는 행위는 GitHub Issue 생성이나 실행 승인과 다릅니다. 첫 도입 단계에서는 빈 Change·가상 티켓·샘플 명세를 만들지 않습니다.
 
