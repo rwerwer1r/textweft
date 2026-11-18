@@ -1,6 +1,6 @@
 ---
 description: "현재 Agent-driven parallel development 하네스 확장 작업의 진행·검증·인계 상태"
-updated: 2026-11-19T01:24:04+09:00
+updated: 2026-11-19T01:35:24+09:00
 ---
 # Agent-driven parallel development harness
 
@@ -23,7 +23,7 @@ updated: 2026-11-19T01:24:04+09:00
 - Confirmed PR #16 was 12 commits ahead and 0 behind its base at HEAD `3d76da0`; CI run 44344132683 succeeded. Newer commits require fresh CI.
 - Re-inspected the read-only template repository tree and selected additional Git collaboration and GitHub authoring patterns.
 - Added Git branch/Worktree, commit, integration and recovery guides; GitHub comment/review authoring aids and a general Issue template.
-- Added script maintenance guidance, Rulesync preview/refresh tasks, and broader Skill target routing for the parallel workflow.
+- Added script maintenance guidance, Rulesync preview and explicit pinned-source lock resolution, and broader Skill target routing for the parallel workflow.
 - Kept the PR template intentionally concise; its detailed sections remain optional.
 
 ## Remaining work

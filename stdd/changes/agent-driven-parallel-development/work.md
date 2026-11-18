@@ -16,7 +16,7 @@ Template의 문서 구조와 에이전트 중심 개발 운영 방식을 Textwef
 - 병렬 Work 전용 위임 Agent의 범위·파일 소유권·통합 경계 정의
 - Issue 및 Inbox용 최소 작성 템플릿 도입
 - Git branch/worktree·commit·integration·recovery 절차와 GitHub review/comment authoring aids 도입
-- Rulesync preview와 명시적 upstream refresh 경로 추가
+- Rulesync read-only preview와 명시적 pinned-source lock resolution 경로 추가
 - 기존 경량 CI와 승인·계정·저장소 경계 유지
 
 ## Out of Scope
@@ -38,7 +38,7 @@ Template의 문서 구조와 에이전트 중심 개발 운영 방식을 Textwef
 - [ ] Issue/Inbox 템플릿이 프로젝트의 언어·보안·메타데이터 계약을 따른다.
 - [ ] Git branch/worktree·commit·integration·recovery 가이드가 병렬 격리와 승인 경계를 보존한다.
 - [ ] GitHub review/comment 템플릿이 수동 작성 보조임을 명시하고 GitHub 승인 상태를 대체하지 않는다.
-- [ ] Rulesync preview는 읽기 전용이고 upstream refresh는 명시적 갱신 task로만 실행된다.
+- [ ] Rulesync preview는 읽기 전용이며 외부 revision 변경은 manifest SHA 수정과 명시적 lock resolution을 요구한다.
 - [ ] Parallel Workflow는 Skill 지원 타깃에 노출되며 Worker 타깃·실제 격리 지원과 혼동하지 않는다.
 - [ ] 정적 검사와 실제 런타임 관찰을 구분하고 기존 경량 CI를 유지한다.
 - [ ] 변경 diff, 라우팅 색인, 문서 인덱스, 관련 테스트 및 GitHub CI를 확인하고 잔여 미검증 사항을 기록한다.

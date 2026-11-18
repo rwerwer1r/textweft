@@ -30,7 +30,6 @@ example = "npm run example"
 "rulesync:generate" = ["rulesync generate", "node scripts/agent-route-index.mjs generate"]
 "rulesync:check" = "rulesync doctor --strict"
 "rulesync:preview" = ["rulesync doctor --strict", "rulesync generate --dry-run"]
-"rulesync:refresh" = ["rulesync install --update", "rulesync generate", "node scripts/agent-route-index.mjs generate"]
 
 [tasks.check]
 depends = ["lint:md", "lint:code", "hooks:validate", "routes:check", "routes:test", "inbox:test", "docs:index:check", "rulesync:check", "test", "typecheck"]
