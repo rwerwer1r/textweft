@@ -70,8 +70,15 @@ export function renderIndex(root = docsDirectory, maxDepth = 1) {
 export function syncIndex(root = docsDirectory, check = false, maxDepth = 1) {
   const generated = renderIndex(root, maxDepth);
   const target = join(root, "INDEX.tsv");
-  if (existsSync(target) && lstatSync(target).isSymbolicLink()) throw new Error(target + ": symlink는 덮어쓰지 않습니다");
-  const current = existsSync(target) ? readFileSync(target, "utf8") : null;
+  let current = null;
+  try {
+    const stat = lstatSync(target);
+    if (stat.isSymbolicLink()) throw new Error(target + ": symlink는 덮어쓰지 않습니다");
+    if (!stat.isFile()) throw new Error(target + ": 일반 파일만 갱신할 수 있습니다");
+    current = readFileSync(target, "utf8");
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
   if (current === generated) return "current";
   if (check) throw new Error(target + ": INDEX.tsv가 없거나 오래되었습니다");
   writeFileSync(target, generated, "utf8");

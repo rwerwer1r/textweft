@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -70,4 +70,14 @@ test("rejects symlinks and does not follow them", (t) => {
 test("the committed documentation index matches all current docs", () => {
   const root = fileURLToPath(new URL("../docs", import.meta.url));
   assert.equal(readFileSync(join(root, "INDEX.tsv"), "utf8"), renderIndex(root));
+});
+
+test("refuses dangling index symlinks without following them", (t) => {
+  const { docs, write } = fixture(t);
+  write("guide.md", '---\\ndescription: "Valid"\\n---\\n');
+  const index = join(docs, "INDEX.tsv");
+  const destination = join(docs, "missing-target.tsv");
+  symlinkSync(destination, index);
+  assert.throws(() => syncIndex(docs), /symlink/);
+  assert.equal(readlinkSync(index), destination);
 });
