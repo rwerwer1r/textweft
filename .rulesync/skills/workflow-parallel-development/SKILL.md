@@ -21,8 +21,8 @@ targets:
 
 ## Ownership
 
-- `mols-loops`는 outer Run/RPI/재귀/반복 예산을 소유합니다.
-- `mols-stdd`는 Change와 Spec 상태를 소유합니다.
+- `workflow-iteration`는 outer Run/RPI/재귀/반복 예산을 소유합니다.
+- `stdd-management`는 Change와 Spec 상태를 소유합니다.
 - `workflow-delivery`는 각 Work의 Spec → 테스트 설계 → 테스트 구현 → 구현 → Review 순서를 소유합니다.
 - 이 Skill은 독립 Work의 병렬 분해·dispatch·격리·결과 회수·통합 경계만 소유합니다.
 - 부모 Goal·Scope·Acceptance·권한·승인·완료 판정은 coordinator가 소유합니다.
@@ -37,7 +37,7 @@ targets:
 2. **Decompose:** 파일 수가 아니라 독립적으로 검증·완료할 수 있는 결과로 Work를 나눕니다. 선행 관계를 DAG로 기록하고 공유 계약·API·스키마는 먼저 결정합니다.
 3. **Assign ownership:** 각 Work의 Change/Work ID, Goal, Acceptance, dependency, 관련 Spec, base SHA, writable paths, read-only paths, out-of-scope, tests, output format을 지정합니다.
 4. **Verify isolation:** 동시에 쓰는 Worker는 별도 worktree/branch 또는 동등한 runtime isolation과 disjoint write paths를 가져야 합니다. 같은 checkout을 공유하면 read-only 작업만 병렬화하고 writes는 직렬화합니다.
-5. **Dispatch:** 필요한 최소 지침·Spec·계약만 전달하고 `mols-work-unit-worker` 또는 확인된 동등 Agent를 호출합니다. Worker는 자신의 Work에 `workflow-delivery`를 적용합니다.
+5. **Dispatch:** 필요한 최소 지침·Spec·계약만 전달하고 `textweft-work-unit-worker` 또는 확인된 동등 Agent를 호출합니다. Worker는 자신의 Work에 `workflow-delivery`를 적용합니다.
 6. **Track safely:** 실행·종료 상태를 확인합니다. timeout, incomplete response, partial write는 unknown입니다. 종료를 확인하지 못한 Worker를 재할당하지 않습니다.
 7. **Integrate:** 단일 coordinator가 실제 변경 ref·diff·테스트·제한을 회수하고 충돌·중복·계약 불일치를 해결합니다. 통합된 상태에서 cross-Work tests와 부모 Acceptance를 다시 검증합니다.
 8. **Reconcile Change:** 하나의 STDD `work.md`만 갱신합니다. 완료 조건·테스트·Review·Spec 반영이 확인되지 않으면 `done`으로 표시하지 않습니다.

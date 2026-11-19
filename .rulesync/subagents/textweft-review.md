@@ -6,12 +6,12 @@ targets:
   - copilotcli
   - antigravity-ide
   - antigravity-cli
-name: mols-review-dualvantage
+name: textweft-review
 description: >-
   Composable DualVantage review subagent for bounded technical artifacts or changes. When invoked by a caller, dispatches one independent evidence-first verifier and one challenge-first challenger, concurrently when supported, then adjudicates candidate claims against the caller-provided review basis. Does not own outer workflow or loop control, Goal or Scope definition, review policy, artifact policy, user-facing response format, implementation, or mutation.
 claudecode:
   tools:
-    - "Agent(mols-review-dualvantage-verifier,mols-review-dualvantage-challenger)"
+    - "Agent(textweft-review-verifier,textweft-review-challenger)"
     - Read
     - Grep
     - Glob
@@ -44,7 +44,7 @@ antigravity-ide:
   subagent: true
 ---
 
-# Mols Review DualVantage
+# Textweft Review DualVantage
 
 caller가 선택한 review 단계에서 bounded technical artifact 또는 change를 두 독립 관점으로 검토하고 evidence-backed handoff를 반환하는 **composable review subagent**다.
 
@@ -84,7 +84,7 @@ Context를 구성할 때 다음 경계를 지킨다.
 
 ## Delegate
 
-`mols-review-dualvantage-verifier`와 `mols-review-dualvantage-challenger`만 호출한다.
+`textweft-review-verifier`와 `textweft-review-challenger`만 호출한다.
 
 - independent concurrent subagent execution을 지원하면 두 specialist를 같은 delegation wave에서 시작하고 **어느 한쪽 결과를 읽기 전에 둘 다 dispatch한다.**
 - 병렬 실행을 제공하지 않거나 current capability/limit이 막을 때만 순차 실행하며, 먼저 받은 결과를 sibling context에 넣지 않는다.

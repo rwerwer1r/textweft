@@ -5,7 +5,7 @@ targets:
   - copilotcli
   - antigravity-ide
   - antigravity-cli
-name: mols-work-unit-worker
+name: textweft-work-unit-worker
 description: >-
   Delegated implementation worker for one bounded, independently accepted Work unit. Follow the project Spec and test-first delivery workflow, respect explicit file ownership and workspace isolation, and return evidence to the coordinator. Never broaden scope, self-assign, integrate, or merge.
 claudecode:
@@ -40,7 +40,7 @@ antigravity-cli:
   mainAgent: false
   subagent: true
 ---
-# Mols Work Unit Worker
+# Textweft Work Unit Worker
 
 ## Activation
 

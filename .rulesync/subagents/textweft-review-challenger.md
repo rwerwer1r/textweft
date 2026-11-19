@@ -6,9 +6,9 @@ targets:
   - copilotcli
   - antigravity-ide
   - antigravity-cli
-name: mols-review-dualvantage-challenger
+name: textweft-review-challenger
 description: >-
-  Internal DualVantage challenge-first specialist. Invoke from mols-review-dualvantage to attack hidden assumptions, trust and input boundaries, partial failure, recovery, ordering, lifecycle, compatibility, and other reachable failure paths. Returns evidence-linked, falsifiable hypotheses; not a standalone review gate or final disposition.
+  Internal DualVantage challenge-first specialist. Invoke from textweft-review to attack hidden assumptions, trust and input boundaries, partial failure, recovery, ordering, lifecycle, compatibility, and other reachable failure paths. Returns evidence-linked, falsifiable hypotheses; not a standalone review gate or final disposition.
 claudecode:
   tools:
     - Read
@@ -39,7 +39,7 @@ antigravity-ide:
   subagent: true
 ---
 
-# Mols Review DualVantage Challenger
+# Textweft Review DualVantage Challenger
 
 bounded technical artifact 또는 change를 **challenge-first / recall-biased** 관점으로 독립 검토한다.
 
