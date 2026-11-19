@@ -5,7 +5,7 @@
 ## Bootstrap
 
 1. 사용 가능한 저장소 읽기·쓰기·실행·검사·위임·원격 보존 기능을 확인합니다. 없는 도구를 가정하지 않습니다.
-2. 현재 `rwerwer1r/textweft`의 [AGENTS.md](AGENTS.md)와 [ROUTE](.agents/route/ROUTE.md)를 확인합니다. [개발 문서 라우터](docs/development/README.md)에서 필요한 절차만 고르고, 관련 Rule·Skill 원본만 읽습니다.
+2. 현재 `rwerwer1r/textweft`의 [AGENTS.md](AGENTS.md)와 [ROUTE](.agents/route/ROUTE.md)를 확인합니다. 문서 주제를 모르면 [문서 지도](docs/README.md)와 [INDEX](docs/INDEX.tsv)에서 소유자를 찾고, 개발 절차는 [개발 문서 라우터](docs/development/README.md)에서 필요한 항목만 고릅니다. 관련 Rule·Skill 원본만 읽습니다.
 3. 코드·정본에 접근할 수 없다면 사용자에게 관련 부분만 요청하거나 확인 가능한 범위로 제한합니다. 다른 계정·저장소로 우회하거나 과거 대화를 최신 ref로 간주하지 않습니다.
 
 ## Capability Bridge

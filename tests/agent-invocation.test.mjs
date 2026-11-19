@@ -35,3 +35,45 @@ test('review coordinator and workers are hidden but model-invocable', () => {
     }
   }
 });
+test('work unit worker is delegated and bounded', () => {
+  const agent = agentMetadata('mols-work-unit-worker');
+  assert.deepEqual(agent.targets, ['claudecode', 'copilot', 'copilotcli', 'antigravity-ide', 'antigravity-cli']);
+  for (const target of ['copilot', 'copilotcli']) {
+    assert.equal(agent[target]['user-invocable'], false, target);
+    assert.equal(agent[target]['disable-model-invocation'], false, target);
+  }
+  assert.ok(agent.claudecode.tools.includes('Edit'));
+  assert.equal(agent['antigravity-ide'].mainAgent, false);
+  assert.equal(agent['antigravity-ide'].subagent, true);
+  assert.ok(agent.description.includes('bounded'));
+  const source = readFileSync(new URL('../.rulesync/subagents/mols-work-unit-worker.md', import.meta.url), 'utf8');
+  assert.match(source, /writable paths/);
+  assert.match(source, /shared workspace/);
+  assert.match(source, /PR 생성\/병합/);
+});
+
+test('autopilot delegates parallel work only with verified isolation', () => {
+  const source = readFileSync(new URL('../.rulesync/subagents/mols-autopilot.md', import.meta.url), 'utf8');
+  assert.match(source, /workflow-parallel-development/);
+  assert.match(source, /verified workspace isolation/);
+});
+
+function skillMetadata(name) {
+  const source = readFileSync(new URL(`../.rulesync/skills/${name}/SKILL.md`, import.meta.url), 'utf8');
+  const end = source.indexOf('\n---\n', 4);
+  assert.ok(source.startsWith('---\n') && end > 4, `invalid skill frontmatter: ${name}`);
+  const doc = parseDocument(source.slice(4, end), { uniqueKeys: true });
+  assert.deepEqual(doc.errors, []);
+  return doc.toJS();
+}
+
+test('parallel workflow is selectable on Skill targets without implying worker support', () => {
+  const skill = skillMetadata('workflow-parallel-development');
+  assert.deepEqual(skill.targets, [
+    'copilot', 'copilotcli', 'codexcli', 'claudecode',
+    'antigravity-ide', 'antigravity-cli', 'androidstudio',
+  ]);
+  const worker = agentMetadata('mols-work-unit-worker');
+  assert.ok(!worker.targets.includes('codexcli'));
+  assert.ok(!worker.targets.includes('androidstudio'));
+});

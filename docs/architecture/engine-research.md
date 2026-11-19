@@ -1,3 +1,6 @@
+---
+description: "텍스트·정적 이미지 게임의 초기 실행·표시 계약과 설계 수용 시나리오를 검토할 때 읽습니다."
+---
 # Engine Design Research
 
 **상태:** P1 설계 제안(미확정). 현재 집중 범위는 [Project Goal](../GOAL.md)의 **텍스트·정적 이미지 웹 게임**이며, Rust 코어 언어 결정은 [Architecture Decision](../architecture.md)에 있다. 기존 TypeScript 초안을 신규 설계의 제약으로 삼지 않는다.

@@ -19,12 +19,13 @@ test('Rulesync 원본에서 생성한 Rule·Skill 색인', () => {
     'workflow-harness-improvement',
     'workflow-integration',
     'workflow-investigation',
+    'workflow-parallel-development',
     'workflow-resumption',
     'workflow-review',
   ]);
   assert.ok(skills.every(x => x.path === `.rulesync/skills/${x.name}/SKILL.md`));
   assert.ok(skills.every(x => x.description && !x.description.includes('undefined')));
-  assert.equal(new Set(skills.map(x => x.name)).size, 9);
+  assert.equal(new Set(skills.map(x => x.name)).size, 10);
 });
 
 test('frontmatter는 정상 입력을 읽고 누락·중복을 거부한다', () => {

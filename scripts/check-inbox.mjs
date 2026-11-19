@@ -42,7 +42,7 @@ export function checkPaths(paths, base = root) {
       errors.push(candidate + ': .inbox/ 밖 경로');
       continue;
     }
-    if (rel === 'README.md' || !rel.endsWith('.md')) continue;
+    if (rel === 'README.md' || rel === 'AGENTS.md' || rel.startsWith('.configs' + sep) || !rel.endsWith('.md')) continue;
     try {
       for (const error of validateText(readFileSync(path, 'utf8'))) errors.push(candidate + ': ' + error);
     } catch (error) { errors.push(candidate + ': 파일 읽기 실패 (' + error.code + ')'); }

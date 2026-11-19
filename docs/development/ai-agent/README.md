@@ -1,3 +1,6 @@
+---
+description: "에이전트 하네스의 설계 원칙, 책임, 리뷰 근거와 승인 경계를 확인할 때 읽습니다."
+---
 # Agent Governance
 
 AI 개발 하네스의 설계 원칙과 판단 기준을 정의합니다. 권한·계정·승인의 정본은 [AGENTS.md](../../../AGENTS.md)이며, 이 문서는 새 권한이나 실행 절차를 부여하지 않습니다.
@@ -21,6 +24,8 @@ AI 개발 하네스의 설계 원칙과 판단 기준을 정의합니다. 권한
 | 병합·릴리스·배포·권한 변경 | 명시적 승인 및 플랫폼 게이트 |
 
 ## Agent Roles
+
+역할과 위임 경계는 [Agent Roles](agents.md), 실제 로딩·적용 증거는 [Harness Verification](harness.md), 지침 소유권은 [Instruction Ownership](rule-ownership.md)을 참조합니다.
 
 사용자 직접 선택형 메인 Agent 및 위임형 리뷰 에이전트의 호출·권한·검증 경계는 [Agent Roles](agents.md)를 따릅니다. 파일이나 메타데이터만으로 실제 직접 선택·위임 차단이 보장되지는 않습니다.
 

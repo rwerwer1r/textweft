@@ -22,3 +22,7 @@ test('hidden inbox path contract', () => {
   assert.deepEqual(checkPaths(['.inbox/README.md', '.inbox/github-2-agent-harness/001-workstate.md']), []);
   assert.ok(checkPaths(['inbox/README.md']).some(e => e.includes('.inbox/ 밖 경로')));
 });
+
+test('reusable Inbox guides and templates are not work records', () => {
+  assert.deepEqual(checkPaths(['.inbox/AGENTS.md', '.inbox/.configs/guides/frontmatter.md', '.inbox/.configs/templates/handoff.md']), []);
+});

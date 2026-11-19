@@ -1,3 +1,6 @@
+---
+description: "개발 우선순위, 에이전트 협업, 작업 워크플로, 도구와 검증 경로를 선택할 때 읽습니다."
+---
 # Textweft Development
 
 **공통 계약은 [AGENTS.md](../../AGENTS.md).** 이 문서는 작업에 필요한 세부 문서를 **하나씩 선택하기 위한 라우터**입니다. 관련 없는 링크는 따라가지 않습니다.
@@ -26,10 +29,18 @@
 | 목표·구현·리뷰·복구·재개 등 업무별 실행 Skill | [Workflow Skills](../../.rulesync/skills/README.md) · [ROUTE](../../.agents/route/ROUTE.md) |
 | 준비·구현·리뷰·병합 단계 판단 | [Workflow Selection](workflows/choosing.md) |
 | 실제 변경·검증·리뷰 | [Routine Loop](workflows/routine-loop.md) |
-| AI 주도 개발·바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
+| Agent-driven 개발의 책임·실행 계약 | [Agent-driven Development](workflows/agent-driven-development.md) |
+| 독립 Work 병렬 분해·위임·통합 | [Parallel Agentic Development](workflows/parallel-agentic-development.md) |
+| STDD Change·Spec 중심 개발 | [Spec-driven Development](workflows/spec-driven-development.md) |
+| 테스트 설계·테스트 우선 구현 | [Test-driven Development](workflows/test-driven-development.md) |
+| 바이브코더 저작 경험 | [Vibe Coding](workflows/vibe-coding.md) |
 | 중요한 사람 결정·리뷰 근거 | [Agent Governance](ai-agent/README.md) |
 | 사용자 선택형 Agent·전문 위임·호출 제한 | [Agent Roles](ai-agent/agents.md) |
+| 실제 지침·Skill 로딩 증거 | [Harness Verification](ai-agent/harness.md) · [Instruction Ownership](ai-agent/rule-ownership.md) |
 | Rule·Skill 선택 | [ROUTE](../../.agents/route/ROUTE.md) |
+| 브랜치·Worktree·커밋·통합·복구 | [Git](../tools/git/README.md) |
+| GitHub Issue·PR·댓글·리뷰 작성 보조 자료 | [GitHub Templates](../../.github/templates/README.md) |
+| 프로젝트 스크립트 유지보수 | [Scripts](tooling/scripts.md) |
 | Rulesync 설정·생성·잠금 | [Rulesync](tooling/rulesync.md) |
 | 외부 Skill 선택·일회성 하네스 절차 | [Selective Agent Assets](tooling/agent-assets.md) |
 | Change 티켓·상태·명세 delta | [STDD Workspace](../../stdd/README.md) · [외부 Skill](tooling/agent-assets.md) |

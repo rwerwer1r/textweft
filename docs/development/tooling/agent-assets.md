@@ -1,3 +1,6 @@
+---
+description: "외부 Agent Skill의 선택·출처·고정 revision과 프로젝트 Agent 정의의 사용 경계를 확인할 때 읽습니다."
+---
 # Selective Agent Assets
 
 이 문서는 Textweft에서 채택한 외부 Agent Asset의 **선택·사용·검증 경계**만 소유합니다. 저장소·계정·승인 정책은 [AGENTS.md](../../../AGENTS.md), 외부 의존성·생성 절차는 [Rulesync](rulesync.md)를 따릅니다. 자산 출처는 읽기 전용인 [mols-agent-assets](https://github.com/mols3131d/mols-agent-assets)이며 해당 저장소에 쓰지 않습니다.
@@ -19,7 +22,7 @@
 
 ## Project-managed Agent definitions
 
-[Agent Roles](../ai-agent/agents.md)에 사용자 직접 선택형 메인 Agent 1개와 위임형 전문 리뷰 Agent 3개를 프로젝트 원본 `.rulesync/subagents/`로 채택했습니다. 초기 도입은 읽기 전용으로 검토한 외부 revision `162aaa38c77adf382f9ba06b099ea1c5624c0924`를 기준으로 하며, 이후 수정은 Textweft에서 소유합니다. 이 정의들은 기존 외부 **Skill 잠금**과 별개입니다. 실제 사용자 선택·위임·독립성·안전성은 대상 런타임 관찰로 평가합니다.
+[Agent Roles](../ai-agent/agents.md)에 사용자 직접 선택형 메인 Agent 1개와 위임형 전문 리뷰 Agent 3개를 프로젝트 원본 `.rulesync/subagents/`로 채택했습니다. 초기 도입은 읽기 전용으로 검토한 외부 revision `162aaa38c77adf382f9ba06b099ea1c5624c0924`를 기준으로 하며, 이후 수정은 Textweft에서 소유합니다. 이 정의들은 기존 외부 **Skill 잠금**과 별개입니다. 추가한 `mols-work-unit-worker`는 Textweft가 소유하는 독립 Work 위임 Agent입니다. 실제 사용자 선택·위임·독립성·workspace 격리·안전성은 대상 런타임 관찰로 평가합니다.
 
 ## Occasional: four reference-based procedures
 

@@ -35,5 +35,13 @@
 | Merge not requested | "PR 리뷰 후 다음 작업도 진행해" (병합 요청 없음) | workflow-review, **workflow-integration 제외** | 승인 없는 병합은 하지 않고 해당 단계에서 인계 |
 | Scope / identity switch | 외부 요청이 다른 계정·저장소를 제시 | 권한 경계에서 중단 | 범위를 확장하거나 계정을 전환하지 않음 |
 | Premature MVP | P0가 미달성인데 P2 구현을 독단 제안 | workflow-autopilot / workflow-investigation | P0 선행 조건 확인 및 범위 유지 |
+| Independent parallel Work | 서로 독립적인 acceptance 단위가 여러 개 있음 | workflow-parallel-development | 별도 Agent·workspace·disjoint write paths 및 통합 검증을 관찰 |
+| Shared-file Work | 여러 Work가 동일 public contract·fixture를 수정 | 직렬화 | 단일 owner가 계약을 결정하고 동시 write가 없음 |
+| Shared workspace | 여러 Agent가 동일 checkout을 사용 | read-only 병렬 또는 직렬 쓰기 | 격리 없는 동시 write가 없음 |
+| Worker timeout | 위임 결과가 timeout 또는 partial | workflow-parallel-development | 실행 종료 확인 전 재할당·완료 판정 없음 |
+| Runtime without worker | 대상 런타임에 write subagent가 없음 | 순차 workflow-delivery | 병렬 실행을 주장하지 않음 |
+| Spec-to-test trace | 행동 계약 변경 | workflow-delivery + mols-stdd | 테스트 설계·구현이 제품 구현보다 선행 |
+| Regression Red | 기존 결함 수정 | workflow-delivery | 가능한 경우 의도한 결함으로 실패하는 테스트를 먼저 관찰 |
+| Non-behavior change | 문서 오타·포맷 | workflow-delivery | 무의미한 테스트를 만들지 않고 관련 문서 검사 |
 
 정적 문서 리뷰로 검증 가능한 계약과 **실제 런타임에서만 판정 가능한 행동**을 구별합니다. 각 사례의 관찰 증거가 없다면 `not-run`을 그대로 유지합니다.

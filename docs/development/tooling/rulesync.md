@@ -1,3 +1,6 @@
+---
+description: "Rulesync source, target, lockfile, generated projection과 Agent Skill routing을 관리할 때 읽습니다."
+---
 # Rulesync Tooling
 
 Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 게임 런타임 의존성이 아닙니다. 버전·설치·명령은 [mise.toml](../../../mise.toml)의 정본을 따릅니다. 자체 바이너리 다운로드·해시 래퍼는 사용하지 않습니다.
@@ -9,7 +12,7 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 | [AGENTS.md](../../../AGENTS.md)·[CHATBOT.md](../../../CHATBOT.md) | Git 추적 공통 진입점, 자동 생성·덮어쓰기 금지 |
 | `CLAUDE.md`·`GEMINI.md` | Git에서 제외하는 로컬 진입점; `mise run update`가 없을 때만 만들며 기존 파일은 보존 |
 | [`.rulesync/rules/`](../../../.rulesync/rules/typescript.md)·[`.rulesync/skills/`](../../../.rulesync/skills/README.md)·`.rulesync/commands/` | Rule·Skill·Command 원본 (Command는 아직 정의 없음) |
-| [`.rulesync/subagents/`](../../../.rulesync/subagents/mols-autopilot.md) | 사용자 직접 선택형 메인 Agent·위임형 전문 리뷰 Agent의 원본. [Agent Roles](../ai-agent/agents.md) 참조 |
+| [`.rulesync/subagents/`](../../../.rulesync/subagents/mols-autopilot.md) | 사용자 직접 선택형 Autopilot·위임형 Work Unit Worker·전문 리뷰 Agent의 원본. [Agent Roles](../ai-agent/agents.md) 참조 |
 | [rulesync.jsonc](../../../rulesync.jsonc)·[rulesync.lock](../../../rulesync.lock) | 여섯 가지 선별 외부 Skill 의존성 선언·고정된 upstream SHA·선택 목록·무결성 잠금 |
 | [rules.jsonl](../../../.agents/route/rules.jsonl)·[skills.jsonl](../../../.agents/route/skills.jsonl) | 원본에서 생성하는 Git 추적 라우팅 색인, 직접 편집 금지 |
 | `.github/instructions/`·`.github/prompts/` 등 도구별 투영 | 로컬 생성물, Git 무시 |
@@ -22,7 +25,7 @@ Rulesync는 Rule·Skill을 AI 도구별로 생성하는 **개발 도구**이며 
 
 Codex CLI는 프로젝트 Skill·Subagent만, Claude Code는 루트 Rule을 제외합니다. Antigravity IDE·CLI, Gemini in Android Studio, GitHub Copilot·CLI를 지원합니다. Claude Code·Gemini CLI의 루트 진입점은 `mise run update`가 로컬에서만 생성하며 공통 [AGENTS.md](../../../AGENTS.md)를 참조합니다. 기존 파일은 덮어쓰지 않습니다. 런타임이 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다. ChatGPT 전용 Rulesync 타깃은 없습니다.
 
-프로젝트에 채택한 네 Agent의 타깃별 설정은 [Agent Roles](../ai-agent/agents.md)에 설명합니다. Subagent는 Rule·Skill 파생 색인과 별개로 생성되며 Android Studio에는 만들지 않습니다. 자동 선택·호출 제한·독립 검토는 대상 런타임에서 관찰해야 합니다.
+프로젝트의 Autopilot·Work Unit Worker·DualVantage 리뷰 Agent 타깃별 설정은 [Agent Roles](../ai-agent/agents.md)에 설명합니다. Subagent는 Rule·Skill 파생 색인과 별개로 생성되며 Android Studio에는 만들지 않습니다. 자동 선택·호출 제한·독립 검토는 대상 런타임에서 관찰해야 합니다.
 
 ## Lifecycle
 
@@ -30,11 +33,12 @@ Codex CLI는 프로젝트 Skill·Subagent만, Claude Code는 루트 Rule을 제�
 mise install
 mise run rulesync:install
 mise run rulesync:generate
+mise run rulesync:preview
 mise run rulesync:check
 mise run routes:check
 ```
 
-Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rulesync:generate`는 도구별 복사본과 프로젝트 직접 저작 Rule·Skill 라우팅 색인을 갱신합니다. `rulesync:check`는 Rulesync 자체 진단, `routes:check`는 **Textweft 고유 파생 색인의 정합성**만 검사합니다.
+Rulesync CLI 바이너리는 mise가 고정 버전으로 설치합니다. `rulesync:generate`는 도구별 복사본과 프로젝트 직접 저작 Rule·Skill 라우팅 색인을 갱신합니다. `rulesync:preview`는 strict 진단과 dry-run 생성 계획을 확인하며 파일을 쓰지 않습니다. `rulesync:check`는 Rulesync 자체 진단, `routes:check`는 **Textweft 고유 파생 색인의 정합성**만 검사합니다. 외부 Skill revision을 갱신할 때는 `rulesync.jsonc`의 명시적 source SHA를 먼저 변경하고 `mise run rulesync:resolve`로 lock을 다시 생성합니다. manifest·lock·생성 projection·출처·integrity를 함께 리뷰하며 moving ref나 자동 upstream 갱신을 사용하지 않습니다.
 
 ## External Skill Adoption
 
