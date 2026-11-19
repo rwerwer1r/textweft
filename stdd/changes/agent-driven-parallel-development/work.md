@@ -12,7 +12,7 @@ Template의 문서 구조와 에이전트 중심 개발 운영 방식을 Textwef
 - 문서 탐색 구조, 문서 소유권 및 frontmatter 기반 인덱스 도입
 - Agent harness의 configured / reachable / observed-applied 검증 기준
 - Agent-driven 개발, 병렬 Work 분해·격리·통합, STDD/Spec, TDD 절차 명문화
-- 기존 RPI/mols-loops, STDD, workflow-delivery, Rulesync를 연결하는 선택형 Workflow Skill
+- 기존 RPI 반복 절차, STDD, workflow-delivery, Rulesync를 연결하는 선택형 Workflow Skill
 - 병렬 Work 전용 위임 Agent의 범위·파일 소유권·통합 경계 정의
 - Issue 및 Inbox용 최소 작성 템플릿 도입
 - Git branch/worktree·commit·integration·recovery 절차와 GitHub review/comment authoring aids 도입

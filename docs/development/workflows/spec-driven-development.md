@@ -3,7 +3,7 @@ description: "STDD Change, 도메인 Spec, 변경 delta와 구현·테스트 추
 ---
 # Spec-driven Development
 
-행동 계약이 바뀌는 작업은 **Spec을 먼저 정하고, 테스트와 구현을 그 Spec에 연결**합니다. Textweft의 Change/Spec 저장 위치와 상태 소유권은 [STDD Workspace](../../../stdd/README.md) 및 고정 외부 `mols-stdd` Skill이 소유합니다.
+행동 계약이 바뀌는 작업은 **Spec을 먼저 정하고, 테스트와 구현을 그 Spec에 연결**합니다. Textweft의 Change/Spec 저장 위치와 상태 소유권은 [STDD Workspace](../../../stdd/README.md) 및 [stdd-management](../../../.rulesync/skills/stdd-management/SKILL.md)이 소유합니다.
 
 ## Canonical Ownership
 

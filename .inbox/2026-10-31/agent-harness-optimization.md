@@ -44,8 +44,8 @@ updated: 2026-10-31T17:28:32.122Z
 - 실패 시 수정·재검증 후 사람 리뷰. 승인 전 병합·배포 금지.
 
 ## Selective Agent Asset Adoption (2026-11-01)
-- 사용자가 지정한 8개 후보 가운데 반복 사용 4개(`mols-agent-asset`, `review-changes`, `mols-test-design`, `mols-loops`)는 Rulesync 선언형 외부 의존성으로 지정하고, 나머지 4개(`mols-chatbot-bootstrap`, `mols-dev-env-bootstrap-design`, `mols-ci-design`, `check-dependencies`)는 일회성 참조를 Textweft 소유 문서에 최소 반영.
-- 외부 `mols3131d/mols-agent-assets`는 **읽기 전용**으로만 접근, 모든 쓰기는 `rwerwer1r/textweft`의 기존 PR 브랜치로 한정. 외부 자산 원문 복사·자동 설치는 하지 않고 선택된 upstream SHA를 명시.
+- 사용자가 지정한 8개 후보 가운데 반복 사용 4개(`당시 외부 자산 설계 Skill`, `review-changes`, `당시 외부 테스트 설계 Skill`, `당시 외부 반복 Skill`)는 Rulesync 선언형 외부 의존성으로 지정하고, 나머지 4개(`당시 외부 챗봇 부트스트랩 Skill`, `당시 외부 개발환경 설계 Skill`, `당시 외부 CI 설계 Skill`, `check-dependencies`)는 일회성 참조를 Textweft 소유 문서에 최소 반영.
+- 외부 `당시 사용한 외부 Skill 저장소`는 **읽기 전용**으로만 접근, 모든 쓰기는 `rwerwer1r/textweft`의 기존 PR 브랜치로 한정. 외부 자산 원문 복사·자동 설치는 하지 않고 선택된 upstream SHA를 명시.
 - 확인: Rulesync 공식 declarative source 선택 구문 및 frozen lock 정책. 현재 연결 환경에는 실행 가능한 Rulesync/미리 설치된 mise가 없어 설치·lock 갱신·projection·CI는 미실행.
 - 변경: `rulesync.jsonc`에 4개 Skill을 upstream SHA로 지정; `mise.toml`의 `rulesync:resolve`/`rulesync:install`; `mise-tasks/update`의 frozen install+generate; `docs/development/tooling/agent-assets.md`, 개발 가이드·Rulesync 문서·CHATBOT 라우팅 갱신. 프로젝트의 직접 저작 Skill 색인은 비워 둠.
 - 원격 정적 확인: 선택한 8개 원본이 고정 upstream SHA에 존재, PR #4 head와 변경 반영 일치, 사용자 게임 `src/`·`tests/`·예제 변경 없음.

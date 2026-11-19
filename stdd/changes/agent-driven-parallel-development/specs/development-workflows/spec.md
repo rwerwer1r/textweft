@@ -4,7 +4,7 @@
 
 Textweft already has:
 - a root agent contract and progressive Rule/Skill routing;
-- `mols-loops` as the outer adaptive RPI/recursive orchestration dependency;
+- an adaptive RPI/recursive orchestration mechanism;
 - STDD Change/Spec ownership through PR #14;
 - `workflow-delivery` with Spec → test design → test implementation → implementation;
 - project-managed Autopilot and review subagents;
