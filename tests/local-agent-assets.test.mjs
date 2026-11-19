@@ -1,9 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { cpFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { parseDocument } from 'yaml';
 import { buildIndexes } from '../scripts/agent-route-index.mjs';
 
@@ -57,4 +58,25 @@ test('tracked project sources have no legacy external identity references', () =
     if (forbidden.test(body)) references.push(path + ' (content)');
   }
   assert.deepEqual(references, []);
+});
+
+test('legacy curated Skill cache blocks update before re-projecting external assets', () => {
+  const temporary = mkdtempSync(join(tmpdir(), 'textweft-legacy-curated-'));
+  try {
+    const oldSkill = join(temporary, '.rulesync/skills/.curated/old-skill/SKILL.md');
+    mkdirSync(join(temporary, 'mise-tasks'), { recursive: true });
+    mkdirSync(join(temporary, '.rulesync/skills/.curated/old-skill'), { recursive: true });
+    cpFileSync(join(root, 'mise-tasks/update'), join(temporary, 'mise-tasks/update'));
+    writeFileSync(join(temporary, 'package-lock.json'), '{}');
+    writeFileSync(oldSkill, '# old local cache');
+    execFileSync('git', ['init', '-q'], { cwd: temporary });
+
+    const result = spawnSync('bash', ['mise-tasks/update'], { cwd: temporary, encoding: 'utf8' });
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /stale external agent assets/);
+    assert.match(result.stderr, /\.rulesync\/skills\/\.curated/);
+    assert.ok(existsSync(oldSkill), 'legacy cache must not be deleted automatically');
+  } finally {
+    rmSync(temporary, { recursive: true, force: true });
+  }
 });

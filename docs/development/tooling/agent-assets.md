@@ -28,4 +28,5 @@ Textweft의 Agent Skill은 **이 저장소가 직접 작성하고 유지**합니
 - **Routing:** `mise run routes:generate`로 `skills.jsonl`을 재생성하고 `mise run routes:check`로 드리프트를 확인합니다. 파생 색인을 직접 수정하지 않습니다.
 - **Projection:** `mise run rulesync:preview`로 읽기 전용 계획을 보고 `mise run rulesync:generate`로 현재 런타임의 도구별 사본을 만듭니다. 외부 설치·동기화 단계는 없습니다.
 - **Validation:** `mise run check`와 [런타임 검증](../ai-agent/harness.md)을 구분합니다. CI 통과는 Skill이 실제로 로드되거나 Subagent가 독립 실행된 증거가 아닙니다.
+- **Existing clones:** 과거 `.curated/` 캐시가 남아 있으면 `mise run update`가 재투영을 막기 위해 중단합니다. [로컬 이전 절차](rulesync.md#lifecycle)에 따라 수동 확인·정리하고 재시도합니다. 이미 생성된 이전 Agent 파일도 런타임별로 확인해야 합니다.
 - **Bootstrap:** `mise run bootstrap`과 `mise run update`는 mise·npm·Lefthook·프로젝트 자산 투영만 동기화합니다. 외부 코드 다운로드는 선언된 일반 개발 도구·npm 의존성 설치 범위이며, 타 저장소 Skill 소스를 사용하지 않습니다.
