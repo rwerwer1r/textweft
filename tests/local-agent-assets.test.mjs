@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cpFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
@@ -66,7 +66,7 @@ test('legacy curated Skill cache blocks update before re-projecting external ass
     const oldSkill = join(temporary, '.rulesync/skills/.curated/old-skill/SKILL.md');
     mkdirSync(join(temporary, 'mise-tasks'), { recursive: true });
     mkdirSync(join(temporary, '.rulesync/skills/.curated/old-skill'), { recursive: true });
-    cpFileSync(join(root, 'mise-tasks/update'), join(temporary, 'mise-tasks/update'));
+    copyFileSync(join(root, 'mise-tasks/update'), join(temporary, 'mise-tasks/update'));
     writeFileSync(join(temporary, 'package-lock.json'), '{}');
     writeFileSync(oldSkill, '# old local cache');
     execFileSync('git', ['init', '-q'], { cwd: temporary });
