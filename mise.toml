@@ -24,9 +24,6 @@ example = "npm run example"
 "docs:index:check" = "node scripts/generate-docs-index.mjs --check"
 "hooks:install" = "lefthook install"
 "hooks:validate" = "lefthook validate"
-# resolve는 최초 잠금 생성/명시 갱신에만 사용. frozen은 기존 lock을 바꾸지 않습니다.
-"rulesync:resolve" = "rulesync install"
-"rulesync:install" = "rulesync install --frozen"
 "rulesync:generate" = ["rulesync generate", "node scripts/agent-route-index.mjs generate"]
 "rulesync:check" = "rulesync doctor --strict"
 "rulesync:preview" = ["rulesync doctor --strict", "rulesync generate --dry-run"]
