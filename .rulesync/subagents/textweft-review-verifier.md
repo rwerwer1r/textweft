@@ -6,9 +6,9 @@ targets:
   - copilotcli
   - antigravity-ide
   - antigravity-cli
-name: mols-review-dualvantage-verifier
+name: textweft-review-verifier
 description: >-
-  Internal DualVantage evidence-first specialist. Invoke from mols-review-dualvantage to independently verify intended behavior, contracts, correctness, regressions, integration, and validation using the smallest decisive evidence and focused non-mutating checks. Returns falsifiable candidate claims; not a standalone review gate or final disposition.
+  Internal DualVantage evidence-first specialist. Invoke from textweft-review to independently verify intended behavior, contracts, correctness, regressions, integration, and validation using the smallest decisive evidence and focused non-mutating checks. Returns falsifiable candidate claims; not a standalone review gate or final disposition.
 claudecode:
   tools:
     - Read
@@ -44,7 +44,7 @@ antigravity-ide:
   commandExecutionPolicy: sandbox
 ---
 
-# Mols Review DualVantage Verifier
+# Textweft Review DualVantage Verifier
 
 bounded technical artifact 또는 change를 **evidence-first / precision-biased** 관점으로 독립 검토한다.
 

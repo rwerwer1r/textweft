@@ -13,4 +13,4 @@ description: "요청 단계 선택과 Agent-driven, parallel, spec-driven, test-
 | [Routine Loop](routine-loop.md) | 일반적인 변경·검증·리뷰·인계 |
 | [Vibe Coding](vibe-coding.md) | 게임 개발자의 AI 저작 경험과 수용 기준 |
 
-복합 작업의 바깥 Run/RPI/재귀 제어는 고정 외부 Skill `mols-loops`가 소유합니다. 이 문서와 `workflow-*`는 각 도메인의 절차만 제공합니다.
+복합 작업의 바깥 Run/RPI/재귀 제어는 프로젝트 Skill [workflow-iteration](../../../.rulesync/skills/workflow-iteration/SKILL.md)가 소유합니다. 이 문서와 `workflow-*`는 각 도메인의 절차만 제공합니다.

@@ -7,7 +7,7 @@ description: "Autopilot, Work Unit Worker, 독립 리뷰 Agent의 선택·위임
 
 ## Main Agent: User-Selected Autopilot
 
-[`mols-autopilot`](../../../.rulesync/subagents/mols-autopilot.md)은 사용자가 **직접 선택**해야 시작하는 최상위 자율 작업자입니다. 현재 프로젝트 목표·실제 마일스톤·권한·ref에서 가치 있는 범위 내 작업을 선택하고 검증·리뷰·PR 준비까지 조정할 수 있습니다.
+[`textweft-autopilot`](../../../.rulesync/subagents/textweft-autopilot.md)은 사용자가 **직접 선택**해야 시작하는 최상위 자율 작업자입니다. 현재 프로젝트 목표·실제 마일스톤·권한·ref에서 가치 있는 범위 내 작업을 선택하고 검증·리뷰·PR 준비까지 조정할 수 있습니다.
 
 - 다른 에이전트가 호출하여 권한을 확대하는 용도로 사용하지 않습니다. 위임 호출을 받았다면 작업을 수행하지 않습니다.
 - 자율성은 작업 선정과 조정에 관한 것이지 병합·배포·고위험 변경 승인이나 무기한 백그라운드 실행을 허가하지 않습니다.
@@ -16,13 +16,13 @@ description: "Autopilot, Work Unit Worker, 독립 리뷰 Agent의 선택·위임
 
 ## Work Unit Worker
 
-[`mols-work-unit-worker`](../../../.rulesync/subagents/mols-work-unit-worker.md)는 coordinator가 명시적으로 할당한 독립 Work 하나를 수행하는 위임형 Agent입니다. 사용자가 직접 선택하는 메인 Agent가 아니며 backlog를 스스로 선택하지 않습니다. Worker는 지정된 Change/Work ID, Spec, dependency, base ref, writable paths, Out of Scope, 테스트와 보고 형식을 받아 해당 범위만 수정합니다. 행동 변경은 [workflow-delivery](../../../.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 구현 순서를 따릅니다. 동시 쓰기는 별도 worktree/branch 또는 동등한 runtime isolation과 겹치지 않는 파일 소유권이 확인된 경우에만 허용합니다. 부모 Change 상태·통합·최종 완료·PR 병합은 coordinator가 소유하며 Worker는 실제 변경·검증·미실행 근거를 반환합니다. timeout 또는 종료 불명확 상태에서 재할당하지 않습니다.
+[`textweft-work-unit-worker`](../../../.rulesync/subagents/textweft-work-unit-worker.md)는 coordinator가 명시적으로 할당한 독립 Work 하나를 수행하는 위임형 Agent입니다. 사용자가 직접 선택하는 메인 Agent가 아니며 backlog를 스스로 선택하지 않습니다. Worker는 지정된 Change/Work ID, Spec, dependency, base ref, writable paths, Out of Scope, 테스트와 보고 형식을 받아 해당 범위만 수정합니다. 행동 변경은 [workflow-delivery](../../../.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 구현 순서를 따릅니다. 동시 쓰기는 별도 worktree/branch 또는 동등한 runtime isolation과 겹치지 않는 파일 소유권이 확인된 경우에만 허용합니다. 부모 Change 상태·통합·최종 완료·PR 병합은 coordinator가 소유하며 Worker는 실제 변경·검증·미실행 근거를 반환합니다. timeout 또는 종료 불명확 상태에서 재할당하지 않습니다.
 
 Worker 정의는 Claude Code·Copilot·Copilot CLI·Antigravity 대상에만 생성됩니다. 직접 호출 제한은 런타임별로 다르므로 native control이 없는 환경에서는 instruction-level 제한으로 취급합니다. Codex CLI·Android Studio 등에서 동등한 write subagent와 workspace 격리가 확인되지 않으면 병렬 쓰기를 하지 않고 순차 실행합니다.
 
 ## Delegated Review
 
-[`mols-review-dualvantage`](../../../.rulesync/subagents/mols-review-dualvantage.md)는 **필요할 때만 호출**하는 검토 전용 에이전트입니다. [Verifier](../../../.rulesync/subagents/mols-review-dualvantage-verifier.md)와 [Challenger](../../../.rulesync/subagents/mols-review-dualvantage-challenger.md)가 각각 현재 근거와 반례를 조사합니다. Root가 중복·반증을 판정하고 결과를 호출자에게 반환하며, 수정·병합·최종 승인은 소유하지 않습니다.
+[`textweft-review`](../../../.rulesync/subagents/textweft-review.md)는 **필요할 때만 호출**하는 검토 전용 에이전트입니다. [Verifier](../../../.rulesync/subagents/textweft-review-verifier.md)와 [Challenger](../../../.rulesync/subagents/textweft-review-challenger.md)가 각각 현재 근거와 반례를 조사합니다. Root가 중복·반증을 판정하고 결과를 호출자에게 반환하며, 수정·병합·최종 승인은 소유하지 않습니다.
 
 - Copilot 계열에서는 리뷰 Agent 3개의 `user-invocable: false`로 사용자 선택을 숨기고, `disable-model-invocation: false`로 위임 호출을 허용합니다. **이 메타데이터만으로 특정 상위 Agent에서만 호출되는 권한을 네이티브하게 강제하지는 않습니다.** Root·Worker의 호출 범위는 본문 지침과 실제 실행 평가로 확인합니다.
 - 두 specialist는 서로의 결론을 초기에 전달받지 않아야 합니다. 각 호출에서 최대 1회씩, 합계 2회까지만 자동 호출합니다.
@@ -30,11 +30,9 @@ Worker 정의는 Claude Code·Copilot·Copilot CLI·Antigravity 대상에만 생
 - [workflow-review](../../../.rulesync/skills/workflow-review/SKILL.md)가 리뷰 업무의 수용·검증 절차를 소유하며 DualVantage는 필요할 때 호출하는 전문 실행 단위입니다. Reviewer의 결론은 변경·승인·병합 권한을 만들지 않습니다.
 - 일반적인 작은 변경에는 [기존 자체 리뷰](../workflows/routine-loop.md)만으로 충분할 수 있습니다. 중요한 변경에서 독립 리뷰가 필요한지는 위험과 비용으로 판단합니다.
 
-## Runtime and Provenance
+## Runtime and Ownership
 
-Autopilot과 DualVantage의 네 Agent 정의는 Rulesync의 [프로젝트 추적 원본](../../../.rulesync/subagents/mols-autopilot.md)에 있으며, 재사용 자산의 `162aaa38c77adf382f9ba06b099ea1c5624c0924` revision을 기준으로 채택했습니다. 원본은 [Agent Library](https://github.com/mols3131d/mols-agent-assets/tree/162aaa38c77adf382f9ba06b099ea1c5624c0924/src/rulesync/.rulesync/subagents)에 있습니다. **외부 자료는 읽기 전용**이며, 현재 프로젝트 파일의 후속 수정은 Textweft가 소유합니다. `mols-work-unit-worker`는 Textweft가 별도로 작성한 프로젝트 소유 Agent이며 외부 라이브러리에서 복사한 정의가 아닙니다. 외부 저장소의 루트 라이선스가 명시되지 않았으므로 공개 재배포 권한을 가정하지 않습니다.
-
-[Rulesync](../tooling/rulesync.md)가 지원 대상의 네이티브 에이전트 파일을 로컬 생성합니다. 메타데이터의 직접 선택·호출 제한은 런타임에 따라 다르며, 특히 Claude Code에서 비위임 제한을 네이티브로 강제한다고 가정하지 않습니다. `mols-autopilot`이 지원하지 않는 타깃에서는 하위 Agent 실행으로 우회하지 않습니다. 제한된 챗봇에는 [CHATBOT.md](../../../CHATBOT.md)가 적용됩니다.
+모든 Agent 정의는 `.rulesync/subagents/`에서 Textweft가 직접 유지합니다. [Rulesync](../tooling/rulesync.md)가 지원 대상의 네이티브 에이전트 파일을 로컬 생성합니다. 메타데이터의 직접 선택·호출 제한은 런타임마다 다르며, 특히 Claude Code에서 비위임 제한을 네이티브로 강제한다고 가정하지 않습니다. `textweft-autopilot`이 지원되지 않는 타깃에서 하위 Agent로 우회하지 않습니다. 제한된 챗봇은 [CHATBOT.md](../../../CHATBOT.md)를 사용합니다.
 
 ## Acceptance Checks
 

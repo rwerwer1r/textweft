@@ -3,7 +3,7 @@ description: "Spec에서 테스트 oracle을 도출하고 제품 코드보다 �
 ---
 # Test-driven Development
 
-Textweft의 TDD는 테스트 개수나 기계적인 Red/Green ceremony가 아니라 **명세를 구현보다 먼저 실행 가능한 검증으로 바꾸는 방식**입니다. 테스트 선택과 oracle 품질은 `mols-test-design`, 순서는 `workflow-delivery`가 소유합니다.
+Textweft의 TDD는 테스트 개수나 기계적인 Red/Green ceremony가 아니라 **명세를 구현보다 먼저 실행 가능한 검증으로 바꾸는 방식**입니다. 테스트 선택과 oracle 품질은 [test-design](../../../.rulesync/skills/test-design/SKILL.md), 순서는 `workflow-delivery`가 소유합니다.
 
 ## Work Order
 

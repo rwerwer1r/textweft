@@ -3,7 +3,7 @@ description: "여러 Agent가 독립 Work를 병렬 수행할 때 분해·파일
 ---
 # Parallel Agentic Development
 
-병렬 개발은 Agent 수를 늘리는 방식이 아니라 **독립적으로 수용 가능한 Work를 분리하고 충돌 비용을 통제하는 방식**입니다. 바깥 RPI·재귀·반복 예산은 `mols-loops`, 각 Work의 Spec/TDD 절차는 `workflow-delivery`, 병렬 실행 조정은 [workflow-parallel-development](../../../.rulesync/skills/workflow-parallel-development/SKILL.md)가 소유합니다. branch·Worktree·stacked PR·통합·복구는 [Git guide](../../tools/git/README.md)를 따릅니다.
+병렬 개발은 Agent 수를 늘리는 방식이 아니라 **독립적으로 수용 가능한 Work를 분리하고 충돌 비용을 통제하는 방식**입니다. 바깥 RPI·재귀·반복 예산은 [workflow-iteration](../../../.rulesync/skills/workflow-iteration/SKILL.md), 각 Work의 Spec/TDD 절차는 `workflow-delivery`, 병렬 실행 조정은 [workflow-parallel-development](../../../.rulesync/skills/workflow-parallel-development/SKILL.md)가 소유합니다. branch·Worktree·stacked PR·통합·복구는 [Git guide](../../tools/git/README.md)를 따릅니다.
 
 ## When Parallelism Pays
 

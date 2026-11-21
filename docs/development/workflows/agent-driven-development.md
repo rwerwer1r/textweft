@@ -18,7 +18,7 @@ Textweft의 개발은 **Agent가 실행을 주도하고 사람이 방향과 중�
 
 1. 요청을 관찰 가능한 Goal, In Scope, Out of Scope, Acceptance로 구체화합니다. 중요한 모호성은 사람에게 질문하고 기술 세부를 임의로 제품 결정으로 승격하지 않습니다.
 2. 실제 계약과 기존 STDD Change를 확인합니다. 행동 변경이면 필요한 Spec delta를 작성하고 기준 정본을 명시합니다.
-3. `mols-loops`가 선택되면 Prepare → RPI → Finalize와 재귀·반복을 제어합니다. 도메인 Work는 필요한 `workflow-*`와 도구를 조합합니다.
+3. [workflow-iteration](../../../.rulesync/skills/workflow-iteration/SKILL.md)가 선택되면 Prepare → RPI → Finalize와 재귀·반복을 제어합니다. 도메인 Work는 필요한 `workflow-*`와 도구를 조합합니다.
 4. 각 행동 변경 Work는 [Delivery](../../../.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 구현 순서를 따릅니다.
 5. 독립 Work에만 [병렬 개발 절차](parallel-agentic-development.md)를 적용합니다.
 6. 결과를 Spec·테스트·구현·문서와 대조하고 실행/정적 확인/CI/미실행을 분리해 보고합니다.

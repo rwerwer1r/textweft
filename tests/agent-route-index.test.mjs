@@ -12,6 +12,11 @@ test('Rulesync 원본에서 생성한 Rule·Skill 색인', () => {
   }]);
   const skills = indexes['.agents/route/skills.jsonl'].trim().split('\n').map(JSON.parse);
   assert.deepEqual(skills.map(x => x.name), [
+    'agent-asset-design',
+    'chatbot-continuity',
+    'review-changes',
+    'stdd-management',
+    'test-design',
     'workflow-autopilot',
     'workflow-delivery',
     'workflow-failure-recovery',
@@ -19,13 +24,14 @@ test('Rulesync 원본에서 생성한 Rule·Skill 색인', () => {
     'workflow-harness-improvement',
     'workflow-integration',
     'workflow-investigation',
+    'workflow-iteration',
     'workflow-parallel-development',
     'workflow-resumption',
     'workflow-review',
   ]);
   assert.ok(skills.every(x => x.path === `.rulesync/skills/${x.name}/SKILL.md`));
   assert.ok(skills.every(x => x.description && !x.description.includes('undefined')));
-  assert.equal(new Set(skills.map(x => x.name)).size, 10);
+  assert.equal(new Set(skills.map(x => x.name)).size, 16);
 });
 
 test('frontmatter는 정상 입력을 읽고 누락·중복을 거부한다', () => {

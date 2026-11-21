@@ -3,7 +3,7 @@
 현재 ref의 [AGENTS.md](../../AGENTS.md)를 먼저 확인합니다. **여기는 Rule·Skill 선택용이며 문서 작업 라우터가 아닙니다.** 문서·작업 절차는 [개발 문서 라우터](../../docs/development/README.md)에서 고릅니다.
 
 1. **대상 파일에 Rule이 관련될 때만** [rules.jsonl](rules.jsonl)의 `name`·`description`으로 후보를 찾습니다. **업무별 `workflow-*`나 재사용 Skill이 필요한 작업일 때만** [skills.jsonl](skills.jsonl)의 `name`·`description`으로 선택합니다. 관련 후보가 없으면 중단합니다.
-2. `workflow-*`는 업무 흐름을 정의하는 선택형 Skill이며, 기타 전문 Skill·문서·지침을 필요한 경우에만 조합합니다. `mols-loops` 같은 외부 의존성은 [선별 외부 Skill 안내](../../docs/development/tooling/agent-assets.md)를 따릅니다.
+2. `workflow-*`는 업무 흐름을 정의하는 선택형 Skill이며, 기타 전문 Skill·문서·지침을 필요한 경우에만 조합합니다. 복합 RPI는 프로젝트의 [workflow-iteration](../../.rulesync/skills/workflow-iteration/SKILL.md), 전문 능력은 [Local Skills](../../docs/development/tooling/agent-assets.md)에서 필요한 원본만 선택합니다.
 3. 후보의 `path`(저장소 루트 상대 경로)에서 **원본**을 읽고 Rule의 `globs`·대상 경로, Skill의 작업 조건을 확인합니다. 일치할 때만 적용합니다.
 4. 대상·작업이 바뀌면 다시 선택합니다. 원본 누락·색인 불일치는 추측하지 않습니다.
 

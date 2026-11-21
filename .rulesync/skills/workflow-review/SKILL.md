@@ -25,7 +25,7 @@ PR·diff·코드·문서·설계·에이전트 하네스의 품질을 **독립�
 ## Execute
 
 1. 실제 변경과 호출자/사용자 동작 경로, 관련 계약·회귀 위험을 확인합니다. 근거 없는 일반적 우려보다 재현 가능한 결함을 우선합니다.
-2. 필요에 따라 기존 `review-changes` 또는 `mols-agent-asset` Skill을 활용합니다. 별도 Agent 실행이 가능하고 가치가 있으면 DualVantage 등의 **진짜 분리 실행**을 선택합니다.
+2. 필요에 따라 기존 `review-changes` 또는 `agent-asset-design` Skill을 활용합니다. 별도 Agent 실행이 가능하고 가치가 있으면 DualVantage 등의 **진짜 분리 실행**을 선택합니다.
 3. Finding마다 위치·영향·재현 조건·근거·확인/반증 방법을 남기고, 스타일 취향이나 미확인 가정을 구별합니다. 실제 검증과 미실행 검증을 구분합니다.
 4. GitHub review/comment 본문을 작성할 때는 [PR review](../../../.github/templates/pull-request-review.md)와 [inline comment](../../../.github/templates/pull-request-inline-comment.md) 보조 템플릿을 사용하고 placeholder를 제거합니다. 템플릿 본문은 GitHub의 실제 review decision이나 승인 상태를 대신하지 않습니다.
 5. 수정이 요청·허용된 경우에만 [Delivery](../workflow-delivery/SKILL.md) 또는 [Harness Improvement](../workflow-harness-improvement/SKILL.md)로 넘겨 변경과 재검토를 수행합니다.

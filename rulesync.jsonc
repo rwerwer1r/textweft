@@ -43,24 +43,6 @@
       "skills"
     ]
   },
-  "sources": [
-    {
-      "source": "mols3131d/mols-agent-assets@4885018f6aa5a3ea7c4a7dd227a4b9609dc0d8b9:src/rulesync/.rulesync/skills",
-      "skills": [
-        "mols-agent-asset",
-        "mols-chatbot-continuity",
-        "mols-loops",
-        "mols-test-design",
-        "review-changes"
-      ]
-    },
-    {
-      "source": "mols3131d/mols-agent-assets@a4b8a6a7f58650cb937b99da4a02c76a1f828f96:src/rulesync/.rulesync/skills",
-      "skills": [
-        "mols-stdd"
-      ]
-    }
-  ],
   "outputRoots": [
     "."
   ],

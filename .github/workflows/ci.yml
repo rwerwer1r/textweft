@@ -25,6 +25,12 @@ jobs:
           node-version: '22.16.0'
       - name: Install
         run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify Rulesync projection
+        run: |
+          bash scripts/check-agent-cache.sh
+          npm exec --yes --package=rulesync@40.2.0 -- rulesync doctor --strict
+          npm exec --yes --package=rulesync@40.2.0 -- rulesync generate
+          node scripts/agent-route-index.mjs check
       - name: Test and typecheck
         run: |
           npm test

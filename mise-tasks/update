@@ -15,9 +15,10 @@ if [[ ! -f package-lock.json ]]; then
   exit 1
 fi
 
+# Fail closed before installation or projection; never delete untracked cache.
+bash scripts/check-agent-cache.sh
+
 mise install
-# Check upstream lock integrity before changing npm modules or Git hooks.
-mise run rulesync:install
 npm ci
 lefthook install
 mise run rulesync:generate
