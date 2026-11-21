@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
@@ -115,5 +115,31 @@ test('shared guard rejects stale caches in each Rulesync asset kind without dele
     } finally {
       rmSync(temporary, { recursive: true, force: true });
     }
+  }
+});
+
+test('shared guard rejects dangling symlink and non-directory cache nodes without mutation', () => {
+  const temporary = mkdtempSync(join(tmpdir(), 'textweft-cache-nodes-'));
+  try {
+    mkdirSync(join(temporary, 'scripts'), { recursive: true });
+    mkdirSync(join(temporary, '.rulesync', 'skills'), { recursive: true });
+    copyFileSync(join(root, 'scripts/check-agent-cache.sh'), join(temporary, 'scripts/check-agent-cache.sh'));
+    const cache = join(temporary, '.rulesync', 'skills', '.curated');
+    const check = () => spawnSync('bash', ['scripts/check-agent-cache.sh'], { cwd: temporary, encoding: 'utf8' });
+
+    symlinkSync('missing-cache', cache);
+    const link = check();
+    assert.equal(link.status, 1);
+    assert.match(link.stderr, /stale external agent assets/);
+    assert.equal(readlinkSync(cache), 'missing-cache', 'dangling symlink remains unchanged');
+
+    rmSync(cache);
+    writeFileSync(cache, 'unexpected cache file');
+    const file = check();
+    assert.equal(file.status, 1);
+    assert.match(file.stderr, /stale external agent assets/);
+    assert.equal(readFileSync(cache, 'utf8'), 'unexpected cache file', 'regular file remains unchanged');
+  } finally {
+    rmSync(temporary, { recursive: true, force: true });
   }
 });

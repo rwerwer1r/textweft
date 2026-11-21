@@ -36,5 +36,6 @@ Textweft가 에이전트 Skill과 Subagent를 직접 소유하고, 다른 저장
 - PR 변경 중 신규·운영 문서 및 Agent 정의 33개에서 상대 Markdown 링크를 정적 확인했고 미해결 경로를 발견하지 못했다.
 - `tests/local-agent-assets.test.mjs`는 모든 Git 추적 파일에서 이전 에이전트 자산 식별자 참조를 차단한다.
 - **자체 리뷰 보강:** Rulesync v40.2.0의 `.curated/` 로딩 경로를 확인해 기존 클론에서 외부 자산이 재투영될 수 있음을 발견했다. `mise run update`의 실행 전 차단과 비파괴 회귀 테스트, 수동 정리 안내를 추가했다.
-- 실제 Rulesync 생성·`mise run check`·새 클론 부트스트랩·각 대상 런타임의 Skill 자동 로딩/Agent 호출은 이 세션에서 **미실행**이다.
+- CI #156 (`cd5c08d36c3c3220767abf108cdecec71b083dd3`)에서 Rulesync v40.2.0 strict 진단·실제 생성·라우팅 검증, 33개 테스트, 타입 검사가 성공했다. 공유 캐시 가드는 프로젝트의 업데이트·생성·미리보기·검사 진입점에 적용했다.
+- 전체 `mise run check`·새 클론 부트스트랩·각 대상 런타임의 Skill 자동 로딩/Agent 호출은 **미실행**이다. CI의 Rulesync 파일 생성은 런타임 자동 로딩을 증명하지 않는다.
 - 원격 Git 이력 자체는 바꾸지 않았다. PR 병합은 별도 사용자 승인 전까지 보류한다.
