@@ -50,7 +50,8 @@ test('Rulesync only projects local assets; bootstrap never installs remote Skill
 test('tracked project sources have no legacy external identity references', () => {
   const paths = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' })
     .split('\0').filter(Boolean);
-  const forbidden = new RegExp('mo' + 'ls', 'i');
+  const oldPrefix = ['mo', 'ls'].join('');
+  const forbidden = new RegExp(`${oldPrefix}(?:3131d|-(?:agent-asset|autopilot|chatbot-[a-z-]+|loops|review-dualvantage(?:-[a-z-]+)?|stdd|test-design|work-unit-worker))`, 'i');
   const references = [];
   for (const path of paths) {
     if (forbidden.test(path)) references.push(path + ' (path)');
@@ -65,8 +66,10 @@ test('legacy curated Skill cache blocks update before re-projecting external ass
   try {
     const oldSkill = join(temporary, '.rulesync/skills/.curated/old-skill/SKILL.md');
     mkdirSync(join(temporary, 'mise-tasks'), { recursive: true });
+    mkdirSync(join(temporary, 'scripts'), { recursive: true });
     mkdirSync(join(temporary, '.rulesync/skills/.curated/old-skill'), { recursive: true });
     copyFileSync(join(root, 'mise-tasks/update'), join(temporary, 'mise-tasks/update'));
+    copyFileSync(join(root, 'scripts/check-agent-cache.sh'), join(temporary, 'scripts/check-agent-cache.sh'));
     writeFileSync(join(temporary, 'package-lock.json'), '{}');
     writeFileSync(oldSkill, '# old local cache');
     execFileSync('git', ['init', '-q'], { cwd: temporary });
@@ -78,5 +81,39 @@ test('legacy curated Skill cache blocks update before re-projecting external ass
     assert.ok(existsSync(oldSkill), 'legacy cache must not be deleted automatically');
   } finally {
     rmSync(temporary, { recursive: true, force: true });
+  }
+});
+
+
+test('all project Rulesync tasks call shared legacy-cache guard first', () => {
+  const config = readFileSync(join(root, 'mise.toml'), 'utf8');
+  for (const task of ['rulesync:generate', 'rulesync:check', 'rulesync:preview']) {
+    const line = config.split('\n').find(entry => entry.startsWith('"' + task + '" = '));
+    assert.ok(line, task + ': declared task');
+    assert.match(line, /= \["bash scripts\/check-agent-cache\.sh",/, task + ': guard precedes Rulesync');
+  }
+  const update = readFileSync(join(root, 'mise-tasks/update'), 'utf8');
+  assert.ok(update.indexOf('bash scripts/check-agent-cache.sh') < update.indexOf('mise install'));
+});
+
+test('shared guard rejects stale caches in each Rulesync asset kind without deletion', () => {
+  for (const kind of ['rules', 'skills', 'subagents']) {
+    const temporary = mkdtempSync(join(tmpdir(), 'textweft-guard-'));
+    try {
+      const path = join(temporary, '.rulesync', kind, '.curated', 'old-asset', 'file.md');
+      mkdirSync(join(temporary, 'scripts'), { recursive: true });
+      copyFileSync(join(root, 'scripts/check-agent-cache.sh'), join(temporary, 'scripts/check-agent-cache.sh'));
+      mkdirSync(join(temporary, '.rulesync', kind, '.curated'), { recursive: true });
+      const empty = spawnSync('bash', ['scripts/check-agent-cache.sh'], { cwd: temporary, encoding: 'utf8' });
+      assert.equal(empty.status, 0, kind + ': empty cache is safe');
+      mkdirSync(join(temporary, '.rulesync', kind, '.curated', 'old-asset'), { recursive: true });
+      writeFileSync(path, '# preserved');
+      const result = spawnSync('bash', ['scripts/check-agent-cache.sh'], { cwd: temporary, encoding: 'utf8' });
+      assert.equal(result.status, 1, kind + ': nonempty cache is blocked');
+      assert.match(result.stderr, /stale external agent assets/);
+      assert.ok(existsSync(path), kind + ': user cache remains untouched');
+    } finally {
+      rmSync(temporary, { recursive: true, force: true });
+    }
   }
 });

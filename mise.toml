@@ -24,9 +24,9 @@ example = "npm run example"
 "docs:index:check" = "node scripts/generate-docs-index.mjs --check"
 "hooks:install" = "lefthook install"
 "hooks:validate" = "lefthook validate"
-"rulesync:generate" = ["rulesync generate", "node scripts/agent-route-index.mjs generate"]
-"rulesync:check" = "rulesync doctor --strict"
-"rulesync:preview" = ["rulesync doctor --strict", "rulesync generate --dry-run"]
+"rulesync:generate" = ["bash scripts/check-agent-cache.sh", "rulesync generate", "node scripts/agent-route-index.mjs generate"]
+"rulesync:check" = ["bash scripts/check-agent-cache.sh", "rulesync doctor --strict"]
+"rulesync:preview" = ["bash scripts/check-agent-cache.sh", "rulesync doctor --strict", "rulesync generate --dry-run"]
 
 [tasks.check]
 depends = ["lint:md", "lint:code", "hooks:validate", "routes:check", "routes:test", "inbox:test", "docs:index:check", "rulesync:check", "test", "typecheck"]

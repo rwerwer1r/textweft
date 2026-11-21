@@ -15,15 +15,8 @@ if [[ ! -f package-lock.json ]]; then
   exit 1
 fi
 
-# Rulesync reads .curated/ from disk even when config has no remote sources.
-# Fail before any install or generation; never delete untracked user files.
-for legacy_cache in .rulesync/rules/.curated .rulesync/skills/.curated .rulesync/subagents/.curated; do
-  if [[ -L "$legacy_cache" ]] || [[ -e "$legacy_cache" && ! -d "$legacy_cache" ]] ||
-    { [[ -d "$legacy_cache" ]] && [[ -n "$(find "$legacy_cache" -mindepth 1 -print -quit)" ]]; }; then
-    printf '오류: stale external agent assets in %s; inspect and remove obsolete local cache before running mise run update again.\n' "$legacy_cache" >&2
-    exit 1
-  fi
-done
+# Fail closed before installation or projection; never delete untracked cache.
+bash scripts/check-agent-cache.sh
 
 mise install
 npm ci
