@@ -17,12 +17,12 @@
 | PR·체크포인트 | 원격 도구가 있을 때만 실제 수행·재조회. 없으면 인계 요약(영속화 미확인) |
 | 다중 에이전트 리뷰 | 같은 챗의 반례 검토는 **단일 모델 자체 리뷰**, 독립 리뷰 아님 |
 
-외부 Skill을 실제 작업에 선택해야 하지만 런타임이 직접 발견하지 못하면 [선택형 자산 가이드](docs/development/tooling/agent-assets.md)에서 **필요한 후보만** 확인하고, 접근 가능한 원본을 직접 읽습니다. 미설치·미확인 Skill을 로드했다고 주장하지 않으며, 이 가이드는 권한이나 원본 행동 계약을 대체하지 않습니다.
+작업별 전문 Skill은 [프로젝트 자산 목록](docs/development/tooling/agent-assets.md)과 [ROUTE](.agents/route/ROUTE.md)에서 선택하고, 이 저장소의 원본만 읽습니다. 접근하거나 로드하지 않은 Skill은 적용한 것으로 주장하지 않습니다.
 
 사용자 직접 선택형 Agent 및 위임형 Subagent의 네이티브 설치·호출은 제한된 챗봇에서 자동으로 제공되지 않습니다. [Agent Roles](docs/development/ai-agent/agents.md)는 실제 런타임별 제약을 구분합니다.
 
 ## Working Loop
 
-[mols-loops 의존성](docs/development/tooling/agent-assets.md)의 RPI 오케스트레이션은 설치·로드가 확인된 경우 **`mols-loops`** 원본을 사용합니다. 복잡한 재귀·루프를 런타임이 지원하지 않으면 미지원 범위를 밝히고 인계합니다. 소프트웨어 동작을 바꾸는 **각 Work 단위**는 [workflow-delivery](.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 따릅니다. 세부 공통 검증·인계는 개발 문서 라우터의 Routine Loop를 읽습니다. 불가능한 단계는 적용 가능한 초안과 다음 실행 주체를 남깁니다.
+[workflow-iteration](.rulesync/skills/workflow-iteration/SKILL.md)이 복합 작업의 RPI·반복·재귀를 제어합니다. 해당 Skill을 직접 읽고 적용할 수 있을 때만 사용합니다. 복잡한 재귀·루프를 런타임이 지원하지 않으면 미지원 범위를 밝히고 인계합니다. 소프트웨어 동작을 바꾸는 **각 Work 단위**는 [workflow-delivery](.rulesync/skills/workflow-delivery/SKILL.md)의 Spec → 테스트 설계 → 테스트 구현 → 실제 구현 순서를 따릅니다. 세부 공통 검증·인계는 개발 문서 라우터의 Routine Loop를 읽습니다. 불가능한 단계는 적용 가능한 초안과 다음 실행 주체를 남깁니다.
 
 결과는 **변경/초안 · 실제 확인/미실행 · 위험/승인 · 다음 행동** 순서로 보고합니다. 접근하지 않은 파일·실행하지 않은 검사·생성하지 않은 PR을 완료로 주장하지 않습니다. 권한·기밀·병합 승인은 `AGENTS.md`, 복원은 [Inbox](.inbox/README.md)가 소유합니다.

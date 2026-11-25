@@ -13,7 +13,7 @@ function agentMetadata(name) {
 }
 
 test('user-selected autopilot is selectable but not delegated', () => {
-  const agent = agentMetadata('mols-autopilot');
+  const agent = agentMetadata('textweft-autopilot');
   for (const target of ['copilot', 'copilotcli']) {
     assert.equal(agent[target]['user-invocable'], true);
     assert.equal(agent[target]['disable-model-invocation'], true);
@@ -24,9 +24,9 @@ test('user-selected autopilot is selectable but not delegated', () => {
 
 test('review coordinator and workers are hidden but model-invocable', () => {
   for (const name of [
-    'mols-review-dualvantage',
-    'mols-review-dualvantage-verifier',
-    'mols-review-dualvantage-challenger',
+    'textweft-review',
+    'textweft-review-verifier',
+    'textweft-review-challenger',
   ]) {
     const agent = agentMetadata(name);
     for (const target of ['copilot', 'copilotcli']) {
@@ -36,7 +36,7 @@ test('review coordinator and workers are hidden but model-invocable', () => {
   }
 });
 test('work unit worker is delegated and bounded', () => {
-  const agent = agentMetadata('mols-work-unit-worker');
+  const agent = agentMetadata('textweft-work-unit-worker');
   assert.deepEqual(agent.targets, ['claudecode', 'copilot', 'copilotcli', 'antigravity-ide', 'antigravity-cli']);
   for (const target of ['copilot', 'copilotcli']) {
     assert.equal(agent[target]['user-invocable'], false, target);
@@ -46,14 +46,14 @@ test('work unit worker is delegated and bounded', () => {
   assert.equal(agent['antigravity-ide'].mainAgent, false);
   assert.equal(agent['antigravity-ide'].subagent, true);
   assert.ok(agent.description.includes('bounded'));
-  const source = readFileSync(new URL('../.rulesync/subagents/mols-work-unit-worker.md', import.meta.url), 'utf8');
+  const source = readFileSync(new URL('../.rulesync/subagents/textweft-work-unit-worker.md', import.meta.url), 'utf8');
   assert.match(source, /writable paths/);
   assert.match(source, /shared workspace/);
   assert.match(source, /PR 생성\/병합/);
 });
 
 test('autopilot delegates parallel work only with verified isolation', () => {
-  const source = readFileSync(new URL('../.rulesync/subagents/mols-autopilot.md', import.meta.url), 'utf8');
+  const source = readFileSync(new URL('../.rulesync/subagents/textweft-autopilot.md', import.meta.url), 'utf8');
   assert.match(source, /workflow-parallel-development/);
   assert.match(source, /verified workspace isolation/);
 });
@@ -73,7 +73,7 @@ test('parallel workflow is selectable on Skill targets without implying worker s
     'copilot', 'copilotcli', 'codexcli', 'claudecode',
     'antigravity-ide', 'antigravity-cli', 'androidstudio',
   ]);
-  const worker = agentMetadata('mols-work-unit-worker');
+  const worker = agentMetadata('textweft-work-unit-worker');
   assert.ok(!worker.targets.includes('codexcli'));
   assert.ok(!worker.targets.includes('androidstudio'));
 });

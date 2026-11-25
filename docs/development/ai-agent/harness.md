@@ -9,14 +9,14 @@ description: "에이전트 런타임이 프로젝트 지침과 Skill을 발견�
 
 1. 실제 런타임·버전·저장소·ref·작업 경로·권한을 확인합니다.
 2. 해당 작업에 적용되는 root instruction, path-scoped Rule, Workflow Skill, Subagent를 확인합니다.
-3. Rulesync source/selector → lock → generated projection → runtime discovery의 각 경계를 구분합니다.
+3. 저장소의 `.rulesync/` 원본 → `rulesync.jsonc` 대상 설정 → 생성된 벤더별 파일 → 실제 런타임 발견·로드 경계를 구분합니다. 외부 Skill source/lock은 사용하지 않습니다.
 4. 런타임이 실제로 읽은 파일과 적용 범위를 관찰하고 대표 작업의 행동을 기대 계약과 대조합니다.
 
 ## Evidence Levels
 
 | 수준 | 확인할 내용 | 증명하지 않는 것 |
 | --- | --- | --- |
-| Configured | source, selector, target, pinned revision 선언 | 런타임이 파일을 읽을 수 있음 |
+| Configured | 프로젝트 원본 Skill·Subagent와 target/생성 설정 확인 | 런타임이 파일을 읽을 수 있음 |
 | Reachable | 실제 런타임이 해당 작업에 맞는 원본을 발견·로드함 | 작업에서 지침을 준수함 |
 | Observed Applied | 대표 작업이 지침·권한·검증 경계를 따르는 것을 관찰함 | 테스트하지 않은 런타임·작업 전체의 호환성 |
 
