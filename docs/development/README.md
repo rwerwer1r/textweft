@@ -44,7 +44,7 @@ description: "개발 우선순위, 에이전트 협업, 작업 워크플로, 도
 | Rulesync 설정·생성·검증 | [Rulesync](tooling/rulesync.md) |
 | 프로젝트 Skill·Subagent 선택 | [Project Agent Assets](tooling/agent-assets.md) |
 | Change 티켓·상태·명세 delta | [STDD Workspace](../../stdd/README.md) · [stdd-management](../../.rulesync/skills/stdd-management/SKILL.md) |
-| 장기 작업의 원격 체크포인트·재개 | [Inbox](../../.inbox/README.md) |
+| 장기 작업의 원격 체크포인트·재개 | [Routine Loop](workflows/routine-loop.md#commit-checkpoints) |
 | **런타임이 없거나 제한된 챗봇만** | [CHATBOT](../../CHATBOT.md) |
 
 ## Checks

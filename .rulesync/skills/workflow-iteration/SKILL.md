@@ -21,7 +21,7 @@ Textweft의 복합 작업에서 **Research → Plan → Implement → Review (RP
 ## Prepare
 
 1. 목표·완료 조건·제외 범위·사용자 승인·현재 Git/CI 상태를 확인합니다. 불명확한 제품/권한 결정은 멈춰 확인합니다.
-2. 제한된 반복 예산(작업 범위, 확인 비용, 다음 체크포인트)을 정하고, 재개에 필요한 경우에만 [STDD](../../../stdd/README.md)와 [Inbox](../../../.inbox/README.md)에 상태를 남깁니다.
+2. 제한된 반복 예산(작업 범위, 확인 비용, 다음 체크포인트)을 정하고, 재개에 필요한 경우에만 [STDD](../../../stdd/README.md)의 해당 Change 및 [Routine Loop](../../../docs/development/workflows/routine-loop.md#commit-checkpoints)에 따라 필요한 재개 증거를 남깁니다.
 3. 단순 작업이면 별도 루프·재귀·분해 없이 해당 Workflow로 직접 실행합니다.
 
 ## Loop

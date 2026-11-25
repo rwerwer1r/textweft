@@ -10,8 +10,8 @@ description: "STDD Change, 도메인 Spec, 변경 delta와 구현·테스트 추
 - `stdd/changes/<change-id>/work.md`: Change의 유일한 진행 상태, 목표, 완료 조건, 다음 행동.
 - `stdd/changes/<change-id>/specs/<domain>/spec.md`: 해당 Change에서 바뀌는 요구사항 delta.
 - `stdd/specs/<domain>/spec.md`: 검증되어 반영된 도메인 명세.
-- 코드와 테스트: 기존 프로젝트 소유 경로. Spec이나 Inbox에 복제하지 않습니다.
-- `.inbox/`: 세션 복구·조사 증거이며 Change 상태나 도메인 Spec의 정본이 아닙니다.
+- 코드와 테스트: 기존 프로젝트 소유 경로. Spec이나 세션 기록에 복제하지 않습니다.
+- 승인된 세션 복구·조사 증거: Change 상태나 도메인 Spec의 정본이 아닙니다.
 
 ## Spec Delta
 

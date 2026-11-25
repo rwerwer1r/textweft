@@ -20,4 +20,4 @@ stdd/
 
 [stdd-management](../.rulesync/skills/stdd-management/SKILL.md)에서 Change 발행·진행·재개·위임 절차를 선택하고, 복합 루프는 [workflow-iteration](../.rulesync/skills/workflow-iteration/SKILL.md), 소프트웨어 변경의 테스트 우선 순서는 [workflow-delivery](../.rulesync/skills/workflow-delivery/SKILL.md)가 소유합니다.
 
-[.inbox](../.inbox/README.md)는 세션 복구를 위한 **비정본 증적**이며 Change 상태를 중복 소유하지 않습니다. PR/CI의 상태도 `work.md`를 대신하지 않습니다. 완료 판정·명세 반영은 실제 검증 근거를 필요로 하며 [AGENTS.md](../AGENTS.md)의 병합 승인과 권한 경계는 그대로 적용됩니다.
+승인된 세션 복구 기록은 **비정본 증적**이며 Change 상태를 중복 소유하지 않습니다. PR/CI의 상태도 `work.md`를 대신하지 않습니다. 완료 판정·명세 반영은 실제 검증 근거를 필요로 하며 [AGENTS.md](../AGENTS.md)의 병합 승인과 권한 경계는 그대로 적용됩니다.

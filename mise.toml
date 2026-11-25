@@ -11,15 +11,13 @@ deps = "npm ci"
 test = "npm test"
 typecheck = "npm run typecheck"
 example = "npm run example"
-"lint:md" = "rumdl check README.md AGENTS.md CHATBOT.md docs/ .inbox/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md .github/ISSUE_TEMPLATE/ .github/templates/"
+"lint:md" = "rumdl check README.md AGENTS.md CHATBOT.md docs/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md .github/ISSUE_TEMPLATE/ .github/templates/"
 "lint:code" = "biome lint src/ scripts/ tests/ examples/lighthouse/main.ts"
-"format:md" = "rumdl fmt README.md AGENTS.md CHATBOT.md docs/ .inbox/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md .github/ISSUE_TEMPLATE/ .github/templates/"
+"format:md" = "rumdl fmt README.md AGENTS.md CHATBOT.md docs/ stdd/ .agents/route/ .rulesync/rules/ .rulesync/skills/ .rulesync/subagents/ .github/pull_request_template.md .github/ISSUE_TEMPLATE/ .github/templates/"
 "format:code" = "biome format --write src/ scripts/ tests/ examples/lighthouse/main.ts"
 "routes:generate" = "node scripts/agent-route-index.mjs generate"
 "routes:check" = "node scripts/agent-route-index.mjs check"
 "routes:test" = "node --test tests/agent-route-index.test.mjs"
-"inbox:test" = "node --test tests/inbox-harness.test.mjs"
-"inbox:check" = "node scripts/check-inbox.mjs"
 "docs:index" = "node scripts/generate-docs-index.mjs"
 "docs:index:check" = "node scripts/generate-docs-index.mjs --check"
 "hooks:install" = "lefthook install"
@@ -29,5 +27,5 @@ example = "npm run example"
 "rulesync:preview" = ["bash scripts/check-agent-cache.sh", "rulesync doctor --strict", "rulesync generate --dry-run"]
 
 [tasks.check]
-depends = ["lint:md", "lint:code", "hooks:validate", "routes:check", "routes:test", "inbox:test", "docs:index:check", "rulesync:check", "test", "typecheck"]
-description = "변경 전 검증: rumdl, Biome, 라우팅·인박스·문서 인덱스 계약, 런타임 테스트와 타입"
+depends = ["lint:md", "lint:code", "hooks:validate", "routes:check", "routes:test", "docs:index:check", "rulesync:check", "test", "typecheck"]
+description = "변경 전 검증: rumdl, Biome, 라우팅·문서 인덱스 계약, 런타임 테스트와 타입"

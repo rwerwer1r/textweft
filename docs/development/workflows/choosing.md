@@ -14,6 +14,6 @@ description: "요청된 작업 단계와 적합한 Workflow Skill을 선택하�
 
 요청 단계(준비·구현·리뷰·병합)는 이 문서가 소유하고, **해당 단계에서 어떤 업무를 수행할지**는 [ROUTE](../../../.agents/route/ROUTE.md)에서 관련 `workflow-*` Skill을 선택합니다. Skill 선택만으로 승인 단계가 확대되지 않습니다.
 
-일상 변경은 [Routine Loop](routine-loop.md)를 따릅니다. Draft PR은 완료 증거가 아닙니다. 작업 기록은 [Inbox](../../../.inbox/README.md), Rule·Skill 소유권은 [Rulesync](../tooling/rulesync.md)를 참조합니다.
+일상 변경은 [Routine Loop](routine-loop.md)를 따릅니다. Draft PR은 완료 증거가 아닙니다. 작업 기록은 [Routine Loop](routine-loop.md#commit-checkpoints), Rule·Skill 소유권은 [Rulesync](../tooling/rulesync.md)를 참조합니다.
 
 독립적으로 수용 가능한 Work가 여러 개이고 실제 위임 Agent와 격리된 workspace가 확인되면 [workflow-parallel-development](../../../.rulesync/skills/workflow-parallel-development/SKILL.md)을 사용합니다. 공유 파일·fixture·계약 또는 shared workspace는 직렬화합니다. 행동 변경은 Spec-driven/TDD 순서를 유지합니다.

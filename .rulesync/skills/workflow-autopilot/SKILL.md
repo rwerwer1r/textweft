@@ -20,7 +20,7 @@ targets:
 
 ## Inputs
 
-사용자가 제시한 목표·제약·실행 범위, 현재 계정·저장소·ref, 채택된 [개발 우선순위](../../../docs/development/README.md), 최신 PR·이슈·테스트·인박스, 허용된 도구와 승인 상태.
+사용자가 제시한 목표·제약·실행 범위, 현재 계정·저장소·ref, 채택된 [개발 우선순위](../../../docs/development/README.md), 최신 PR·이슈·테스트·승인된 작업 기록, 허용된 도구와 승인 상태.
 
 ## Execute
 
@@ -32,4 +32,4 @@ targets:
 
 ## Exit / Handoff
 
-선정한 일과 제외한 이유, 실제 결과·ref·검증/미검증, 남은 위험·승인과 다음 행동을 보고합니다. 의미 있는 장기 작업 상태만 [Inbox](../../../.inbox/README.md)에 보존합니다. 병합·배포·권한 변경은 [AGENTS.md](../../../AGENTS.md) 승인 경계를 그대로 따릅니다.
+선정한 일과 제외한 이유, 실제 결과·ref·검증/미검증, 남은 위험·승인과 다음 행동을 보고합니다. 의미 있는 장기 작업 상태만 [Routine Loop](../../../docs/development/workflows/routine-loop.md#commit-checkpoints)에 따라 승인된 위치에 보존합니다. 병합·배포·권한 변경은 [AGENTS.md](../../../AGENTS.md) 승인 경계를 그대로 따릅니다.

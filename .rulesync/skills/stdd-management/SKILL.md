@@ -16,7 +16,7 @@ targets:
 
 ## Source of truth
 
-[STDD Workspace](../../../stdd/README.md)의 `stdd/changes/<change-id>/work.md`가 Change 상태의 유일한 정본입니다. `.inbox/`와 PR은 재개 증거이며 상태 복제본이 아닙니다.
+[STDD Workspace](../../../stdd/README.md)의 `stdd/changes/<change-id>/work.md`가 Change 상태의 유일한 정본입니다. PR과 승인된 작업 기록은 재개 증거이며 상태 복제본이 아닙니다.
 
 ## Change Lifecycle
 
