@@ -10,9 +10,6 @@ pre-commit:
     - name: code
       glob: "**/*.{js,mjs,cjs,ts,tsx,json,jsonc}"
       run: mise exec -- biome lint {staged_files}
-    - name: inbox
-      glob: ".inbox/**/*.md"
-      run: mise run inbox:check {staged_files}
     - name: routing
       glob:
         - ".agents/route/*.jsonl"

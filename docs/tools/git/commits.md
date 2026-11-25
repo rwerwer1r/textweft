@@ -21,6 +21,6 @@ description: "검토 가능한 커밋 단위, Conventional Commit 메시지와 �
 
 ## Checkpoints
 
-장기 작업은 의미 있는 진척·위험 단계·인계 시점에 작업 branch에 체크포인트를 남깁니다. 미완료 변경은 미완료·미검증 상태임을 명확히 합니다. 다른 세션에서 복원하려면 조회 가능한 원격 ref에 커밋을 반영하고 재조회합니다. 자세한 절차는 [Routine Loop](../../development/workflows/routine-loop.md#commit-checkpoints)와 [Inbox](../../../.inbox/README.md)를 따릅니다.
+장기 작업은 의미 있는 진척·위험 단계·인계 시점에 작업 branch에 체크포인트를 남깁니다. 미완료 변경은 미완료·미검증 상태임을 명확히 합니다. 다른 세션에서 복원하려면 조회 가능한 원격 ref에 커밋을 반영하고 재조회합니다. 자세한 절차는 [Routine Loop](../../development/workflows/routine-loop.md#commit-checkpoints)를 따릅니다.
 
 공유된 커밋은 후속 커밋으로 수정하는 것을 우선합니다. 게시된 이력의 amend·split·rebase는 소유자와 downstream 의존성을 확인하고 명시적으로 조정한 경우에만 수행합니다.

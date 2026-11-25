@@ -10,6 +10,8 @@ Textweft already has:
 - project-managed Autopilot and review subagents;
 - a lightweight CI and an Inbox used for durable session evidence.
 
+This baseline describes the historical Change. Current session evidence and recovery are governed by [Routine Loop](../../../../../docs/development/workflows/routine-loop.md#commit-checkpoints); the repository-local Inbox has been retired.
+
 The current development documentation does not yet provide one discoverable, end-to-end contract for agent-driven work, safe parallel implementation, spec/test traceability, and runtime harness evidence.
 
 ## Required Delta

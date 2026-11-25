@@ -3,7 +3,7 @@ description: "Autopilot, Work Unit Worker, 독립 리뷰 Agent의 선택·위임
 ---
 # Agent Roles and Delegation
 
-에이전트 자산의 **작성 유형**과 **실제 실행 역할**을 구분합니다. 공통 권한·승인 정책은 [AGENTS.md](../../../AGENTS.md), 일상 절차는 [Routine Loop](../workflows/routine-loop.md), 지속 상태는 [Inbox](../../../.inbox/README.md)가 소유합니다. 이 문서는 역할·호출·위임·검증 경계만 다룹니다.
+에이전트 자산의 **작성 유형**과 **실제 실행 역할**을 구분합니다. 공통 권한·승인 정책은 [AGENTS.md](../../../AGENTS.md), 일상 절차는 [Routine Loop](../workflows/routine-loop.md), 재개 증거와 지속 상태의 경계는 [Routine Loop](../workflows/routine-loop.md#commit-checkpoints)를 따릅니다. 이 문서는 역할·호출·위임·검증 경계만 다룹니다.
 
 ## Main Agent: User-Selected Autopilot
 
@@ -39,7 +39,7 @@ Worker 정의는 Claude Code·Copilot·Copilot CLI·Antigravity 대상에만 생
 1. 지원하는 환경에서 Autopilot을 사용자가 직접 선택할 수 있으며, 다른 에이전트의 위임 시도가 차단되거나 명시적으로 거절되는지 관찰합니다.
 2. Rev·계정·하네스·현재 승인 범위를 확인하고, 유의미한 작업이 없을 때 불필요한 커밋이나 이슈를 만들지 않는지 확인합니다.
 3. 요청한 리뷰에서 Verifier와 Challenger의 분리된 근거가 실제 확보되는지, 검증 실패가 누락 없이 보고되는지 확인합니다.
-4. 병합 승인 부족, 검증 불가, 중단·재개 시 인박스 기록과 최신 Git 근거가 일치하는지 확인합니다.
+4. 병합 승인 부족, 검증 불가, 중단·재개 시 승인된 재개 기록과 최신 Git 근거가 일치하는지 확인합니다.
 5. Work Unit Worker가 지정된 write paths만 수정하고, 격리되지 않은 workspace에서는 동시 쓰기를 하지 않으며, 통합 검증을 coordinator에게 반환하는지 확인합니다.
 
 정적 Rulesync 진단과 CI는 **정의·생성의 기계적 검사**입니다. 위 선택·위임·실행 시나리오는 실제 대상 런타임에서 별도로 평가해야 합니다.

@@ -11,7 +11,6 @@ description: "프로젝트 스크립트의 책임, 생성·검사 명령과 자�
 | --- | --- | --- |
 | [agent-route-index.mjs](../../../scripts/agent-route-index.mjs) | Rulesync Rule·Skill 원본에서 route JSONL 색인 생성 또는 drift 확인 | generate만 기록, check는 읽기 전용 |
 | [generate-docs-index.mjs](../../../scripts/generate-docs-index.mjs) | docs frontmatter에서 docs/INDEX.tsv 생성 또는 drift 확인 | mise run docs:index 기록, docs:index:check 읽기 전용 |
-| [check-inbox.mjs](../../../scripts/check-inbox.mjs) | 변경된 Inbox 작업 기록의 필수 metadata 검사 | 읽기 전용 |
 
 ## Change contract
 

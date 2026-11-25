@@ -27,6 +27,9 @@ coverage/
 /.agents/commands/*
 !/.agents/commands/.gitkeep
 
+# 폐지된 로컬 작업 기록 디렉토리
+/.inbox/
+
 # rumdl 검사 캐시
 /.rumdl_cache/
 
